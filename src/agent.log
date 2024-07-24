@@ -1,0 +1,162 @@
+
+
+[1m> Entering new AgentExecutor chain...[0m
+
+
+[1m> Entering new LLMChain chain...[0m
+Prompt after formatting:
+[32;1m[1;3mSystem: You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
+
+TOOLS:
+------
+You have access to the following tools:
+
+
+Get Distance and Travel Time: Useful when you want to know the distance and travel time between two locations. The input to this tool should be the origin and destination location tuples (longitude, latitude), like '(104.0256898, 30.6401228), (30.6392765, 104.0704372)'.
+
+The way you use the tools is by specifying a json blob.
+Specifically, this json should have a `action` key (with the name of the tool to use) and a `action_input` key (with the input to the tool going here).
+
+The only values that should be in the "action" field are: Get Distance and Travel Time
+
+The $JSON_BLOB should only contain a SINGLE action, do NOT return a list of multiple actions. Here is an example of a valid $JSON_BLOB:
+
+```
+{
+  "action": $TOOL_NAME,
+  "action_input": $INPUT
+}
+```
+
+ALWAYS use the following format:
+
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action:
+```
+$JSON_BLOB
+```
+Observation: the result of the action
+... (this Thought/Action/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
+
+
+The taxi assignment control task usually involves many steps. You can break this task down into subtasks and complete them one by one. 
+There is no rush to give a final answer unless you are confident that the answer is correct.
+Answer the following questions as best you can. Begin! 
+
+Take a deep breath and work on this problem step-by-step.
+Reminder you MUST use the EXACT characters `Final Answer` when responding the final answer of the original input question.
+
+Human: [HumanMessage(content='Now you get the two lists of position dict for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:\n{\n    "78942": {\n        "origin": [\n            104.0412682,\n            30.6669185\n        ],\n        "destination": [\n            104.1438647,\n            30.6276377\n        ]\n    },\n    "81088": {\n        "origin": [\n            104.0562247,\n            30.6223237\n        ],\n        "destination": [\n            104.0738543,\n            30.6970738\n        ]\n    }\n}\n,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position dict.\nThe taxi vehicles are as follows:\n{\n    "23": [\n        104.0550663,\n        30.6798155\n    ],\n    "34": [\n        104.0660008,\n        30.6720357\n    ],\n    "60": [\n        104.0401505,\n        30.6547859\n    ],\n    "1": [\n        104.0582862,\n        30.6764701\n    ],\n    "4": [\n        104.062719,\n        30.6639631\n    ],\n    "35": [\n        104.02944,\n        30.6776402\n    ],\n    "30": [\n        104.0523899,\n        30.6538646\n    ],\n    "46": [\n        104.0485473,\n        30.6657565\n    ],\n    "5": [\n        104.0577697,\n        30.6778274\n    ],\n    "36": [\n        104.0427216,\n        30.6812148\n    ],\n    "13": [\n        104.0626448,\n        30.6238797\n    ],\n    "53": [\n        104.0662965,\n        30.6658053\n    ],\n    "43": [\n        104.040901,\n        30.6867022\n    ],\n    "59": [\n        104.0558713,\n        30.6739928\n    ],\n    "33": [\n        104.0631067,\n        30.6713975\n    ]\n}\n,where `key` is the `taxi id`, and `value` represents the current position of the vehicle.\nPlease use the appropriate tool to assign each request to a single taxi reasonably.\n\nTo do this, you must determine whether the current passenger request pickup position is in the taxi driver\'s service range or not. \n1. Don\'t finish the task until you have a final answer. You must output a list of decision when you finish this task.\n2. You can only use tools mentioned before to help you make decision. Don\'t fabricate any other tool name not mentioned.\n3. Remember what tools you have used, you can use same tool to solve the problems of identical property.\n4. If all of the taxi drivers are not available or too far away from the certain passenger, you must leave assign the order to id \'-1\', which means the order is not assigned to any taxi driver. \n5. Output the list of passenger assignment decision in order of the given passenger request before. \nLet\'s take a deep breath and think step by step. Once you made a final decision, output it in the following format: \n\n```\nFinal Answer: \n"decision": {list of order assignment tuple(int, int) that indicate the order(1st id) from a passenger is assigned to a taxi driver(2nd id)},\n"explanation": {your explanation about your decision, described your suggestions to the taxi drivers}\n``` \n\n# ')]
+
+[0m
+
+
+[1m> Entering new AgentExecutor chain...[0m
+
+
+[1m> Entering new LLMChain chain...[0m
+Prompt after formatting:
+[32;1m[1;3mSystem: You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
+
+TOOLS:
+------
+You have access to the following tools:
+
+
+Get Distance and Travel Time: Useful when you want to know the distance and travel time between two locations. The input to this tool should be the origin and destination location tuples (longitude, latitude), like '(104.0256898, 30.6401228), (30.6392765, 104.0704372)'.
+
+The way you use the tools is by specifying a json blob.
+Specifically, this json should have a `action` key (with the name of the tool to use) and a `action_input` key (with the input to the tool going here).
+
+The only values that should be in the "action" field are: Get Distance and Travel Time
+
+The $JSON_BLOB should only contain a SINGLE action, do NOT return a list of multiple actions. Here is an example of a valid $JSON_BLOB:
+
+```
+{
+  "action": $TOOL_NAME,
+  "action_input": $INPUT
+}
+```
+
+ALWAYS use the following format:
+
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action:
+```
+$JSON_BLOB
+```
+Observation: the result of the action
+... (this Thought/Action/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
+
+
+The taxi assignment control task usually involves many steps. You can break this task down into subtasks and complete them one by one. 
+There is no rush to give a final answer unless you are confident that the answer is correct.
+Answer the following questions as best you can. Begin! 
+
+Take a deep breath and work on this problem step-by-step.
+Reminder you MUST use the EXACT characters `Final Answer` when responding the final answer of the original input question.
+
+Human: [HumanMessage(content='Now you get the two position dicts for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:\n{\n    "78942": {\n        "origin": [\n            104.0412682,\n            30.6669185\n        ],\n        "destination": [\n            104.1438647,\n            30.6276377\n        ]\n    },\n    "81088": {\n        "origin": [\n            104.0562247,\n            30.6223237\n        ],\n        "destination": [\n            104.0738543,\n            30.6970738\n        ]\n    }\n}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position dict.\nThe taxi vehicles are as follows:\n{\n    "39": [\n        104.0533012,\n        30.6812997\n    ],\n    "8": [\n        104.0558318,\n        30.6298932\n    ],\n    "18": [\n        104.0595487,\n        30.6732419\n    ],\n    "3": [\n        104.0550126,\n        30.6744148\n    ],\n    "29": [\n        104.0302386,\n        30.657072\n    ],\n    "40": [\n        104.0609789,\n        30.6396059\n    ],\n    "51": [\n        104.0488791,\n        30.6785845\n    ],\n    "56": [\n        104.0497119,\n        30.6742686\n    ],\n    "25": [\n        104.0233991,\n        30.6648727\n    ],\n    "1": [\n        104.0610433,\n        30.6076953\n    ],\n    "52": [\n        104.0313578,\n        30.6690803\n    ],\n    "42": [\n        104.0722921,\n        30.6129639\n    ],\n    "16": [\n        104.0302386,\n        30.657072\n    ],\n    "58": [\n        104.0504333,\n        30.6132099\n    ],\n    "7": [\n        104.0485473,\n        30.6657565\n    ]\n}\t,where `key` is the `taxi id`, and `value` represents the current position of the vehicle.\nPlease use the appropriate tool to assign each request to a single taxi reasonably.\n\nTo do this, you must determine whether the current passenger request pickup position is in the taxi driver\'s service range or not. \n1. Don\'t finish the task until you have a final answer. You must output a list of decision when you finish this task.\n2. You can only use tools mentioned before to help you make decision. Don\'t fabricate any other tool name not mentioned.\n3. Remember what tools you have used, you can use same tool to solve the problems of identical property.\n4. If all of the taxi drivers are not available or too far away from the certain passenger, you must leave assign the order to id \'-1\', which means the order is not assigned to any taxi driver. \n5. Output the list of passenger assignment decision in order of the given passenger request before. \nLet\'s take a deep breath and think step by step. Once you made a final decision, output it in the following format: \n\n```\nFinal Answer: \n"decision": {list of request assignment tuple(int, int) that indicate the request(1st id) from a passenger is assigned to a taxi driver(2nd id)},\n"explanation": {your explanation about your decision, described your suggestions to the taxi drivers}\n``` \n')]
+
+[0m
+
+
+[1m> Entering new AgentExecutor chain...[0m
+
+
+[1m> Entering new LLMChain chain...[0m
+Prompt after formatting:
+[32;1m[1;3mSystem: You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
+
+TOOLS:
+------
+You have access to the following tools:
+
+
+Get Distance and Travel Time: Useful when you want to know the distance and travel time between two locations. The input to this tool should be the origin and destination location tuples (longitude, latitude), like '(104.0256898, 30.6401228), (30.6392765, 104.0704372)'.
+
+The way you use the tools is by specifying a json blob.
+Specifically, this json should have a `action` key (with the name of the tool to use) and a `action_input` key (with the input to the tool going here).
+
+The only values that should be in the "action" field are: Get Distance and Travel Time
+
+The $JSON_BLOB should only contain a SINGLE action, do NOT return a list of multiple actions. Here is an example of a valid $JSON_BLOB:
+
+```
+{
+  "action": $TOOL_NAME,
+  "action_input": $INPUT
+}
+```
+
+ALWAYS use the following format:
+
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action:
+```
+$JSON_BLOB
+```
+Observation: the result of the action
+... (this Thought/Action/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
+
+
+The taxi assignment control task usually involves many steps. You can break this task down into subtasks and complete them one by one. 
+There is no rush to give a final answer unless you are confident that the answer is correct.
+Answer the following questions as best you can. Begin! 
+
+Take a deep breath and work on this problem step-by-step.
+Reminder you MUST use the EXACT characters `Final Answer` when responding the final answer of the original input question.
+
+Human: [HumanMessage(content='Now you get the two position dicts for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:\n{\n    "81088": {\n        "origin": [\n            104.0562247,\n            30.6223237\n        ],\n        "destination": [\n            104.0738543,\n            30.6970738\n        ]\n    },\n    "78942": {\n        "origin": [\n            104.0412682,\n            30.6669185\n        ],\n        "destination": [\n            104.1438647,\n            30.6276377\n        ]\n    }\n}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position dict.\nThe taxi vehicles are as follows:\n{\n    "3": [\n        104.0459975,\n        30.6723991\n    ],\n    "60": [\n        104.0517283,\n        30.6743851\n    ],\n    "14": [\n        104.0578464,\n        30.6740823\n    ],\n    "30": [\n        104.0531357,\n        30.6611065\n    ],\n    "52": [\n        104.0385894,\n        30.6598553\n    ],\n    "47": [\n        104.0384306,\n        30.6641564\n    ],\n    "42": [\n        104.0551667,\n        30.6798906\n    ],\n    "70": [\n        104.0581489,\n        30.6792291\n    ],\n    "6": [\n        104.0503757,\n        30.6308255\n    ],\n    "16": [\n        104.0513409,\n        30.6303493\n    ],\n    "27": [\n        104.0578915,\n        30.6757306\n    ],\n    "22": [\n        104.0409354,\n        30.6607956\n    ],\n    "7": [\n        104.0520894,\n        30.6667892\n    ],\n    "44": [\n        104.0514075,\n        30.6770349\n    ],\n    "23": [\n        104.0662965,\n        30.6658053\n    ],\n    "8": [\n        104.0280326,\n        30.6752172\n    ]\n}\t,where `key` is the `taxi id`, and `value` represents the current position of the vehicle.\nPlease use the appropriate tool to assign each request to a single taxi reasonably.\n\nTo do this, you must determine whether the current passenger request pickup position is in the taxi driver\'s service range or not. \n1. Don\'t finish the task until you have a final answer. You must output a list of decision when you finish this task.\n2. You can only use tools mentioned before to help you make decision. Don\'t fabricate any other tool name not mentioned.\n3. Remember what tools you have used, you can use same tool to solve the problems of identical property.\n4. If all of the taxi drivers are not available or too far away from the certain passenger, you must leave assign the order to id \'-1\', which means the order is not assigned to any taxi driver. \n5. Output the list of passenger assignment decision in order of the given passenger request before. \nLet\'s take a deep breath and think step by step. Once you made a final decision, output it in the following format: \n\n```\nFinal Answer: \n"decision": {list of request assignment tuple(int, int) that indicate the request(1st id) from a passenger is assigned to a taxi driver(2nd id)},\n"explanation": {your explanation about your decision, described your suggestions to the taxi drivers}\n``` \n')]
+
+[0m

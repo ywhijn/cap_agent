@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="python@sftp://h666@10.147.19.120:22/home/h666/anaconda3/envs/urbangpt/bin/python">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/sumo_local" remote-root="/home/h666/simulator/sumo/sumo_local" />
+            </list>
+          </settings>
+        </remote-mappings>
+      </list>
+    </list>
+  </component>
+</project>

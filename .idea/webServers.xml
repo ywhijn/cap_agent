@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f2f17b65-92ef-4122-a083-37d474e3b613" name="sumo(项目级别)">
+        <fileTransfer accessType="SFTP" host="10.147.19.120" port="22" sshConfigId="9fb136a4-30bd-4900-b9e9-20d1b685db5a" sshConfig="h666@10.147.19.120:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

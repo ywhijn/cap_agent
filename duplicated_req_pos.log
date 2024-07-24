@@ -1,0 +1,960 @@
+2024-06-23 00:06:00 INFO: ******************************
+2024-06-23 00:06:00 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 00:06:00 INFO: ******************************
+2024-06-23 00:06:15 INFO: The number of steps: 7199
+2024-06-23 00:06:15 INFO: The number of grids: 100
+2024-06-23 00:06:15 INFO: ******************************
+2024-06-23 00:06:16 INFO: The number of test requests: 2685 
+2024-06-23 00:06:16 INFO: ******************************
+2024-06-23 00:06:16 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:16 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:16 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:16 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:16 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:16 INFO: ******************************
+2024-06-23 00:06:16 INFO: The number of test requests: 2685 
+2024-06-23 00:06:16 INFO: ******************************
+2024-06-23 00:06:16 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:16 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:16 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:16 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:16 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:16 INFO: ******************************
+2024-06-23 00:06:17 INFO: The number of test requests: 2685 
+2024-06-23 00:06:17 INFO: ******************************
+2024-06-23 00:06:17 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:17 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:17 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:17 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:17 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:17 INFO: ******************************
+2024-06-23 00:06:17 INFO: The number of test requests: 2685 
+2024-06-23 00:06:17 INFO: ******************************
+2024-06-23 00:06:17 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:17 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:17 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:17 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:17 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:17 INFO: ******************************
+2024-06-23 00:06:18 INFO: The number of test requests: 2685 
+2024-06-23 00:06:18 INFO: ******************************
+2024-06-23 00:06:18 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:18 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:18 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:18 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:18 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:18 INFO: ******************************
+2024-06-23 00:06:18 INFO: The number of test requests: 2685 
+2024-06-23 00:06:18 INFO: ******************************
+2024-06-23 00:06:18 INFO: The number of vehicles (N):       80
+2024-06-23 00:06:18 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 00:06:18 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 00:06:18 INFO: Average vehicle velocity (v):     15
+2024-06-23 00:06:18 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 00:06:18 INFO: ******************************
+2024-06-23 20:28:45 INFO: ******************************
+2024-06-23 20:28:45 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 20:28:45 INFO: ******************************
+2024-06-23 20:29:13 INFO: The number of steps: 7199
+2024-06-23 20:29:13 INFO: The number of grids: 100
+2024-06-23 20:29:13 INFO: ******************************
+2024-06-23 21:22:16 INFO: ******************************
+2024-06-23 21:22:16 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:22:16 INFO: ******************************
+2024-06-23 21:22:43 INFO: The number of steps: 7199
+2024-06-23 21:22:43 INFO: The number of grids: 100
+2024-06-23 21:22:43 INFO: ******************************
+2024-06-23 21:24:16 INFO: ******************************
+2024-06-23 21:24:16 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:24:16 INFO: ******************************
+2024-06-23 21:24:42 INFO: The number of steps: 7199
+2024-06-23 21:24:42 INFO: The number of grids: 100
+2024-06-23 21:24:42 INFO: ******************************
+2024-06-23 21:24:43 INFO: The number of test requests: 2685 
+2024-06-23 21:24:43 INFO: ******************************
+2024-06-23 21:24:43 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:43 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:43 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:43 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:43 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:43 INFO: ******************************
+2024-06-23 21:24:45 INFO: The number of test requests: 2685 
+2024-06-23 21:24:45 INFO: ******************************
+2024-06-23 21:24:45 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:45 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:45 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:45 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:45 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:45 INFO: ******************************
+2024-06-23 21:24:47 INFO: The number of test requests: 2685 
+2024-06-23 21:24:47 INFO: ******************************
+2024-06-23 21:24:47 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:47 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:47 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:47 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:47 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:47 INFO: ******************************
+2024-06-23 21:24:49 INFO: The number of test requests: 2685 
+2024-06-23 21:24:49 INFO: ******************************
+2024-06-23 21:24:49 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:49 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:49 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:49 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:49 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:49 INFO: ******************************
+2024-06-23 21:24:51 INFO: The number of test requests: 2685 
+2024-06-23 21:24:51 INFO: ******************************
+2024-06-23 21:24:51 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:51 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:51 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:51 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:51 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:51 INFO: ******************************
+2024-06-23 21:24:54 INFO: The number of test requests: 2685 
+2024-06-23 21:24:54 INFO: ******************************
+2024-06-23 21:24:54 INFO: The number of vehicles (N):       80
+2024-06-23 21:24:54 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:24:54 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:24:54 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:24:54 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:24:54 INFO: ******************************
+2024-06-23 21:25:43 INFO: ******************************
+2024-06-23 21:25:43 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:25:43 INFO: ******************************
+2024-06-23 21:26:11 INFO: The number of steps: 7199
+2024-06-23 21:26:11 INFO: The number of grids: 100
+2024-06-23 21:26:11 INFO: ******************************
+2024-06-23 21:26:12 INFO: The number of test requests: 2685 
+2024-06-23 21:26:12 INFO: ******************************
+2024-06-23 21:26:12 INFO: The number of vehicles (N):       80
+2024-06-23 21:26:12 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:26:12 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:26:12 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:26:12 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:26:12 INFO: ******************************
+2024-06-23 21:28:22 INFO: ******************************
+2024-06-23 21:28:22 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:28:22 INFO: ******************************
+2024-06-23 21:28:48 INFO: The number of steps: 7199
+2024-06-23 21:28:48 INFO: The number of grids: 100
+2024-06-23 21:28:48 INFO: ******************************
+2024-06-23 21:28:49 INFO: The number of test requests: 2685 
+2024-06-23 21:28:49 INFO: ******************************
+2024-06-23 21:28:49 INFO: The number of vehicles (N):       80
+2024-06-23 21:28:49 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:28:49 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:28:49 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:28:49 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:28:49 INFO: ******************************
+2024-06-23 21:33:54 INFO: ******************************
+2024-06-23 21:33:54 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:33:54 INFO: ******************************
+2024-06-23 21:34:09 INFO: The number of steps: 7199
+2024-06-23 21:34:09 INFO: The number of grids: 100
+2024-06-23 21:34:09 INFO: ******************************
+2024-06-23 21:34:10 INFO: The number of test requests: 2685 
+2024-06-23 21:34:10 INFO: ******************************
+2024-06-23 21:34:10 INFO: The number of vehicles (N):       80
+2024-06-23 21:34:10 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:34:10 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:34:10 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:34:10 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:34:10 INFO: ******************************
+2024-06-23 21:37:46 INFO: ******************************
+2024-06-23 21:37:46 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:37:46 INFO: ******************************
+2024-06-23 21:38:01 INFO: The number of steps: 7199
+2024-06-23 21:38:01 INFO: The number of grids: 100
+2024-06-23 21:38:01 INFO: ******************************
+2024-06-23 21:38:02 INFO: The number of test requests: 2685 
+2024-06-23 21:38:02 INFO: ******************************
+2024-06-23 21:38:02 INFO: The number of vehicles (N):       80
+2024-06-23 21:38:02 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:38:02 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:38:02 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:38:02 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:38:02 INFO: ******************************
+2024-06-23 21:40:22 INFO: ******************************
+2024-06-23 21:40:22 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:40:22 INFO: ******************************
+2024-06-23 21:40:50 INFO: The number of steps: 7199
+2024-06-23 21:40:50 INFO: The number of grids: 100
+2024-06-23 21:40:50 INFO: ******************************
+2024-06-23 21:40:51 INFO: The number of test requests: 2685 
+2024-06-23 21:40:51 INFO: ******************************
+2024-06-23 21:40:51 INFO: The number of vehicles (N):       80
+2024-06-23 21:40:51 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:40:51 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:40:51 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:40:51 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:40:51 INFO: ******************************
+2024-06-23 21:43:44 INFO: ******************************
+2024-06-23 21:43:44 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-23 21:43:44 INFO: ******************************
+2024-06-23 21:44:00 INFO: The number of steps: 7199
+2024-06-23 21:44:00 INFO: The number of grids: 100
+2024-06-23 21:44:00 INFO: ******************************
+2024-06-23 21:44:00 INFO: The number of test requests: 2685 
+2024-06-23 21:44:00 INFO: ******************************
+2024-06-23 21:44:00 INFO: The number of vehicles (N):       80
+2024-06-23 21:44:00 INFO: Request rate (q):                 0.18645833333333334
+2024-06-23 21:44:00 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-23 21:44:00 INFO: Average vehicle velocity (v):     15
+2024-06-23 21:44:00 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-23 21:44:00 INFO: ******************************
+2024-06-24 22:42:34 INFO: ******************************
+2024-06-24 22:42:34 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 2, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 22:42:34 INFO: ******************************
+2024-06-24 22:42:56 INFO: The number of steps: 7199
+2024-06-24 22:42:56 INFO: The number of grids: 100
+2024-06-24 22:42:56 INFO: ******************************
+2024-06-24 22:42:57 INFO: The number of test requests: 2685 
+2024-06-24 22:42:57 INFO: ******************************
+2024-06-24 22:42:57 INFO: The number of vehicles (N):       80
+2024-06-24 22:42:57 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 22:42:57 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 22:42:57 INFO: Average vehicle velocity (v):     15
+2024-06-24 22:42:57 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 22:42:57 INFO: ******************************
+2024-06-24 22:44:51 INFO: ******************************
+2024-06-24 22:44:51 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 22:44:51 INFO: ******************************
+2024-06-24 22:45:03 INFO: The number of steps: 239
+2024-06-24 22:45:03 INFO: The number of grids: 100
+2024-06-24 22:45:03 INFO: ******************************
+2024-06-24 22:45:04 INFO: The number of test requests: 2685 
+2024-06-24 22:45:04 INFO: ******************************
+2024-06-24 22:45:04 INFO: The number of vehicles (N):       80
+2024-06-24 22:45:04 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 22:45:04 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 22:45:04 INFO: Average vehicle velocity (v):     15
+2024-06-24 22:45:04 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 22:45:04 INFO: ******************************
+2024-06-24 22:45:25 INFO: ******************************
+2024-06-24 22:45:25 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 22:45:25 INFO: ******************************
+2024-06-24 22:45:46 INFO: The number of steps: 239
+2024-06-24 22:45:46 INFO: The number of grids: 100
+2024-06-24 22:45:46 INFO: ******************************
+2024-06-24 22:45:47 INFO: The number of test requests: 2685 
+2024-06-24 22:45:47 INFO: ******************************
+2024-06-24 22:45:47 INFO: The number of vehicles (N):       80
+2024-06-24 22:45:47 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 22:45:47 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 22:45:47 INFO: Average vehicle velocity (v):     15
+2024-06-24 22:45:47 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 22:45:47 INFO: ******************************
+2024-06-24 23:02:39 INFO: ******************************
+2024-06-24 23:02:39 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 20, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:02:39 INFO: ******************************
+2024-06-24 23:02:51 INFO: The number of steps: 719
+2024-06-24 23:02:51 INFO: The number of grids: 100
+2024-06-24 23:02:51 INFO: ******************************
+2024-06-24 23:02:52 INFO: The number of test requests: 2685 
+2024-06-24 23:02:52 INFO: ******************************
+2024-06-24 23:02:52 INFO: The number of vehicles (N):       80
+2024-06-24 23:02:52 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:02:52 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:02:52 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:02:52 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:02:52 INFO: ******************************
+2024-06-24 23:04:14 INFO: ******************************
+2024-06-24 23:04:14 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 20, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:04:14 INFO: ******************************
+2024-06-24 23:04:26 INFO: The number of steps: 719
+2024-06-24 23:04:26 INFO: The number of grids: 100
+2024-06-24 23:04:26 INFO: ******************************
+2024-06-24 23:04:27 INFO: The number of test requests: 2685 
+2024-06-24 23:04:27 INFO: ******************************
+2024-06-24 23:04:27 INFO: The number of vehicles (N):       80
+2024-06-24 23:04:27 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:04:27 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:04:27 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:04:27 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:04:27 INFO: ******************************
+2024-06-24 23:29:17 INFO: ******************************
+2024-06-24 23:29:17 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:29:17 INFO: ******************************
+2024-06-24 23:29:29 INFO: The number of steps: 13
+2024-06-24 23:29:29 INFO: The number of grids: 100
+2024-06-24 23:29:29 INFO: ******************************
+2024-06-24 23:29:30 INFO: The number of test requests: 2685 
+2024-06-24 23:29:30 INFO: ******************************
+2024-06-24 23:29:30 INFO: The number of vehicles (N):       80
+2024-06-24 23:29:30 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:29:30 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:29:30 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:29:30 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:29:30 INFO: ******************************
+2024-06-24 23:30:25 INFO: ******************************
+2024-06-24 23:30:25 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:30:25 INFO: ******************************
+2024-06-24 23:30:47 INFO: The number of steps: 13
+2024-06-24 23:30:47 INFO: The number of grids: 100
+2024-06-24 23:30:47 INFO: ******************************
+2024-06-24 23:30:47 INFO: The number of test requests: 2685 
+2024-06-24 23:30:47 INFO: ******************************
+2024-06-24 23:30:47 INFO: The number of vehicles (N):       80
+2024-06-24 23:30:47 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:30:47 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:30:47 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:30:47 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:30:47 INFO: ******************************
+2024-06-24 23:44:04 INFO: ******************************
+2024-06-24 23:44:04 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:44:04 INFO: ******************************
+2024-06-24 23:44:26 INFO: The number of steps: 13
+2024-06-24 23:44:26 INFO: The number of grids: 100
+2024-06-24 23:44:26 INFO: ******************************
+2024-06-24 23:44:27 INFO: The number of test requests: 2685 
+2024-06-24 23:44:27 INFO: ******************************
+2024-06-24 23:44:27 INFO: The number of vehicles (N):       80
+2024-06-24 23:44:27 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:44:27 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:44:27 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:44:27 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:44:27 INFO: ******************************
+2024-06-24 23:51:02 INFO: ******************************
+2024-06-24 23:51:02 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-24 23:51:02 INFO: ******************************
+2024-06-24 23:51:23 INFO: The number of steps: 13
+2024-06-24 23:51:23 INFO: The number of grids: 100
+2024-06-24 23:51:23 INFO: ******************************
+2024-06-24 23:51:24 INFO: The number of test requests: 2685 
+2024-06-24 23:51:24 INFO: ******************************
+2024-06-24 23:51:24 INFO: The number of vehicles (N):       80
+2024-06-24 23:51:24 INFO: Request rate (q):                 0.18645833333333334
+2024-06-24 23:51:24 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-24 23:51:24 INFO: Average vehicle velocity (v):     15
+2024-06-24 23:51:24 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-24 23:51:24 INFO: ******************************
+2024-06-25 15:35:39 INFO: ******************************
+2024-06-25 15:35:39 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80000, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 15:35:39 INFO: ******************************
+2024-06-25 15:35:59 INFO: ******************************
+2024-06-25 15:35:59 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80000, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 15:35:59 INFO: ******************************
+2024-06-25 15:36:14 INFO: The number of steps: 239
+2024-06-25 15:36:14 INFO: The number of grids: 100
+2024-06-25 15:36:14 INFO: ******************************
+2024-06-25 15:36:15 INFO: The number of test requests: 2685 
+2024-06-25 15:36:15 INFO: ******************************
+2024-06-25 15:36:15 INFO: The number of vehicles (N):       80000
+2024-06-25 15:36:15 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 15:36:15 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 15:36:15 INFO: Average vehicle velocity (v):     15
+2024-06-25 15:36:15 INFO: Dimensionless parameter (Lq / vB):0.0010059702283725556
+2024-06-25 15:36:15 INFO: ******************************
+2024-06-25 15:38:23 INFO: ******************************
+2024-06-25 15:38:23 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 8000, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 15:38:23 INFO: ******************************
+2024-06-25 15:38:38 INFO: The number of steps: 239
+2024-06-25 15:38:38 INFO: The number of grids: 100
+2024-06-25 15:38:38 INFO: ******************************
+2024-06-25 15:38:39 INFO: The number of test requests: 2685 
+2024-06-25 15:38:39 INFO: ******************************
+2024-06-25 15:38:39 INFO: The number of vehicles (N):       8000
+2024-06-25 15:38:39 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 15:38:39 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 15:38:39 INFO: Average vehicle velocity (v):     15
+2024-06-25 15:38:39 INFO: Dimensionless parameter (Lq / vB):0.010059702283725557
+2024-06-25 15:38:39 INFO: ******************************
+2024-06-25 15:39:10 INFO: ******************************
+2024-06-25 15:39:10 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 800, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 15:39:10 INFO: ******************************
+2024-06-25 15:39:25 INFO: The number of steps: 239
+2024-06-25 15:39:25 INFO: The number of grids: 100
+2024-06-25 15:39:25 INFO: ******************************
+2024-06-25 15:39:26 INFO: The number of test requests: 2685 
+2024-06-25 15:39:26 INFO: ******************************
+2024-06-25 15:39:26 INFO: The number of vehicles (N):       800
+2024-06-25 15:39:26 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 15:39:26 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 15:39:26 INFO: Average vehicle velocity (v):     15
+2024-06-25 15:39:26 INFO: Dimensionless parameter (Lq / vB):0.10059702283725556
+2024-06-25 15:39:26 INFO: ******************************
+2024-06-25 22:53:16 INFO: ******************************
+2024-06-25 22:53:16 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 800, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 22:53:16 INFO: ******************************
+2024-06-25 22:53:29 INFO: The number of steps: 239
+2024-06-25 22:53:29 INFO: The number of grids: 100
+2024-06-25 22:53:29 INFO: ******************************
+2024-06-25 22:53:29 INFO: The number of test requests: 2685 
+2024-06-25 22:53:29 INFO: ******************************
+2024-06-25 22:53:29 INFO: The number of vehicles (N):       800
+2024-06-25 22:53:29 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 22:53:29 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 22:53:29 INFO: Average vehicle velocity (v):     15
+2024-06-25 22:53:29 INFO: Dimensionless parameter (Lq / vB):0.10059702283725556
+2024-06-25 22:53:29 INFO: ******************************
+2024-06-25 23:12:20 INFO: ******************************
+2024-06-25 23:12:20 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 23:12:20 INFO: ******************************
+2024-06-25 23:12:33 INFO: The number of steps: 239
+2024-06-25 23:12:33 INFO: The number of grids: 100
+2024-06-25 23:12:33 INFO: ******************************
+2024-06-25 23:12:33 INFO: The number of test requests: 2685 
+2024-06-25 23:12:33 INFO: ******************************
+2024-06-25 23:12:33 INFO: The number of vehicles (N):       80
+2024-06-25 23:12:33 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 23:12:33 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 23:12:33 INFO: Average vehicle velocity (v):     15
+2024-06-25 23:12:33 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-25 23:12:33 INFO: ******************************
+2024-06-25 23:13:14 INFO: ******************************
+2024-06-25 23:13:14 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 500, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 23:13:14 INFO: ******************************
+2024-06-25 23:13:27 INFO: The number of steps: 27
+2024-06-25 23:13:27 INFO: The number of grids: 100
+2024-06-25 23:13:27 INFO: ******************************
+2024-06-25 23:24:22 INFO: ******************************
+2024-06-25 23:24:22 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 500, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 23:24:22 INFO: ******************************
+2024-06-25 23:24:45 INFO: The number of steps: 27
+2024-06-25 23:24:45 INFO: The number of grids: 100
+2024-06-25 23:24:45 INFO: ******************************
+2024-06-25 23:46:54 INFO: ******************************
+2024-06-25 23:46:54 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 23:46:54 INFO: ******************************
+2024-06-25 23:47:07 INFO: The number of steps: 13
+2024-06-25 23:47:07 INFO: The number of grids: 100
+2024-06-25 23:47:07 INFO: ******************************
+2024-06-25 23:47:08 INFO: The number of test requests: 2685 
+2024-06-25 23:47:08 INFO: ******************************
+2024-06-25 23:47:08 INFO: The number of vehicles (N):       80
+2024-06-25 23:47:08 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 23:47:08 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 23:47:08 INFO: Average vehicle velocity (v):     15
+2024-06-25 23:47:08 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-25 23:47:08 INFO: ******************************
+2024-06-25 23:48:10 INFO: ******************************
+2024-06-25 23:48:10 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-25 23:48:10 INFO: ******************************
+2024-06-25 23:48:32 INFO: The number of steps: 13
+2024-06-25 23:48:32 INFO: The number of grids: 100
+2024-06-25 23:48:32 INFO: ******************************
+2024-06-25 23:48:33 INFO: The number of test requests: 2685 
+2024-06-25 23:48:33 INFO: ******************************
+2024-06-25 23:48:33 INFO: The number of vehicles (N):       80
+2024-06-25 23:48:33 INFO: Request rate (q):                 0.18645833333333334
+2024-06-25 23:48:33 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-25 23:48:33 INFO: Average vehicle velocity (v):     15
+2024-06-25 23:48:33 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-25 23:48:33 INFO: ******************************
+2024-06-26 00:21:44 INFO: ******************************
+2024-06-26 00:21:44 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-26 00:21:44 INFO: ******************************
+2024-06-26 00:21:57 INFO: The number of steps: 13
+2024-06-26 00:21:57 INFO: The number of grids: 100
+2024-06-26 00:21:57 INFO: ******************************
+2024-06-26 00:21:58 INFO: The number of test requests: 2685 
+2024-06-26 00:21:58 INFO: ******************************
+2024-06-26 00:21:58 INFO: The number of vehicles (N):       80
+2024-06-26 00:21:58 INFO: Request rate (q):                 0.18645833333333334
+2024-06-26 00:21:58 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-26 00:21:58 INFO: Average vehicle velocity (v):     15
+2024-06-26 00:21:58 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-26 00:21:58 INFO: ******************************
+2024-06-26 00:23:11 INFO: ******************************
+2024-06-26 00:23:11 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-26 00:23:11 INFO: ******************************
+2024-06-26 00:23:33 INFO: The number of steps: 13
+2024-06-26 00:23:33 INFO: The number of grids: 100
+2024-06-26 00:23:33 INFO: ******************************
+2024-06-26 00:23:34 INFO: The number of test requests: 2685 
+2024-06-26 00:23:34 INFO: ******************************
+2024-06-26 00:23:34 INFO: The number of vehicles (N):       80
+2024-06-26 00:23:34 INFO: Request rate (q):                 0.18645833333333334
+2024-06-26 00:23:34 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-26 00:23:34 INFO: Average vehicle velocity (v):     15
+2024-06-26 00:23:34 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-26 00:23:34 INFO: ******************************
+2024-06-28 21:37:04 INFO: ******************************
+2024-06-28 21:37:04 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-28 21:37:04 INFO: ******************************
+2024-06-30 21:45:09 INFO: ******************************
+2024-06-30 21:45:09 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-30 21:45:09 INFO: ******************************
+2024-06-30 21:45:55 INFO: ******************************
+2024-06-30 21:45:55 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-06-30 21:45:55 INFO: ******************************
+2024-06-30 21:46:23 INFO: The number of steps: 13
+2024-06-30 21:46:23 INFO: The number of grids: 100
+2024-06-30 21:46:23 INFO: ******************************
+2024-06-30 21:46:25 INFO: The number of test requests: 2685 
+2024-06-30 21:46:25 INFO: ******************************
+2024-06-30 21:46:25 INFO: The number of vehicles (N):       80
+2024-06-30 21:46:25 INFO: Request rate (q):                 0.18645833333333334
+2024-06-30 21:46:25 INFO: Average trip distance (L):        6474.1771122077325
+2024-06-30 21:46:25 INFO: Average vehicle velocity (v):     15
+2024-06-30 21:46:25 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-06-30 21:46:25 INFO: ******************************
+2024-07-24 19:59:52 INFO: ******************************
+2024-07-24 19:59:52 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 19:59:52 INFO: ******************************
+2024-07-24 20:00:07 INFO: The number of steps: 13
+2024-07-24 20:00:07 INFO: The number of grids: 100
+2024-07-24 20:00:07 INFO: ******************************
+2024-07-24 20:00:08 INFO: The number of test requests: 2685 
+2024-07-24 20:00:08 INFO: ******************************
+2024-07-24 20:00:08 INFO: The number of vehicles (N):       80
+2024-07-24 20:00:08 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:00:08 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:00:08 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:00:08 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:00:08 INFO: ******************************
+2024-07-24 20:01:39 INFO: ******************************
+2024-07-24 20:01:39 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 20:01:39 INFO: ******************************
+2024-07-24 20:02:01 INFO: The number of steps: 13
+2024-07-24 20:02:01 INFO: The number of grids: 100
+2024-07-24 20:02:01 INFO: ******************************
+2024-07-24 20:02:02 INFO: The number of test requests: 2685 
+2024-07-24 20:02:02 INFO: ******************************
+2024-07-24 20:02:02 INFO: The number of vehicles (N):       80
+2024-07-24 20:02:02 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:02:02 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:02:02 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:02:02 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:02:02 INFO: ******************************
+2024-07-24 20:05:13 INFO: ******************************
+2024-07-24 20:05:13 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 20:05:13 INFO: ******************************
+2024-07-24 20:05:25 INFO: The number of steps: 13
+2024-07-24 20:05:25 INFO: The number of grids: 100
+2024-07-24 20:05:25 INFO: ******************************
+2024-07-24 20:05:25 INFO: The number of test requests: 2685 
+2024-07-24 20:05:25 INFO: ******************************
+2024-07-24 20:05:25 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:25 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:25 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:25 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:25 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:25 INFO: ******************************
+2024-07-24 20:05:26 INFO: ****************** Simulation Polling rate: 1.0 *********************
+2024-07-24 20:05:26 INFO: Service rate (non-ride-pooling):  nan
+2024-07-24 20:05:26 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:26 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:26 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:26 INFO: The average detour time (min):    nan
+2024-07-24 20:05:26 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:26 INFO: The average total time ratio:     nan
+2024-07-24 20:05:26 INFO: The average detour distance (km): nan
+2024-07-24 20:05:26 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:26 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:26 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:26 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:26 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:26 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:26 INFO: Service rate (non-ride-pooling):  nan
+2024-07-24 20:05:26 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:26 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:26 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:26 INFO: The average detour time (min):    nan
+2024-07-24 20:05:26 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:26 INFO: The average total time ratio:     nan
+2024-07-24 20:05:26 INFO: The average detour distance (km): nan
+2024-07-24 20:05:26 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:26 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:26 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:26 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:26 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:26 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The number of test requests: 2685 
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:26 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:26 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:26 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:26 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: ****************** Simulation Polling rate: 0.8 *********************
+2024-07-24 20:05:26 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:26 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:26 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:26 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:26 INFO: The average detour time (min):    nan
+2024-07-24 20:05:26 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:26 INFO: The average total time ratio:     nan
+2024-07-24 20:05:26 INFO: The average detour distance (km): nan
+2024-07-24 20:05:26 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:26 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:26 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:26 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:26 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:26 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:26 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:26 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:26 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:26 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:26 INFO: The average detour time (min):    nan
+2024-07-24 20:05:26 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:26 INFO: The average total time ratio:     nan
+2024-07-24 20:05:26 INFO: The average detour distance (km): nan
+2024-07-24 20:05:26 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:26 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:26 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:26 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:26 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:26 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:26 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:26 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:26 INFO: ******************************
+2024-07-24 20:05:27 INFO: The number of test requests: 2685 
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:27 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:27 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:27 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:27 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: ****************** Simulation Polling rate: 0.6 *********************
+2024-07-24 20:05:27 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:27 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:27 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:27 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:27 INFO: The average detour time (min):    nan
+2024-07-24 20:05:27 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:27 INFO: The average total time ratio:     nan
+2024-07-24 20:05:27 INFO: The average detour distance (km): nan
+2024-07-24 20:05:27 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:27 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:27 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:27 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:27 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:27 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:27 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:27 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:27 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:27 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:27 INFO: The average detour time (min):    nan
+2024-07-24 20:05:27 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:27 INFO: The average total time ratio:     nan
+2024-07-24 20:05:27 INFO: The average detour distance (km): nan
+2024-07-24 20:05:27 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:27 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:27 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:27 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:27 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:27 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The number of test requests: 2685 
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:27 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:27 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:27 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:27 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: ****************** Simulation Polling rate: 0.4 *********************
+2024-07-24 20:05:27 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:27 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:27 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:27 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:27 INFO: The average detour time (min):    nan
+2024-07-24 20:05:27 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:27 INFO: The average total time ratio:     nan
+2024-07-24 20:05:27 INFO: The average detour distance (km): nan
+2024-07-24 20:05:27 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:27 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:27 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:27 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:27 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:27 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:27 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:27 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:27 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:27 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:27 INFO: The average detour time (min):    nan
+2024-07-24 20:05:27 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:27 INFO: The average total time ratio:     nan
+2024-07-24 20:05:27 INFO: The average detour distance (km): nan
+2024-07-24 20:05:27 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:27 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:27 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:27 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:27 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:27 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:27 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:27 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:27 INFO: ******************************
+2024-07-24 20:05:28 INFO: The number of test requests: 2685 
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:28 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:28 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:28 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:28 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: ****************** Simulation Polling rate: 0.2 *********************
+2024-07-24 20:05:28 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:28 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:28 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:28 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:28 INFO: The average detour time (min):    nan
+2024-07-24 20:05:28 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:28 INFO: The average total time ratio:     nan
+2024-07-24 20:05:28 INFO: The average detour distance (km): nan
+2024-07-24 20:05:28 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:28 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:28 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:28 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:28 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:28 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:28 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:28 INFO: Service rate (ride-pooling):      0.0
+2024-07-24 20:05:28 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:28 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:28 INFO: The average detour time (min):    nan
+2024-07-24 20:05:28 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:28 INFO: The average total time ratio:     nan
+2024-07-24 20:05:28 INFO: The average detour distance (km): nan
+2024-07-24 20:05:28 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:28 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:28 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:28 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:28 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:28 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The number of test requests: 2685 
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The number of vehicles (N):       80
+2024-07-24 20:05:28 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:05:28 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:05:28 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:05:28 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: ****************** Simulation Polling rate: 0.0 *********************
+2024-07-24 20:05:28 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:28 INFO: Service rate (ride-pooling):      nan
+2024-07-24 20:05:28 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:28 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:28 INFO: The average detour time (min):    nan
+2024-07-24 20:05:28 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:28 INFO: The average total time ratio:     nan
+2024-07-24 20:05:28 INFO: The average detour distance (km): nan
+2024-07-24 20:05:28 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:28 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:28 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:28 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:28 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:28 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: ****************** Simulation Average Results *********************
+2024-07-24 20:05:28 INFO: Service rate (non-ride-pooling):  0.0
+2024-07-24 20:05:28 INFO: Service rate (ride-pooling):      nan
+2024-07-24 20:05:28 INFO: The average assigning time (s):   nan
+2024-07-24 20:05:28 INFO: The average pick-up time (min):   nan
+2024-07-24 20:05:28 INFO: The average detour time (min):    nan
+2024-07-24 20:05:28 INFO: The average detour time ratio:    nan
+2024-07-24 20:05:28 INFO: The average total time ratio:     nan
+2024-07-24 20:05:28 INFO: The average detour distance (km): nan
+2024-07-24 20:05:28 INFO: The average detour distance ratio:nan
+2024-07-24 20:05:28 INFO: Cancellation rate (pickup):       0.0
+2024-07-24 20:05:28 INFO: Cancellation rate (assign):       1.0
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft1):nan
+2024-07-24 20:05:28 INFO: Ratio of delivering time to shortest time(ft2):nan
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:05:28 INFO: The average idle time(min):                     0.0
+2024-07-24 20:05:28 INFO: The total income of all vehicles (USD):         0.0
+2024-07-24 20:05:28 INFO: The total travel distance of all vehicles (km): 0.0
+2024-07-24 20:05:28 INFO: The average number of requests in each vehicle: 0.0
+2024-07-24 20:05:28 INFO: ******************************
+2024-07-24 20:06:11 INFO: ******************************
+2024-07-24 20:06:11 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 20:06:11 INFO: ******************************
+2024-07-24 20:06:23 INFO: The number of steps: 13
+2024-07-24 20:06:23 INFO: The number of grids: 100
+2024-07-24 20:06:23 INFO: ******************************
+2024-07-24 20:06:24 INFO: The number of test requests: 2685 
+2024-07-24 20:06:24 INFO: ******************************
+2024-07-24 20:06:24 INFO: The number of vehicles (N):       80
+2024-07-24 20:06:24 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 20:06:24 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 20:06:24 INFO: Average vehicle velocity (v):     15
+2024-07-24 20:06:24 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 20:06:24 INFO: ******************************
+2024-07-24 22:32:15 INFO: ******************************
+2024-07-24 22:32:15 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 22:32:15 INFO: ******************************
+2024-07-24 22:32:39 INFO: The number of steps: 13
+2024-07-24 22:32:39 INFO: The number of grids: 100
+2024-07-24 22:32:39 INFO: ******************************
+2024-07-24 22:32:40 INFO: The number of test requests: 2685 
+2024-07-24 22:32:40 INFO: ******************************
+2024-07-24 22:32:40 INFO: The number of vehicles (N):       80
+2024-07-24 22:32:40 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 22:32:40 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 22:32:40 INFO: Average vehicle velocity (v):     15
+2024-07-24 22:32:40 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 22:32:40 INFO: ******************************
+2024-07-24 22:34:55 INFO: ******************************
+2024-07-24 22:34:55 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 22:34:55 INFO: ******************************
+2024-07-24 22:35:17 INFO: The number of steps: 13
+2024-07-24 22:35:17 INFO: The number of grids: 100
+2024-07-24 22:35:17 INFO: ******************************
+2024-07-24 22:35:18 INFO: The number of test requests: 2685 
+2024-07-24 22:35:18 INFO: ******************************
+2024-07-24 22:35:18 INFO: The number of vehicles (N):       80
+2024-07-24 22:35:18 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 22:35:18 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 22:35:18 INFO: Average vehicle velocity (v):     15
+2024-07-24 22:35:18 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 22:35:18 INFO: ******************************
+2024-07-24 22:48:36 INFO: ******************************
+2024-07-24 22:48:36 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 1000, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 22:48:36 INFO: ******************************
+2024-07-24 22:48:57 INFO: The number of steps: 13
+2024-07-24 22:48:57 INFO: The number of grids: 100
+2024-07-24 22:48:57 INFO: ******************************
+2024-07-24 22:48:58 INFO: The number of test requests: 2685 
+2024-07-24 22:48:58 INFO: ******************************
+2024-07-24 22:48:58 INFO: The number of vehicles (N):       80
+2024-07-24 22:48:58 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 22:48:58 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 22:48:58 INFO: Average vehicle velocity (v):     15
+2024-07-24 22:48:58 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 22:48:58 INFO: ******************************
+2024-07-24 22:58:21 INFO: ******************************
+2024-07-24 22:58:21 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 22:58:21 INFO: ******************************
+2024-07-24 22:58:42 INFO: The number of steps: 239
+2024-07-24 22:58:42 INFO: The number of grids: 100
+2024-07-24 22:58:42 INFO: ******************************
+2024-07-24 22:58:43 INFO: The number of test requests: 2685 
+2024-07-24 22:58:43 INFO: ******************************
+2024-07-24 22:58:43 INFO: The number of vehicles (N):       80
+2024-07-24 22:58:43 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 22:58:43 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 22:58:43 INFO: Average vehicle velocity (v):     15
+2024-07-24 22:58:43 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 22:58:43 INFO: ******************************
+2024-07-24 23:00:48 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2024-07-24 23:17:37 INFO: ******************************
+2024-07-24 23:17:37 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:17:37 INFO: ******************************
+2024-07-24 23:18:00 INFO: The number of steps: 239
+2024-07-24 23:18:00 INFO: The number of grids: 100
+2024-07-24 23:18:00 INFO: ******************************
+2024-07-24 23:18:01 INFO: The number of test requests: 2685 
+2024-07-24 23:18:01 INFO: ******************************
+2024-07-24 23:18:01 INFO: The number of vehicles (N):       80
+2024-07-24 23:18:01 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 23:18:01 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 23:18:01 INFO: Average vehicle velocity (v):     15
+2024-07-24 23:18:01 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 23:18:01 INFO: ******************************
+2024-07-24 23:28:58 INFO: ******************************
+2024-07-24 23:28:58 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:28:58 INFO: ******************************
+2024-07-24 23:29:19 INFO: The number of steps: 239
+2024-07-24 23:29:19 INFO: The number of grids: 100
+2024-07-24 23:29:19 INFO: ******************************
+2024-07-24 23:29:20 INFO: The number of test requests: 2685 
+2024-07-24 23:29:20 INFO: ******************************
+2024-07-24 23:29:20 INFO: The number of vehicles (N):       80
+2024-07-24 23:29:20 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 23:29:20 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 23:29:20 INFO: Average vehicle velocity (v):     15
+2024-07-24 23:29:20 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 23:29:20 INFO: ******************************
+2024-07-24 23:32:50 INFO: ******************************
+2024-07-24 23:32:50 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:32:50 INFO: ******************************
+2024-07-24 23:33:10 INFO: The number of steps: 239
+2024-07-24 23:33:10 INFO: The number of grids: 100
+2024-07-24 23:33:10 INFO: ******************************
+2024-07-24 23:33:11 INFO: The number of test requests: 2685 
+2024-07-24 23:33:11 INFO: ******************************
+2024-07-24 23:33:11 INFO: The number of vehicles (N):       80
+2024-07-24 23:33:11 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 23:33:11 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 23:33:11 INFO: Average vehicle velocity (v):     15
+2024-07-24 23:33:11 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 23:33:11 INFO: ******************************
+2024-07-24 23:44:18 INFO: ******************************
+2024-07-24 23:44:18 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:44:18 INFO: ******************************
+2024-07-24 23:44:40 INFO: The number of steps: 239
+2024-07-24 23:44:40 INFO: The number of grids: 100
+2024-07-24 23:44:40 INFO: ******************************
+2024-07-24 23:44:40 INFO: The number of test requests: 2685 
+2024-07-24 23:44:40 INFO: ******************************
+2024-07-24 23:44:40 INFO: The number of vehicles (N):       80
+2024-07-24 23:44:40 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 23:44:40 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 23:44:40 INFO: Average vehicle velocity (v):     15
+2024-07-24 23:44:40 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 23:44:40 INFO: ******************************
+2024-07-24 23:45:41 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2024-07-24 23:47:21 INFO: ******************************
+2024-07-24 23:47:21 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:47:21 INFO: ******************************
+2024-07-24 23:50:38 INFO: ******************************
+2024-07-24 23:50:38 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-24 23:50:38 INFO: ******************************
+2024-07-24 23:51:03 INFO: The number of steps: 239
+2024-07-24 23:51:03 INFO: The number of grids: 100
+2024-07-24 23:51:03 INFO: ******************************
+2024-07-24 23:51:04 INFO: The number of test requests: 2685 
+2024-07-24 23:51:04 INFO: ******************************
+2024-07-24 23:51:04 INFO: The number of vehicles (N):       80
+2024-07-24 23:51:04 INFO: Request rate (q):                 0.18645833333333334
+2024-07-24 23:51:04 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-24 23:51:04 INFO: Average vehicle velocity (v):     15
+2024-07-24 23:51:04 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-24 23:51:04 INFO: ******************************
+2024-07-24 23:57:20 INFO: Retrying request to /chat/completions in 0.757413 seconds
+2024-07-25 00:02:21 INFO: Retrying request to /chat/completions in 1.916504 seconds
