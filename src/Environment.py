@@ -340,6 +340,8 @@ class ENVIRONMENT:
         we allow users to choose whether considering itinerary nodes or not when calculating distance.
     '''
     def GetDistanceandTime(self, origin, destination, type = 'Linear', congestion_factor = 1.0):
+        print("GetDistanceandTime INVOKED!!!!!!!!!!!!!!!\n")
+        print('origin:', origin, 'destination:', destination)
         # if the input origin and destination are node id, then we convert them to coordinate
         if not isinstance(origin, tuple):
             origin = self.node_id_to_coord[origin]

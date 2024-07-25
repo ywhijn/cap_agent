@@ -25,7 +25,8 @@ from .output_parse import OutputParse
 from .LLM_options import LLMOptions
 from .custom_tools import dict_to_str
 from .custom_tools import (
-    GetDistancTime
+    GetDistancTimeByID
+    # GetDistancTime
     # GetAvailableActions,
     # GetCurrentOccupancy,
     # GetPreviousOccupancy,
@@ -47,7 +48,7 @@ class AgentSystem:
         self.cfg = cfg
 
         self.tools = [
-            GetDistancTime(env=env),
+            GetDistancTimeByID(env=env),
         ]
 
         self.chat = LLMOptions.getClinetByName("deepseek",temperature=0.5)
@@ -66,13 +67,60 @@ class AgentSystem:
             vehicles_dict[int(vehicles[i].id)]=vehicles[i].current_position
             if i > num_vehicles:
                 break
-        UV_loc_string = f"""Now you get the two position dicts for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:
-{dict_to_str(requests_dict)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position dict.\nThe taxi vehicles are as follows:
+        UV_loc_string = f"""Now you get the positions for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:
+{dict_to_str(requests_dict)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
 {dict_to_str(vehicles_dict)}\t,where `key` is the `taxi id`, and `value` represents the current position of the vehicle.
 Please use the appropriate tools to assign each request to a single taxi reasonably.\n"""
         return UV_loc_string
     def parse_output(self,output):
         return self.o_parse.parser_output(output)
+
+    def test_agent(self,UV_loc_string):
+        UV_loc_string="""Now you get the positions for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].
+The passenger requests are as follows:
+{
+    "78942": {
+        "origin": [
+            104.0412682,
+            30.6669185
+        ],
+        "destination": [
+            104.1438647,
+            30.6276377
+        ]
+    },
+    "81088": {
+        "origin": [
+            104.0562247,
+            30.6223237
+        ],
+        "destination": [
+            104.0738543,
+            30.6970738
+        ]
+    }
+}	,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.
+The taxi vehicles are as follows:
+{
+    "17": [
+        104.0581489,
+        30.6792291
+    ],
+    "12": [
+        104.0566995,
+        30.6722262
+    ],
+    "33": [
+        104.0485007,
+        30.6620189
+    ],
+}	,where `key` is the `taxi id`, and `value` represents the current position of the vehicle.
+Please use the appropriate tools to assign each request to a single taxi reasonably."""
+        agent_response=self.agent.agent_run(UV_loc_string)
+        print(f'agent response Output, {agent_response}')
+        agent_action = self.agent.parse_output(agent_response)
+        print(f'parsed response Output, {agent_action}')
+        return agent_action
 
 
 

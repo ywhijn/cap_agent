@@ -958,3 +958,122 @@
 2024-07-24 23:51:04 INFO: ******************************
 2024-07-24 23:57:20 INFO: Retrying request to /chat/completions in 0.757413 seconds
 2024-07-25 00:02:21 INFO: Retrying request to /chat/completions in 1.916504 seconds
+2024-07-25 20:52:41 INFO: ******************************
+2024-07-25 20:52:41 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 20:52:41 INFO: ******************************
+2024-07-25 20:55:25 INFO: ******************************
+2024-07-25 20:55:25 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 20:55:25 INFO: ******************************
+2024-07-25 20:55:46 INFO: The number of steps: 239
+2024-07-25 20:55:46 INFO: The number of grids: 100
+2024-07-25 20:55:46 INFO: ******************************
+2024-07-25 20:55:47 INFO: The number of test requests: 2685 
+2024-07-25 20:55:47 INFO: ******************************
+2024-07-25 20:55:47 INFO: The number of vehicles (N):       80
+2024-07-25 20:55:47 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 20:55:47 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 20:55:47 INFO: Average vehicle velocity (v):     15
+2024-07-25 20:55:47 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 20:55:47 INFO: ******************************
+2024-07-25 20:55:49 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 21:18:04 INFO: ******************************
+2024-07-25 21:18:04 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 21:18:04 INFO: ******************************
+2024-07-25 21:18:29 INFO: The number of steps: 239
+2024-07-25 21:18:29 INFO: The number of grids: 100
+2024-07-25 21:18:29 INFO: ******************************
+2024-07-25 21:18:30 INFO: The number of test requests: 2685 
+2024-07-25 21:18:30 INFO: ******************************
+2024-07-25 21:18:30 INFO: The number of vehicles (N):       80
+2024-07-25 21:18:30 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 21:18:30 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 21:18:30 INFO: Average vehicle velocity (v):     15
+2024-07-25 21:18:30 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 21:18:30 INFO: ******************************
+2024-07-25 21:18:31 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 21:54:54 INFO: ******************************
+2024-07-25 21:54:54 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 21:54:54 INFO: ******************************
+2024-07-25 21:55:06 INFO: ******************************
+2024-07-25 21:55:06 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 21:55:06 INFO: ******************************
+2024-07-25 21:55:30 INFO: The number of steps: 239
+2024-07-25 21:55:30 INFO: The number of grids: 100
+2024-07-25 21:55:30 INFO: ******************************
+2024-07-25 21:55:31 INFO: The number of test requests: 2685 
+2024-07-25 21:55:31 INFO: ******************************
+2024-07-25 21:55:31 INFO: The number of vehicles (N):       80
+2024-07-25 21:55:31 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 21:55:31 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 21:55:31 INFO: Average vehicle velocity (v):     15
+2024-07-25 21:55:31 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 21:55:31 INFO: ******************************
+2024-07-25 21:55:33 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:07:29 INFO: ******************************
+2024-07-25 22:07:29 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 22:07:29 INFO: ******************************
+2024-07-25 22:07:50 INFO: The number of steps: 239
+2024-07-25 22:07:50 INFO: The number of grids: 100
+2024-07-25 22:07:50 INFO: ******************************
+2024-07-25 22:07:51 INFO: The number of test requests: 2685 
+2024-07-25 22:07:51 INFO: ******************************
+2024-07-25 22:07:51 INFO: The number of vehicles (N):       80
+2024-07-25 22:07:51 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 22:07:51 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 22:07:51 INFO: Average vehicle velocity (v):     15
+2024-07-25 22:07:51 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 22:07:51 INFO: ******************************
+2024-07-25 22:07:52 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:18:04 INFO: ******************************
+2024-07-25 22:18:04 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 22:18:04 INFO: ******************************
+2024-07-25 22:18:25 INFO: The number of steps: 239
+2024-07-25 22:18:25 INFO: The number of grids: 100
+2024-07-25 22:18:25 INFO: ******************************
+2024-07-25 22:18:26 INFO: The number of test requests: 2685 
+2024-07-25 22:18:26 INFO: ******************************
+2024-07-25 22:18:26 INFO: The number of vehicles (N):       80
+2024-07-25 22:18:26 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 22:18:26 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 22:18:26 INFO: Average vehicle velocity (v):     15
+2024-07-25 22:18:26 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 22:18:26 INFO: ******************************
+2024-07-25 22:18:28 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:33:22 INFO: ******************************
+2024-07-25 22:33:22 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-25 22:33:22 INFO: ******************************
+2024-07-25 22:33:43 INFO: The number of steps: 239
+2024-07-25 22:33:43 INFO: The number of grids: 100
+2024-07-25 22:33:43 INFO: ******************************
+2024-07-25 22:33:43 INFO: The number of test requests: 2685 
+2024-07-25 22:33:43 INFO: ******************************
+2024-07-25 22:33:43 INFO: The number of vehicles (N):       80
+2024-07-25 22:33:43 INFO: Request rate (q):                 0.18645833333333334
+2024-07-25 22:33:43 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-25 22:33:43 INFO: Average vehicle velocity (v):     15
+2024-07-25 22:33:43 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-25 22:33:43 INFO: ******************************
+2024-07-25 22:33:45 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:33:54 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:33:59 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:05 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:10 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:19 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:28 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:37 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-25 22:34:46 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-07-26 00:53:13 INFO: ******************************
+2024-07-26 00:53:13 INFO: {'SIMULATION': {'START': 21600, 'END': 36000, 'STEP_TIME': 60, 'TIME2FINISH': 1800}, 'AGENT': {'LLM_NAME': 'deepseek'}, 'REQUEST': {'DATA': {'TRAIN': './data/train', 'VALIDATION': './data/validation', 'TEST': './data/requests/test_num2688.csv'}, 'SAMPLE_RATE': 1.0, 'POOLING_RATE': [1.0, 0.8, 0.6, 0.4, 0.2, 0.0], 'CHECK_ITINERARY': False, 'CONSTRAINTS': {'max_assign_time': 600, 'max_pickup_time': 600, 'max_travel_time_mul': 1.5, 'max_travel_dis_mul': 1.5}, 'BEHAVIORS': {'max_assign_time': 600, 'max_pickup_time': 900, 'cancel_prob_assign': 1.0, 'cancel_prob_pickup': 1.0, 'max_tol_vehicle_capacity': 2, 'max_tol_price': 'None'}}, 'VEHICLE': {'DATA': False, 'NUM': 80, 'VELOCITY': 15, 'MAXCAPACITY': 2, 'PlanPathMethod': 'NearestFirst', 'REPOSITION': {'TYPE': True, 'METHOD': 'NearGrid'}}, 'ENVIRONMENT': {'TYPE': 'CITY', 'CITY': {'RoadFile': './data/chengdu.graphml', 'TravelTimeFile': 'None', 'TravelDisFile': 'None', 'X_GRID_NUM': 10, 'Y_GRID_NUM': 10}, 'TOY': {'NumNode': 21, 'DisPerLine': 500}, 'CONSIDER_ITINERARY': {'TYPE': True, 'METHOD': 'API'}, 'CONSIDER_CONGESTION': True, 'REAL_TIME_UPDATE': False, 'MAXLNG': 104.17, 'MINLNG': 103.97, 'MAXLAT': 30.74, 'MINLAT': 30.59}, 'MODEL': {'EPISODES': 500, 'LOCATION_EMBED_NUM': 10, 'TIME_EMBED_NUM': 3, 'DISCOUNT_FACTOR': 1.0, 'LEARNING_RATE': 0.0001, 'BATCH_SIZE': 3, 'MEMORY_SIZE': 5000, 'TRAIN_FREQUENCY': 1, 'TIME_INTERVAL': 300, 'REPOSITION': {'TYPE': False, 'METHOD': 'HotGrid'}}}
+2024-07-26 00:53:13 INFO: ******************************
+2024-07-26 00:53:40 INFO: The number of steps: 239
+2024-07-26 00:53:40 INFO: The number of grids: 100
+2024-07-26 00:53:40 INFO: ******************************
+2024-07-26 00:53:42 INFO: The number of test requests: 2685 
+2024-07-26 00:53:42 INFO: ******************************
+2024-07-26 00:53:42 INFO: The number of vehicles (N):       80
+2024-07-26 00:53:42 INFO: Request rate (q):                 0.18645833333333334
+2024-07-26 00:53:42 INFO: Average trip distance (L):        6474.1771122077325
+2024-07-26 00:53:42 INFO: Average vehicle velocity (v):     15
+2024-07-26 00:53:42 INFO: Dimensionless parameter (Lq / vB):1.0059702283725556
+2024-07-26 00:53:42 INFO: ******************************
+2024-07-26 00:53:47 INFO: HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"

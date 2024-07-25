@@ -113,15 +113,20 @@ class ControlCenter:
     '''RTV System'''
     # Allocate requests to each vehicle, see class RTVSystem for detailed information    
     def AllocateRequest2Vehicles(self, max_num_vehicles = 30, max_match_distance = 3000):
-        requests_for_each_vehicle = self.RTV_system.AllocateRequest2Vehicles(self.requests_step, self.vehicles_all, max_num_vehicles, max_match_distance)
-        scanned_UVpairs,req_set,veh_set = self.get_scanned_UVpair(requests_for_each_vehicle,self.vehicles_all)
-        UV_loc_string=self.agent_system.getUV_loc_Prompt(list(req_set), list(veh_set))
-        agent_response=self.agent_system.agent.agent_run(UV_loc_string)
-        print(f'agent response Output, {agent_response}')
-        agent_action = self.agent_system.parse_output(agent_response)
-        print(f'parsed response Output, {agent_action}')
-
-        print(f'scanned_UVpairs, {scanned_UVpairs}')
+        requests_for_each_vehicle=None
+        self.agent_system.test_agent("test")
+        # requests_for_each_vehicle = self.RTV_system.AllocateRequest2Vehicles(self.requests_step, self.vehicles_all, max_num_vehicles, max_match_distance)
+        # scanned_UVpairs,req_set,veh_set = self.get_scanned_UVpair(requests_for_each_vehicle,self.vehicles_all)
+        # UV_loc_string=self.agent_system.getUV_loc_Prompt(list(req_set), list(veh_set))
+        # # save UV_loc_string  to file immediately
+        # with open('UV_loc_string.txt', 'w') as f:
+        #     f.write(UV_loc_string)
+        # agent_response=self.agent_system.agent.agent_run(UV_loc_string)
+        # print(f'agent response Output, {agent_response}')
+        # agent_action = self.agent_system.parse_output(agent_response)
+        # print(f'parsed response Output, {agent_action}')
+        #
+        # print(f'scanned_UVpairs, {scanned_UVpairs}')
         # self.tracker_system.fill_step_requests_id(self.requests_step)
         exit()
         return requests_for_each_vehicle

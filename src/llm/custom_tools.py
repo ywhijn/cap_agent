@@ -8,6 +8,7 @@ from typing import Any, Optional
 
 import json
 import numpy as np
+from langchain_core.tools import tool
 
 def dict_to_str(my_dict) -> str:
     """将字典转换为格式化的JSON字符串
@@ -27,26 +28,64 @@ def prompts(name, description):
 
     return decorator
 
-
+# convert a list to a tuple
+def list_to_tuple(my_list):
+    return tuple(my_list)
 
 # #############################
 # common tools
 # #############################
-@TODO
+
 class GetDistancTime:
     def __init__(self, env) -> None:
         self.env = env
 
     @prompts(name="Get Distance and Travel Time",
-            description="Useful when you want to know the distance and travel time between two locations. The input to this tool should be the origin and destination location tuples (longitude, latitude), "
-                        "like '(104.0256898, 30.6401228), (30.6392765, 104.0704372)'.")
-    def inference(self,origin, destination, type = 'Linear', congestion_factor = 1.0):
+            description="Useful when you want to know the distance and travel time between two locations. The input to this tool should be a list, whose elements are two positions in format of [longitude, latitude]. "
+            )#"like '[ [104.0256898, 30.6401228], [30.6392765, 104.0704372] ]'." )
+    def inference(self,origin_destination, type = 'Linear', congestion_factor = 1.0):
         distance_time = "The distance and travel time between two points: "
-        dis, time = self.env.GetDistanceandTime(origin, destination, type)
+        dis, time = self.env.GetDistanceandTime(tuple(origin_destination[0]), tuple(origin_destination[1]), type)
         distance_time += dict_to_str({"Distance": dis, "Time": time})
         return distance_time
 
 
+class GetDistancTimeByID:
+    def __init__(self, env) -> None:
+        self.env = env
+
+    @prompts(name="Get Distance and Travel Time by request ID and taxi ID",
+            description="Useful when you want to know the distance and travel time between request' position and driver's position. The input to this tool should be two int, where the first int is the request ID, the second int is the taxi ID. "
+            )#"like '[ [104.0256898, 30.6401228], [30.6392765, 104.0704372] ]'." )
+    def inference(self,request_id: int, driver_id: int):
+        request_dict= {78942: [104.0412682,30.6669185],81088: [104.0562247, 30.6223237]}
+        driver_dict= {17: [104.0581489,30.6792291],12: [104.0566995, 30.6722262],33:[104.0485007,30.6620189]}
+        if int(request_id) not in request_dict.keys() or int(driver_id) not in driver_dict.keys():
+            print( "The request ID or driver ID is not valid.")
+            request_id = 78942
+            driver_id = 17
+        origin = request_dict[int(request_id)]
+        destination = driver_dict[int(driver_id)]
+        distance_time = "The distance and travel time between two points: "
+        dis, time = self.env.GetDistanceandTime(tuple(origin), tuple(destination), type)
+        distance_time += dict_to_str({"Distance": dis, "Time": time})
+        return distance_time
+# @tool
+# def GetDistanceandTime(origin: Tuple[float,float], destination: Tuple[float,float]):
+#     """Get the distance and travel time between two locations
+#     Args:
+#         origin (tuple): The origin location (longitude, latitude)
+#         destination (tuple): The destination location (longitude, latitude)
+#         type (str): The type of distance calculation, 'Linear' or 'Real'
+#         congestion_factor (float): The congestion factor
+#     Returns:
+#         distance (float): The distance between two locations
+#         time (float): The travel time between two locations
+#     """
+#     type = 'Linear'
+#     congestion_factor = 1.0
+#     distance, time = self.env.get_distance_and_time(origin, destination, type, congestion_factor)
+#     return distance, time
 # #############################
 # Get Intersection Information
 # #############################

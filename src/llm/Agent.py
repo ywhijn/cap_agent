@@ -20,7 +20,8 @@ from .llm_rl_prompt import (
     SYSTEM_MESSAGE_SUFFIX,
     HUMAN_MESSAGE,
     HANDLE_PARSING_ERROR,
-    AGENT_MESSAGE
+    AGENT_MESSAGE,
+    FORMAT_INSTRUCTIONS
 )
 
 
@@ -39,7 +40,7 @@ class TaxiAgent:
         print("AGENT_MESSAGE\n", AGENT_MESSAGE)
         # callback
         path_convert = get_abs_path(__file__)
-        self.file_callback = create_file_callback(path_convert('../agent.log'))
+        self.file_callback = create_file_callback(path_convert('../agent_id_tool.log'))
 
         self.tools = []  # agent 可以使用的 tools
         for ins in tools:
@@ -55,7 +56,7 @@ class TaxiAgent:
 
 
         self.agent = initialize_agent(
-            tools=self.tools,  # 这里是所有可以使用的工具
+            tools=self.tools,
             llm=self.llm,
             agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
             verbose=verbose,
@@ -66,8 +67,8 @@ class TaxiAgent:
                 'human_message': HUMAN_MESSAGE,
                 # 'format_instructions': FORMAT_INSTRUCTIONS,
             },
-            handle_parsing_errors=HANDLE_PARSING_ERROR,
-            max_iterations=8,
+            # handle_parsing_errors=HANDLE_PARSING_ERROR,
+            max_iterations=4,
             early_stopping_method="generate",
         )
 
@@ -81,7 +82,6 @@ class TaxiAgent:
         print("agent run\n")
         for message in custom_message:
             print(message.content)
-        # 找出接近的场景, 动作和解释
         llm_response = self.agent.run(
             custom_message,
             callbacks=[self.file_callback]

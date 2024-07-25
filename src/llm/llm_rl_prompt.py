@@ -45,6 +45,28 @@ Final Answer:
 # ------
 # You have access to the following tools:
 # """
+FORMAT_INSTRUCTIONS = """The way you use the tools is by specifying a json blob.
+Specifically, this json should have a `action` key (with the name of the tool to use) and a `action_input` key (with the input to the tool going here).
+The only values that should be in the "action" field are one of: {tool_names}
+
+The $JSON_BLOB should only contain a SINGLE action, do NOT return a list of multiple actions. **Here is an example of a valid $JSON_BLOB**:
+```
+{{{{
+  "action": $TOOL_NAME,
+  "action_input": $INPUT
+}}}}
+```
+
+ALWAYS use the following format when you use tool:
+Question: the input question you must answer
+Thought: always summarize the tools you have used and think what to do next step by step
+Action:
+```
+$JSON_BLOB
+```
+Observation: the result of the action
+... (this Thought/Action/Observation can repeat N times)
+"""
 
 SYSTEM_MESSAGE_PREFIX = """You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
 
