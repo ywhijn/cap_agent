@@ -12,3 +12,5 @@ heapq
 osmnx
 docplex
 pytorch
+langchain_openai
+langchain_core

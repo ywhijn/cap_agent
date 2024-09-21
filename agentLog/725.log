@@ -116,3 +116,15 @@ Let's start by calculating the distance and travel time for the first passenger 
 }
 ```
 **Observation
+
+
+
+
+
+##########
+
+origin: (104.0562247, 30.6223237) destination: (104.0485007, 30.6620189)
+The distance and travel time between two points: {
+    "Distance": 4475.434839208365,
+    "Time": 298.36232261389097
+}

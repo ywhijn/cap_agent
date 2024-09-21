@@ -105,20 +105,20 @@ class ActionSystem:
                 vehicle.open2request = False
             else:
                 vehicle.open2request = True
-        
+        return vehicles_to_reposition
         # repositioning idle vehicles
-        if self.cfg.VEHICLE.REPOSITION.TYPE and len(vehicles_to_reposition) > 0 :
-            self.reposition.Reposition(vehicles_to_reposition)  
-        # Update path (including itinerary nodes)
-        if self.consider_itinerary:
-            for vehicle in vehicles_to_reposition:
-                if vehicle.path is not None:
-                    self.RTV_system.PlanPath.UpdateItineraryNodes(vehicle.path)
-                    # The path of the vehicle may change, so we need to update the traffic density for the road
-                    if self.consider_congestion:
-                        self.UpdateSpeed(vehicle)
+        # if self.cfg.VEHICLE.REPOSITION.TYPE and len(vehicles_to_reposition) > 0 :
+        #     self.reposition.Reposition(vehicles_to_reposition)
+        # # Update path (including itinerary nodes)
+        # if self.consider_itinerary:
+        #     for vehicle in vehicles_to_reposition:
+        #         if vehicle.path is not None:
+        #             self.RTV_system.PlanPath.UpdateItineraryNodes(vehicle.path)
+        #             # The path of the vehicle may change, so we need to update the traffic density for the road
+        #             if self.consider_congestion:
+        #                 self.UpdateSpeed(vehicle)
 
-    
+
 
     # function: Update the traffic density and vehicle speed for each road
     # params: None
@@ -278,7 +278,7 @@ class ActionSystem:
                         vehicle_id = request.vehicle_id
                         assert vehicle_id
                         # Remove the request from the vehicle's trip
-                        vehicle = self.vehicles[vehicle_id]
+                        vehicle = self.vehicles[vehicle_id]   # TODO: reformat the vehicles data structure
                         assert request in vehicle.next_requests
                         vehicle.next_requests = list(set(vehicle.next_requests) - set([request]))
                         # Replan the path of the vehicle

@@ -428,15 +428,210 @@ class RTVSystem:
 
                 if dis < max_match_distance and t < request.max_con_pickup_time:
                     requests_for_each_vehicle[vehicle_idx].append(request)
-        
         # We associate at most 5 requests for each vehicle to accelerate the simulation   
         # for idx, reqs in enumerate(requests_for_each_vehicle):
         #     if len(reqs) > self.cfg.VEHICLE.MAXCAPACITY + 2:
         #         requests_for_each_vehicle[idx] = requests_for_each_vehicle[idx][:self.cfg.VEHICLE.MAXCAPACITY + 1]
-
         return requests_for_each_vehicle
 
+    def scan_requests_by_vehicles(self, requests_step, vehicles_step, max_num_vehicles=10, max_match_distance=None):
+        if max_match_distance is None:
+            max_match_distance = 999999
 
+        max_num_vehicles = min(len(vehicles_step), max_num_vehicles)
+        requests_for_each_vehicle = [[] for _ in
+                                     range(len(vehicles_step))]  # list[list[request]], length = num_vehicles
+        scanned_req_ids=[]
+        for request in requests_step:
+            # Calculte the pickup time and distance for all vehicles to pick the request
+            # In order to accelerate calculation, we only assign a request to vehilces nearby
+            for vehicle_idx, vehicle in enumerate(vehicles_step):
+                # Check if the vehicle is online and open to requests
+                if not vehicles_step[vehicle_idx].online or not vehicles_step[vehicle_idx].open2request:
+                    continue
+                # Requests that are not willing to share a vehicle with others should be assigned to idle vehicles only. the passenger's request only accept one passenger
+                if request.max_tol_num_person == 1 and len(vehicles_step[vehicle_idx].current_requests) + len(
+                        vehicles_step[vehicle_idx].next_requests) > 0:
+                    continue
+                # Check the constraints
+                # todo ...
+                if self.check_itinerary:
+                    pass
+                # We use Manhattan distance to check the constraints of maxiaml pickup and detour time to accelarate the process
+                else:
+                    dis, t = self.environment.GetDistanceandTime(vehicle.current_position, request.pickup_position,
+                                                                 type=self.cal_dis_method)
+                if dis < max_match_distance and t < request.max_con_pickup_time:
+                    requests_for_each_vehicle[vehicle_idx].append(request)
+                    scanned_req_ids.append(request.id)
+        # We associate at most 5 requests for each vehicle to accelerate the simulation
+        # for idx, reqs in enumerate(requests_for_each_vehicle):
+        #     if len(reqs) > self.cfg.VEHICLE.MAXCAPACITY + 2:
+        #         requests_for_each_vehicle[idx] = requests_for_each_vehicle[idx][:self.cfg.VEHICLE.MAXCAPACITY + 1]
+        idle_req_ids = [req for req in requests_step if req.id not in scanned_req_ids]
+        return requests_for_each_vehicle,scanned_req_ids,idle_req_ids
+
+
+    def repositionVehicles(self,idled_vehicles_indices, vehicles,decision_trips,decision_paths):
+        for indice in idled_vehicles_indices:
+            vehicle = vehicles[indice]
+            trips = []
+            paths = []
+            trips.append(Trip())
+            paths.append(Path())
+            if self.cfg.MODEL.REPOSITION.TYPE and not self.cfg.VEHICLE.REPOSITION.TYPE:
+                # Repositioning idle vehicles to 8 (or less) grids nearby
+                reposition_locations = self.reposition.GetRepositionLocation(vehicle.current_position,
+                                                                             method=self.cfg.MODEL.REPOSITION.METHOD)
+                for rep_loc in reposition_locations:
+                    lng, lat, pickup_grid_id, dropoff_grid_id, distance, time = rep_loc
+                    # Initialize request
+                    virtual_request = VirtualRequest(pickup_position=vehicle.current_position,
+                                                     dropoff_position=(lng, lat),
+                                                     pickup_grid_id=pickup_grid_id,
+                                                     dropoff_grid_id=dropoff_grid_id,
+                                                     original_travel_time=time,
+                                                     original_travel_distance=-distance * 0.1)
+                    reposition_trip = Trip(virtual_request)
+                    # Initialize path
+                    reposition_path = Path(current_position=vehicle.current_position,
+                                           next_positions=[vehicle.current_position, (lng, lat)],
+                                           time_needed_to_next_position=np.array([0, time]),
+                                           dis_to_next_position=np.array([0, distance]),
+                                           time_delay_to_each_position=np.zeros((2)))
+
+                    trips.append(reposition_trip)
+                    paths.append(reposition_path)
+
+                decision_trips[indice]=trips
+                decision_paths[indice]=paths
+
+    # upon the GenerateFeasibleTrips function, return different trips types of vehicles
+    def geneTripsBeforeDecision(self, vehicles_step, requests_for_each_vehicle,trip_type_indices, MAX_IS_FEASIBLE_CALLS=150, MAX_TRIPS=30):
+        # Get feasible trips for each vehicle
+        feasible_trips = []
+        feasible_paths = []
+
+        indice = -1
+        for requests_for_vehicle, vehicle in zip(requests_for_each_vehicle, vehicles_step):
+            indice+=1
+            trips = []
+            paths = []
+            tested_trips_requests = []
+            num_is_feasible_calls = 0
+
+            # append a null trip that means the vehicle is assigned nothing
+            trips.append(Trip())
+            paths.append(Path())
+
+            # If the vehicle is empty and still online, but there is no requests nearby, then we consider repositioning the vehicle
+            if len(requests_for_vehicle) == 0 and vehicle.path is None and vehicle.online and vehicle.open2request:
+                trip_type_indices.idle.append(indice)
+                # Considering repositioning in the RL model
+                if self.cfg.MODEL.REPOSITION.TYPE and not self.cfg.VEHICLE.REPOSITION.TYPE:  # not here
+                    # Repositioning idle vehicles to 8 (or less) grids nearby
+                    reposition_locations = self.reposition.GetRepositionLocation(vehicle.current_position,
+                                                                                 method=self.cfg.MODEL.REPOSITION.METHOD)
+                    for rep_loc in reposition_locations:
+                        lng, lat, pickup_grid_id, dropoff_grid_id, distance, time = rep_loc
+                        # Initialize request
+                        virtual_request = VirtualRequest(pickup_position=vehicle.current_position,
+                                                         dropoff_position=(lng, lat),
+                                                         pickup_grid_id=pickup_grid_id,
+                                                         dropoff_grid_id=dropoff_grid_id,
+                                                         original_travel_time=time,
+                                                         original_travel_distance=-distance * 0.1)
+                        reposition_trip = Trip(virtual_request)
+                        # Initialize path
+                        reposition_path = Path(current_position=vehicle.current_position,
+                                               next_positions=[vehicle.current_position, (lng, lat)],
+                                               time_needed_to_next_position=np.array([0, time]),
+                                               dis_to_next_position=np.array([0, distance]),
+                                               time_delay_to_each_position=np.zeros((2)))
+
+                        trips.append(reposition_trip)
+                        paths.append(reposition_path)
+
+                    feasible_trips.append(trips)
+                    feasible_paths.append(paths)
+
+                    continue
+
+            # No trip when repositioning or delivering passengers ????????? vehicle.path is not None
+            if len(requests_for_vehicle) == 0:
+                feasible_trips.append(trips)
+                feasible_paths.append(paths)
+                trip_type_indices.busy.append(indice)
+                continue
+
+
+
+            # Check feasibility for individual requests
+            for request in requests_for_vehicle:
+                # If there exists requests nearby, we stop the repositioning process
+                # if vehicle.current_capacity < len(vehicle.current_requests):
+                #     vehicle.Status2Idle()
+
+                trip = Trip(request)
+
+                path = self.PlanPath.PlanPath(vehicle,
+                                              trip)  # Note: Any parameters of the vehicle should not be changed at this fuction
+
+                if path is not None:
+                    # print(path.current_position)
+                    # print(path.next_itinerary_nodes)
+                    trips.append(trip)
+                    paths.append(path)
+
+                tested_trips_requests.append(trip.requests)
+                num_is_feasible_calls += 1
+
+                # Non-ride-pooling
+                if self.cfg.VEHICLE.MAXCAPACITY == 1:
+                    feasible_trips.append(trips)
+                    feasible_paths.append(paths)
+                    trip_type_indices.nopool.append(indice)
+                    continue
+
+            # We use the average travel distance of each request in the trips to determine the trip priority
+            def TripPriority(trip):  # 利用行程中每个请求的平均行程距离来确定行程优先级
+                assert len(trip.requests) > 0
+                return -sum(request.original_travel_distance for request in trip.requests) / len(trip.requests)
+            # Get feasible trips of size > 1, with a fixed budget of MAX_IS_FEASIBLE_CALLS
+            trips_tobe_combined = [(TripPriority(trip), trip_idx + 1) for trip_idx, trip in enumerate(trips[1:])]
+            heapq.heapify(trips_tobe_combined)  # convert list to heap
+
+            while len(trips_tobe_combined) > 0 and num_is_feasible_calls < MAX_IS_FEASIBLE_CALLS:
+                _, trip_heap_idx = heapq.heappop(
+                    trips_tobe_combined)  # pop the trip with maximum average travel distance
+
+                for trip_list_idx in range(1, len(trips)):
+                    pre_requests = trips[trip_heap_idx].requests
+                    new_requests = trips[trip_list_idx].requests
+                    combined_trip = Trip(list(set(pre_requests) | set(new_requests)))
+
+                    # We judge if the combined trip has been tested through the requests
+                    if combined_trip.requests not in tested_trips_requests:
+
+                        path = self.PlanPath.PlanPath(vehicle, combined_trip)
+
+                        if path is not None:
+                            trips.append(combined_trip)
+                            paths.append(path)
+                            heapq.heappush(trips_tobe_combined, (TripPriority(combined_trip), len(trips) - 1))
+
+                        num_is_feasible_calls += 1
+                        tested_trips_requests.append(combined_trip.requests)
+
+                # Create only MAX_ACTIONS actions
+                if (MAX_TRIPS >= 0 and len(trips) >= MAX_TRIPS):
+                    break
+
+            feasible_trips.append(trips)
+            feasible_paths.append(paths)
+            trip_type_indices.normal.append(indice)
+
+        return feasible_trips, feasible_paths, trip_type_indices
     # function: Generate feasible trips
     # params: vehicles for the current time step, request batch generated by the GetRequestBatch function
     # return: list[list[trip]], list[list[path]], length = num_vehicles
@@ -483,6 +678,7 @@ class RTVSystem:
                     feasible_trips.append(trips)
                     feasible_paths.append(paths)
                     continue
+
             
             # No trip when repositioning or delivering passengers
             if len(requests_for_vehicle) == 0:

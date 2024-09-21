@@ -14,6 +14,7 @@ running_time_for_print = 20
     (1) agent=None and train=False mean running the simulation without RL model
     (2) One can find anything in the control_centrol
 '''
+
 def RunEpisode(requests, vehicles, control_center, agent = None, train = False, train_step = 0, draw_veh_req = False, draw_fre = 60, img_path = 'exp'):
     
     # Initialization
@@ -88,7 +89,7 @@ def RunEpisode(requests, vehicles, control_center, agent = None, train = False, 
         # Get the final score of each decision
         scored_feasible_trips = control_center.ScoreTrips(feasible_trips, feasible_paths, pre_value)
 
-        # LLM()
+
         # Choose a trip for each vehicle
         final_trips, final_paths, scores = control_center.ChooseTrips(scored_feasible_trips, feasible_paths)
         # If no solution
@@ -115,7 +116,10 @@ def RunEpisode(requests, vehicles, control_center, agent = None, train = False, 
                     exit()
                 req_set.add(req)
         # Update the vehicles according to the final trips and paths
-        control_center.UpdateVehicles(final_trips, final_paths)
+        vehicles_to_reposition = control_center.UpdateVehicles(final_trips, final_paths)
+        control_center.RepositionVehicles(vehicles_to_reposition)
+
+
         # Simulate actions 
         control_center.SimulateVehicleAction()
 

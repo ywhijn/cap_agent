@@ -1,0 +1,2 @@
+sudo lsof -i:10086
+[{'name': 'get_distance_time_between_positions', 'args': {'origin': {'lng': 104.0412682, 'lat': 30.6669185}, 'destination': {'lng': 104.0562247, 'lat': 30.6223237}}, 'id': 'call_0_30cf2e36-207d-458f-aabf-b1ac44c8429f', 'type': 'tool_call'}, {'name': 'get_distance_time_between_positions', 'args': {'origin': {'lng': 104.0412682, 'lat': 30.6669185}, 'destination': {'lng': 104.0566995, 'lat': 30.6722262}}, 'id': 'call_1_25ec7533-0839-40e9-899a-cdd3400c3eb8', 'type': 'tool_call'}]

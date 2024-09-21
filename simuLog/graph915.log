@@ -1,0 +1,39 @@
+================================ Human Message =================================
+
+The location of passenger 1 is [104.0412682, 30.6669185]. Given place 3 [104.0562247, 30.6223237] and place 4 [104.0566995, 30.6722262],  please select the closest place to the passenger 1.
+
+---
+
+messages, [HumanMessage(content='The location of passenger 1 is [104.0412682, 30.6669185]. Given place 3 [104.0562247, 30.6223237] and place 4 [104.0566995, 30.6722262],  please select the closest place to the passenger 1.')]
+================================== Ai Message ==================================
+Tool Calls:
+  get_distance_time_between_positions (call_0_bb8a3c03-8e11-47c6-ab83-fc0008f0d449)
+ Call ID: call_0_bb8a3c03-8e11-47c6-ab83-fc0008f0d449
+  Args:
+    origin: [104.0412682, 30.6669185]
+    destination: [104.0562247, 30.6223237]
+  get_distance_time_between_positions (call_1_318052d6-5c42-45b8-9495-600520020dd0)
+ Call ID: call_1_318052d6-5c42-45b8-9495-600520020dd0
+  Args:
+    origin: [104.0412682, 30.6669185]
+    destination: [104.0566995, 30.6722262]
+
+---
+
+function (104.0412682, 30.6669185) (104.0562247, 30.6223237)
+function (104.0412682, 30.6669185) (104.0566995, 30.6722262)
+================================= Tool Message =================================
+Name: get_distance_time_between_positions
+
+{"Distance": 1589.92, "Time": 105.99}
+
+---
+
+messages, [HumanMessage(content='The location of passenger 1 is [104.0412682, 30.6669185]. Given place 3 [104.0562247, 30.6223237] and place 4 [104.0566995, 30.6722262],  please select the closest place to the passenger 1.'), AIMessage(content='', additional_kwargs={'tool_calls': [{'id': 'call_0_bb8a3c03-8e11-47c6-ab83-fc0008f0d449', 'function': {'arguments': '{"origin": [104.0412682, 30.6669185], "destination": [104.0562247, 30.6223237]}', 'name': 'get_distance_time_between_positions'}, 'type': 'function', 'index': 0}, {'id': 'call_1_318052d6-5c42-45b8-9495-600520020dd0', 'function': {'arguments': '{"origin": [104.0412682, 30.6669185], "destination": [104.0566995, 30.6722262]}', 'name': 'get_distance_time_between_positions'}, 'type': 'function', 'index': 1}], 'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 152, 'prompt_tokens': 521, 'total_tokens': 673, 'prompt_cache_hit_tokens': 256, 'prompt_cache_miss_tokens': 265}, 'model_name': 'deepseek-chat', 'system_fingerprint': 'fp_1c141eb703', 'finish_reason': 'tool_calls', 'logprobs': None}, id='run-d43a1ea9-4c6c-47b2-8fc4-1a1e12f3c666-0', tool_calls=[{'name': 'get_distance_time_between_positions', 'args': {'origin': [104.0412682, 30.6669185], 'destination': [104.0562247, 30.6223237]}, 'id': 'call_0_bb8a3c03-8e11-47c6-ab83-fc0008f0d449', 'type': 'tool_call'}, {'name': 'get_distance_time_between_positions', 'args': {'origin': [104.0412682, 30.6669185], 'destination': [104.0566995, 30.6722262]}, 'id': 'call_1_318052d6-5c42-45b8-9495-600520020dd0', 'type': 'tool_call'}], usage_metadata={'input_tokens': 521, 'output_tokens': 152, 'total_tokens': 673}), ToolMessage(content='{"Distance": 5160.1, "Time": 344.01}', name='get_distance_time_between_positions', tool_call_id='call_0_bb8a3c03-8e11-47c6-ab83-fc0008f0d449'), ToolMessage(content='{"Distance": 1589.92, "Time": 105.99}', name='get_distance_time_between_positions', tool_call_id='call_1_318052d6-5c42-45b8-9495-600520020dd0')]
+================================== Ai Message ==================================
+Tool Calls:
+  DecisionPair (call_0_7462d8c9-7ccd-4389-b509-508b129b1245)
+ Call ID: call_0_7462d8c9-7ccd-4389-b509-508b129b1245
+  Args:
+    u_id: 1
+    v_id: 4

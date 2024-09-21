@@ -1,10 +1,12 @@
+from collections import defaultdict
+
 from .ActionSystem import ActionSystem
 from .RTVSystem import RTVSystem
 from .EvaluationSystem import EvaluationSystem
 from .PostProcessSystem import PostProcessSystem
-from .Loggler import  TrackerSystem
+from .LogSystem import  TrackerSystem
 import numpy as np
-from .llm.agentSystem import AgentSystem
+
 
 '''
 The control center is just like a ride-hailing platform
@@ -17,6 +19,8 @@ The control center consists of 4 subsystems:
 
 See each object for detailed information
 '''
+from typing import List, Dict, Tuple, Set, Any, Optional, Callable
+
 class ControlCenter:
     def __init__(self,
                 cfg,
@@ -57,9 +61,10 @@ class ControlCenter:
                                                     environment = self.environment,
                                                     current_timepoint = self.current_timepoint
                                                     )
-
+        self.cur_step_states=defaultdict()
+        self.empty_decision_steps = defaultdict()
         self.tracker_system = TrackerSystem(cfg = self.cfg,environment = self.environment, current_timepoint = self.current_timepoint, step_time = self.step_time)
-        self.agent_system = AgentSystem(cfg = self.cfg, env = self.environment)
+        # self.agent_system = AgentSystem(cfg = self.cfg, env = self.environment)
 
     # Initialize the requests and vehicles
     def Initialize(self, requests, vehicles):
@@ -72,32 +77,11 @@ class ControlCenter:
         self.post_process_system.requests = requests[self.step]
         self.post_process_system.vehicles = vehicles
 
-        if self.agent_system.agent==None:
-            self.agent_system.initialize()
+        # if self.agent_system.agent==None:
+        #     self.agent_system.initialize()
 
 
-    # Update the system's parameters
-    def UpdateParameters(self, timepoint, step):
-        self.current_timepoint = timepoint
-        self.RTV_system.current_timepoint = timepoint
-        self.action_system.current_timepoint = timepoint
-        self.post_process_system.current_timepoint = timepoint
-        self.step = step
-    
-    # Update requests at next time step
-    # params: Unmatched_requests: requests that haven't been allocated to any vehicles and don't cancel
-    def UpdateRequests(self, unmatched_requests):
-        if self.step >= self.total_steps-1 or self.step >= len(self.requests_all) - 1:
-            new_requests = []
-        else:
-            new_requests = self.requests_all[self.step + 1] # New requests at next time step
-        requests = list(set(unmatched_requests) | set(new_requests)) # Union
-        # self.tracker_system.fill_step_requests_id(requests,self.step+1)
-        self.action_system.requests = requests
-        self.post_process_system.requests = requests
-        self.requests_step = requests
-        # Update distribution of requests and vehicles that will be used to guide repositioning
-        self.environment.UpdateDistributions(new_requests, self.vehicles_all)
+
 
     def get_scanned_UVpair(self,requests_for_each_vehicle,vehicles):
         pair_list= []
@@ -114,8 +98,9 @@ class ControlCenter:
     # Allocate requests to each vehicle, see class RTVSystem for detailed information    
     def AllocateRequest2Vehicles(self, max_num_vehicles = 30, max_match_distance = 3000):
         requests_for_each_vehicle=None
-        self.agent_system.test_agent("test")
-        # requests_for_each_vehicle = self.RTV_system.AllocateRequest2Vehicles(self.requests_step, self.vehicles_all, max_num_vehicles, max_match_distance)
+        # self.agent_system.trytools("test")
+        # self.agent_system.test_agent("test")
+        requests_for_each_vehicle = self.RTV_system.AllocateRequest2Vehicles(self.requests_step, self.vehicles_all, max_num_vehicles, max_match_distance)
         # scanned_UVpairs,req_set,veh_set = self.get_scanned_UVpair(requests_for_each_vehicle,self.vehicles_all)
         # UV_loc_string=self.agent_system.getUV_loc_Prompt(list(req_set), list(veh_set))
         # # save UV_loc_string  to file immediately
@@ -128,15 +113,18 @@ class ControlCenter:
         #
         # print(f'scanned_UVpairs, {scanned_UVpairs}')
         # self.tracker_system.fill_step_requests_id(self.requests_step)
-        exit()
+        # exit()
         return requests_for_each_vehicle
 
-
+    def scan_requests_by_vehicles(self, max_num_vehicles = 30, max_match_distance = 3000):
+        requests_for_each_vehicle,scanned_req_ids,idle_req_ids = self.RTV_system.scan_requests_by_vehicles(self.requests_step, self.vehicles_all,
+                                                                             max_num_vehicles, max_match_distance)
+        return requests_for_each_vehicle,scanned_req_ids,idle_req_ids
 
     # Generate feasible trips and the corresponding paths, see class RTVSystem for detailed information
     def GenerateFeasibleTrips(self, requests_for_each_vehicle, MAX_IS_FEASIBLE_CALLS = 150, MAX_TRIPS = 30):
         feasible_trips, feasible_paths = self.RTV_system.GenerateFeasibleTrips(self.vehicles_all, requests_for_each_vehicle, MAX_IS_FEASIBLE_CALLS, MAX_TRIPS)
-        self.tracker_system.compare_scan_feasible(requests_for_each_vehicle,self.vehicles_all,feasible_trips)
+        # self.tracker_system.compare_scan_feasible(requests_for_each_vehicle,self.vehicles_all,feasible_trips)
         return feasible_trips, feasible_paths
 
     # Initialize requests in each batch, see class RTVSystem for detailed information
@@ -162,11 +150,127 @@ class ControlCenter:
         # self.tracker_system.check_repeated_req(final_trips, final_paths)
         return final_trips, final_paths, rewards
     
+    def ChooseTripsbyPairs(self, scored_feasible_trips, feasible_paths, uv_decision_pairs):
+        trip_to_id = {}
+        id_to_trip = {}
+        current_trip_id = 0
+        requests_dict = {}
+        UV2trip_id= {} # all UV pair from trips
+        # self.tracker_system.compare_feasible_final(final_trips, self.vehicles_all,scored_feasible_trips)
+        # self.tracker_system.check_repeated_req(final_trips, final_paths)
+        for vehicle_idx, scored_trips in enumerate(scored_feasible_trips):
+            for trip, score, reward in scored_trips:
+                # Convert trip -> id if it hasn't already been done
+                if trip not in trip_to_id:
+                    trip_to_id[trip] = current_trip_id
+                    id_to_trip[current_trip_id] = trip
+                    current_trip_id += 1
+                    trip_id = current_trip_id - 1
+                else:
+                    trip_id = trip_to_id[trip]
+
+                # Update set of requests in trips
+                for request in trip.requests:
+                    uv_pair = (int(request.id), int(vehicle_idx))
+                    if request.id not in requests_dict:
+                        requests_dict[request.id] = request
+                    if uv_pair not in UV2trip_id:
+                        UV2trip_id[uv_pair] = [trip_id]
+                    else:
+                        UV2trip_id[uv_pair].append(trip_id)
+
+
+        final_trips = []
+        scores = []
+        final_paths = []
+
+
+        assigned_trips={}
+        print("##Function：ChooseTripsbyPairs：\n\tall of possible UV pairs to the trip_id ", UV2trip_id)
+        # Get vehicle specific trips from the decision pairs
+        for uv_decision_pair in uv_decision_pairs:
+            uid,vid = uv_decision_pair
+            # failed decision for this vehicle
+            if uv_decision_pair not in UV2trip_id.keys():
+                print(f'##Function：ChooseTripsbyPairs：\n\tuv pair has no trips ! uv_decision_pair, {uv_decision_pair}')
+                paired_req=[]
+                for trip_uv in UV2trip_id.keys():
+                    if vid == trip_uv[1]:
+                        paired_req.append(trip_uv[0])
+                print(f"##Function：ChooseTripsbyPairs：\n\tbut the vehicle {vid} requests are: ",paired_req) # debug
+                # TODO log this for LLM to distinguish the failed reason # prepared trip options for LLM
+                continue
+            if len(UV2trip_id[uv_decision_pair]) > 1: # check the trip condition, expand the trip in detail
+                self.tracker_system.log_multi_trips(self,uv_decision_pair, UV2trip_id,id_to_trip)
+                # raise Exception(f'Function：ChooseTripsbyPairs：\nuv pair has more trips ! uv_decision_pair, {uv_decision_pair}, {UV2trip_id[uv_decision_pair]}')
+            assigned_trip_id = UV2trip_id[uv_decision_pair][0]
+            assigned_trips[vid] = assigned_trip_id # one trip for one vehicle
+
+        for vehicle_idx in range(len(scored_feasible_trips)):
+            try:
+                assigned_trip_id = assigned_trips[vehicle_idx]
+                assigned_trip = id_to_trip[assigned_trip_id]
+            except:
+                # if the vehicle has no assigned trip, then assign the first empty trip
+                assigned_trip = scored_feasible_trips[vehicle_idx][0][0]
+            scored_final_trip = None  # The final trip is None if there are no assigned trips
+
+            for trip_idx, (trip, score, reward) in enumerate(scored_feasible_trips[vehicle_idx]):
+                if (trip == assigned_trip):
+                    scored_final_trip = trip
+                    final_score = score
+                    final_reward = reward
+                    final_path = feasible_paths[vehicle_idx][trip_idx]
+                    break
+
+            assert scored_final_trip is not None
+            final_trips.append(scored_final_trip)
+            if final_reward is not None:
+                scores.append(final_score)
+            final_paths.append(final_path)
+
+        return final_trips, final_paths, scores
+        # Update the system's parameters
+
+    def UpdateParameters(self, timepoint, step):
+        self.current_timepoint = timepoint
+        self.RTV_system.current_timepoint = timepoint
+        self.action_system.current_timepoint = timepoint
+        self.post_process_system.current_timepoint = timepoint
+        self.step = step
+
+        # Update requests at next time step
+        # params: Unmatched_requests: requests that haven't been allocated to any vehicles and don't cancel
+
+    def UpdateRequests(self, unmatched_requests):
+        if self.step >= self.total_steps - 1 or self.step >= len(self.requests_all) - 1:
+            new_requests = []
+        else:
+            new_requests = self.requests_all[self.step + 1]  # New requests at next time step
+        requests = list(set(unmatched_requests) | set(new_requests))  # Union
+        # self.tracker_system.fill_step_requests_id(requests,self.step+1)
+        self.action_system.requests = requests
+        self.post_process_system.requests = requests
+        self.requests_step = requests
+        # Update distribution of requests and vehicles that will be used to guide repositioning
+        self.environment.UpdateDistributions(new_requests, self.vehicles_all)
 
     '''Action System'''
     # Update the trip and the path of the vehicle, see class ActionSystem for detailed information
     def UpdateVehicles(self, final_trips, final_paths, vehicles = None):
-        self.action_system.UpdateVehicles(final_trips, final_paths, vehicles)
+        vehicles2reposition = self.action_system.UpdateVehicles(final_trips, final_paths, vehicles)
+        return vehicles2reposition
+    def RepositionVehicles(self, vehicles_to_reposition):
+        if self.cfg.VEHICLE.REPOSITION.TYPE and len(vehicles_to_reposition) > 0 :
+            self.action_system.reposition.Reposition(vehicles_to_reposition)
+        # Update path (including itinerary nodes)
+        if self.consider_itinerary:
+            for vehicle in vehicles_to_reposition:
+                if vehicle.path is not None:
+                    self.RTV_system.PlanPath.UpdateItineraryNodes(vehicle.path)
+                    # The path of the vehicle may change, so we need to update the traffic density for the road
+                    if self.action_system.consider_congestion:
+                        self.action_system.UpdateSpeed(vehicle)
     
     # Simulate the action of each vehicle and manage all vehicles, see class ActionSystem for detailed information
     def SimulateVehicleAction(self, vehicles = None):

@@ -147,7 +147,8 @@ class Reposition:
                 # Update the vehicle's path
                 vehicle.path = path
 
-
+    def Repositioning2Cluster(self, vehicles):
+        pass
 
     # function: Manage idle vehicles to hot areas
     # params: requests at the current time step or predicted demand at next time step

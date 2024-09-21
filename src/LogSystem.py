@@ -2,6 +2,8 @@
 select pooled vehicle to track
 each trip and path at least has an empty
 """
+from collections import defaultdict
+
 TESTING = False
 import logging
 import matplotlib.pyplot as plt
@@ -12,6 +14,7 @@ logging.basicConfig(filename='duplicated_req_pos.log',
                     format='%(asctime)s %(levelname)s: %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
                     level=logging.INFO)
+from src.utils import data_process
 class TrackerSystem:
     def __init__(self, cfg,environment,
                 current_timepoint,
@@ -26,6 +29,137 @@ class TrackerSystem:
         self.stage_state_dict= {}
         self.fail_feasible=[]
         self.step_requests_id=[]
+        self.req_id2state = {0: "waiting", 1: "assigned", 2: "picked up", 3: "dropped off"}
+        self.req_state2id = {"waiting": 0, "assigned": 1, "picked up": 2, "dropped off": 3}
+
+        self.V_pathed_after_assigned = defaultdict() # { vehicle_id: { req_id:[path position] } }
+        self.U_state_tracker =  defaultdict() # { req_id: {state :[step] } }
+        self.empty_decision = defaultdict() #
+    def get_state_text(self,u):
+        id2state = {
+            0: "searching for available vehicles",
+            1: "assigned, waiting for pickup at origin",
+            2: "picked up, waiting for arrival at destination",
+            3: "dropped off and finished"
+        }
+        if u.finish_dropoff:
+            return id2state[3]
+        elif u.finish_pickup:
+            return id2state[2]
+        elif u.finish_assign:
+            return id2state[1]
+        else:
+            return id2state[0]
+    def get_state(self,u):
+        if u.finish_dropoff:
+            return self.req_id2state[3]
+        elif u.finish_pickup:
+            return self.req_id2state[2]
+        elif u.finish_assign:
+            return self.req_id2state[1]
+        else:
+            return self.req_id2state[0]
+    def log_pathed(self,control_center,u_i,v): # if multi u assigned to same v, becuase of u key, it won't be overwritten
+        state = self.get_state(u_i)
+        if v.id not in self.V_pathed_after_assigned:
+            self.V_pathed_after_assigned[v.id] = defaultdict(list)
+            self.V_pathed_after_assigned[v.id][u_i.id] = [data_process.map_npTuple(v.current_position)]
+        else:
+            if state != "dropped off" and state != "waiting":
+                self.V_pathed_after_assigned[v.id][u_i.id].append(data_process.map_npTuple(v.current_position))
+
+
+    def log_init_scan(self,control_center): # expand detail with before decision
+        pass
+
+    def log_BeforeDemandNeedDecision(self,control_center,U2MultiV,V2MultiU):
+        U2MultiV_to_decide = {}
+        V2MultiU_to_decide = {}
+        for u in U2MultiV.keys():
+            if len(U2MultiV[u]) > 0:
+                print("u: ",u, "is scanned by vehicles:",U2MultiV[u])
+                U2MultiV_to_decide[u] = len(U2MultiV[u])
+            else:
+                print("u: ",u, "is NOT scanned by any vehicle")
+        for v in V2MultiU.keys():
+            if len(V2MultiU[v]) > 1:
+                print("v: ",v, "has scanned requests:",V2MultiU[v])
+                V2MultiU_to_decide[v] = len(V2MultiU[v])
+
+        if len(U2MultiV_to_decide) < 1 :
+            print(f"!!!NO TRIP FEASIBLE!!! CUR REQUESTS: {len(control_center.requests_step)}")
+            self.empty_decision[control_center.step] = len(control_center.requests_step)
+
+    def log_pooling(self,control_center, v, u_id):   # TODO POOLed log to generate complex decision situation
+        assigned_req_num_by_car = len(v.current_requests) + len(v.next_requests)
+        v_cur_reqs = []
+        v_next_reqs = []
+        u_id_in_v = False
+        for req in v.current_requests:
+            if int(req.id) != u_id:
+                v_cur_reqs.append(int(req.id))
+            else:
+                u_id_in_v = True
+        for req in v.next_requests:
+            if int(req.id) != u_id:
+                v_next_reqs.append(int(req.id))
+            else:
+                u_id_in_v = True
+        excluded_req_num = len(v_cur_reqs) + len(v_next_reqs)
+
+        count_num = assigned_req_num_by_car - excluded_req_num
+        if  u_id_in_v and assigned_req_num_by_car==2:  # u_id assigened to v, and v has another request
+            print("***ALREADY POOLed***")
+            if len(v_cur_reqs) > 0:
+                print(f"\tCurrent requests: {v_cur_reqs}")
+            if len(v_next_reqs) > 0:
+                print(f"\tNext requests: {v_next_reqs}")
+            return True
+        if assigned_req_num_by_car == 1 and u_id_in_v:  # u_id assigened to v, no other request
+            print("***FINDING POOL***")
+            if len(v_cur_reqs) > 0:
+                print(f"\tCurrent requests: {v_cur_reqs}")
+            if len(v_next_reqs) > 0:
+                print(f"\tNext requests: {v_next_reqs}")
+            return False
+        if u_id_in_v == False:  # u_id not assigned to v
+            print("***SOLO***")
+            if len(v_cur_reqs) > 0:
+                print(f"\tCurrent requests: {v_cur_reqs}")
+            if len(v_next_reqs) > 0:
+                print(f"\tNext requests: {v_next_reqs}")
+            print(f"\tAssigned requests num: {assigned_req_num_by_car}")
+            return False
+    def log_multi_trips(self,control_center, uv_decision_pair, UV2trip_id,id_to_trip):
+        print(f"??????\tChooseTripsbyPairs\tuv pair {uv_decision_pair} has more trips: ")
+        v = control_center.vehicles_all[uv_decision_pair[1]]
+        self.log_pooling(control_center, v, -1)
+        for trip_id in UV2trip_id[uv_decision_pair]:
+            tem_req_ids = [int(req.id) for req in id_to_trip[trip_id].requests]
+            print(f"trip_id: {trip_id}, requests: {tem_req_ids}")
+        print("??????")
+
+    def flow_track(self,control_center):
+        print("===============================================================")
+        print(f"STEP {control_center.step}, num cumulated requests: {len(control_center.cur_step_states['requests_step_dict'])}")
+        print("===============================================================")
+        for u_id, u_i in control_center.cur_step_states["requests_step_dict"].items():
+            state = self.get_state(u_i)
+            print(f"_______________FOR U_ID {u_id} ____STATE : {state} ")
+            if state != "waiting" and state != "dropped off":
+                if u_i.vehicle_id is not None:
+                    v = control_center.vehicles_all[u_i.vehicle_id] #
+                    self.log_pathed(control_center, u_i, v)
+                    print(f"Assigned Vehicle {int(v.id)} gone {len(self.V_pathed_after_assigned[v.id][u_i.id])} step",)
+                    self.log_pooling(control_center, v, u_id)
+                else:
+                    print("Not waiting but No vehicle assigned")
+
+    def track_assigned_request(self,requests_dict,vehicles):
+        for request in requests_dict.values():
+            if request.vehicle_id is not None:
+                vehicle = vehicles[request.assigned_vehicle_id]
+                self.set_track(vehicle)
 
     def set_track(self, vehicle):
         if not self.has_tracked(vehicle):

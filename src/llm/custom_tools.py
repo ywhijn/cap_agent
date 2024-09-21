@@ -4,22 +4,13 @@
 @Description: Agent Tools
 @LastEditTime: 2024-01-06 20:26:51
 '''
-from typing import Any, Optional
-
+from typing import Any, Optional, Type, Dict
+from typing_extensions import Annotated
+from src.utils.data_process import dict_to_str
 import json
 import numpy as np
 from langchain_core.tools import tool
 
-def dict_to_str(my_dict) -> str:
-    """将字典转换为格式化的JSON字符串
-    """
-    def convert_to_serializable(obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()  # 将ndarray转换为列表
-        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
-
-    json_str = json.dumps(my_dict, indent=4, default=convert_to_serializable)
-    return json_str
 def prompts(name, description):
     def decorator(func) -> Any:
         func.name = name
@@ -28,36 +19,19 @@ def prompts(name, description):
 
     return decorator
 
-# convert a list to a tuple
-def list_to_tuple(my_list):
-    return tuple(my_list)
-
-# #############################
-# common tools
-# #############################
-
-class GetDistancTime:
+class ToolManager:
     def __init__(self, env) -> None:
         self.env = env
-
-    @prompts(name="Get Distance and Travel Time",
-            description="Useful when you want to know the distance and travel time between two locations. The input to this tool should be a list, whose elements are two positions in format of [longitude, latitude]. "
-            )#"like '[ [104.0256898, 30.6401228], [30.6392765, 104.0704372] ]'." )
-    def inference(self,origin_destination, type = 'Linear', congestion_factor = 1.0):
-        distance_time = "The distance and travel time between two points: "
-        dis, time = self.env.GetDistanceandTime(tuple(origin_destination[0]), tuple(origin_destination[1]), type)
-        distance_time += dict_to_str({"Distance": dis, "Time": time})
-        return distance_time
-
-
-class GetDistancTimeByID:
-    def __init__(self, env) -> None:
-        self.env = env
-
-    @prompts(name="Get Distance and Travel Time by request ID and taxi ID",
-            description="Useful when you want to know the distance and travel time between request' position and driver's position. The input to this tool should be two int, where the first int is the request ID, the second int is the taxi ID. "
-            )#"like '[ [104.0256898, 30.6401228], [30.6392765, 104.0704372] ]'." )
-    def inference(self,request_id: int, driver_id: int):
+    def register_tool(self, tool_name, tool_description, tool_func):
+        self.tools[tool_name] = {
+            'description': tool_description,
+            'func': tool_func
+        }
+    @tool
+    def getDistanceTimeByID(self,
+        request_id: Annotated[int, "request ID from a passenger"],
+        driver_id:Annotated[int, "taxi ID"]) -> Dict[str, float]:
+        """Useful when you want to know the distance and travel time between the request' position and driver's position"""
         request_dict= {78942: [104.0412682,30.6669185],81088: [104.0562247, 30.6223237]}
         driver_dict= {17: [104.0581489,30.6792291],12: [104.0566995, 30.6722262],33:[104.0485007,30.6620189]}
         if int(request_id) not in request_dict.keys() or int(driver_id) not in driver_dict.keys():
@@ -67,9 +41,93 @@ class GetDistancTimeByID:
         origin = request_dict[int(request_id)]
         destination = driver_dict[int(driver_id)]
         distance_time = "The distance and travel time between two points: "
-        dis, time = self.env.GetDistanceandTime(tuple(origin), tuple(destination), type)
-        distance_time += dict_to_str({"Distance": dis, "Time": time})
-        return distance_time
+        dis, time = self.env.GetDistanceandTime(tuple(origin), tuple(destination), type='Linear')
+        round_digit=2
+        res_dict = {"Distance": round(dis, round_digit), "Time": round(time, round_digit)}
+        distance_time += dict_to_str()
+
+        return res_dict
+    def get_tool(self, tool_name):
+        return self.tools[tool_name]
+
+    def get_all_tools(self):
+        return self.tools
+
+    def get_tool_names(self):
+        return list(self.tools.keys())
+
+    def get_tool_descriptions(self):
+        return {tool_name: tool['description'] for tool_name, tool in self.tools.items()}
+
+    def get_tool_funcs(self):
+        return {tool_name: tool['func'] for tool_name, tool in self.tools.items()}
+
+    def __str__(self) -> str:
+        return str(self.tools)
+
+    def __repr__(self) -> str:
+        return str(self.tools)
+
+
+# convert a list to a tuple
+def list_to_tuple(my_list):
+    return tuple(my_list)
+
+# #############################
+# common tools
+# #############################
+
+from langchain.pydantic_v1 import BaseModel, Field
+from langchain_core.callbacks import (
+    AsyncCallbackManagerForToolRun,
+    CallbackManagerForToolRun,
+)
+from langchain_core.tools import BaseTool
+
+class UV_ID_pair(BaseModel):
+    request_id: int = Field(description="request ID from a passenger")
+    driver_id: int = Field(description="taxi ID")
+
+
+# @prompts(name="Get Distance and Travel Time",
+#             description="Useful when you want to know the distance and travel time between two locations. The input to this tool should be a list, whose elements are two positions in format of [longitude, latitude]. "
+#             )#"like '[ [104.0256898,30.6401228], [30.6392765, 104.0704372] ]'." )
+# class GetDistancTime:
+#     def __init__(self, env) -> None:
+#         self.env = env
+#     @tool
+#     def inference(self,origin_destination, type = 'Linear', congestion_factor = 1.0):
+#         distance_time = "The distance and travel time between two points: "
+#         dis, time = self.env.GetDistanceandTime(tuple(origin_destination[0]), tuple(origin_destination[1]), type)
+#         distance_time += dict_to_str({"Distance": dis, "Time": time})
+#         return distance_time
+#
+# @prompts(name="Get Distance and Travel Time by request ID and taxi ID",
+#             description="Useful when you want to know the distance and travel time between request' position and driver's position. The input to this tool should be two int, where the first int is the request ID, the second int is the taxi ID. "
+#             )#"like '[ [104.0256898, 30.6401228], [30.6392765, 104.0704372] ]'." )
+# class GetDistanceTimeByID(BaseTool):
+#     name = "Get Travel Distance and Time By ID"
+#     description = "Useful when you want to know the distance and travel time between request' position and driver's position"
+#     args_schema: Type[BaseModel] = UV_ID_pair
+#     return_direct: bool = True
+#     def __init__(self, env, **kwargs: Any) -> None:
+#         super().__init__(**kwargs)
+#         self.env = env
+#     @tool
+#     def getDistancTimeByID(self,request_id: int, driver_id: int):
+#         request_dict= {78942: [104.0412682,30.6669185],81088: [104.0562247, 30.6223237]}
+#         driver_dict= {17: [104.0581489,30.6792291],12: [104.0566995, 30.6722262],33:[104.0485007,30.6620189]}
+#         if int(request_id) not in request_dict.keys() or int(driver_id) not in driver_dict.keys():
+#             print( "The request ID or driver ID is not valid.")
+#             request_id = 78942
+#             driver_id = 17
+#         origin = request_dict[int(request_id)]
+#         destination = driver_dict[int(driver_id)]
+#         distance_time = "The distance and travel time between two points: "
+#         dis, time = self.env.GetDistanceandTime(tuple(origin), tuple(destination), type='Linear')
+#         round_digit=2
+#         distance_time += dict_to_str({"Distance": round(dis,round_digit), "Time": round(time,round_digit)})
+#         return distance_time
 # @tool
 # def GetDistanceandTime(origin: Tuple[float,float], destination: Tuple[float,float]):
 #     """Get the distance and travel time between two locations

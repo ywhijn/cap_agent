@@ -1,7 +1,26 @@
 
 # read csv has lowest .5 decimal but csv has 7 decimal
+import json
+
+import numpy as np
+
+
 def exact_pos_resolution(requests_raw):
     pass
+def dict_to_str(my_dict) -> str:
+    """将字典转换为格式化的JSON字符串
+    """
+    def convert_to_serializable(obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()  # 将ndarray转换为列表
+        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+
+    json_str = json.dumps(my_dict, indent=2, default=convert_to_serializable)
+    return json_str
+def map_npTuple( original_tuple):
+    return tuple(map(float, original_tuple))
+def strList2intList( original_list):
+    return [ (int(sub[0]),int(sub[1])) for sub in original_list]
 # 删除重复的订单 ID
 def remove_duplicate_orders(requests_raw):
     duplicates = requests_raw[requests_raw.duplicated(subset='order_id', keep=False)]

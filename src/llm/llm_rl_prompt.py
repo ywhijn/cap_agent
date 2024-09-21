@@ -4,19 +4,29 @@
 @Description: Agent Tools Prompts
 @LastEditTime: 2024-01-06 20:26:05
 '''
-AGENT_MESSAGE = """{uv_pairs}
-To do this, you must determine whether the current passenger request pickup position is in the taxi driver's service range or not. 
+AGENT_MESSAGE = \
+"""{uv_pairs}
+{decision_space}
+To do this, you must follow the given rules:
 1. Don't finish the task until you have a final answer. You must output a list of decision when you finish this task.
-2. You can only use tools mentioned before to help you make decision. Don't fabricate any other tool name not mentioned.
+2. You can only use tools mentioned to help you make decision. Don't fabricate any other tool name not mentioned.
 3. Remember what tools you have used, you can use same tool to solve the problems of identical property.
-4. If all of the taxi drivers are not available or too far away from the certain passenger, you must leave assign the order to id '-1', which means the order is not assigned to any taxi driver. 
+4. If all of the taxi drivers are not available or too far away from the certain passenger, you must assign the passenger to dirver id '-1', which means the order is not assigned to any taxi driver. 
 5. Output the list of passenger assignment decision in order of the given passenger request before. 
-Let's take a deep breath and think step by step. Once you made a final decision, output it in the following format: \n
+6. If the assignment decision is too obvious, such as only one candidate taxi id is in a passengers' options, you can directly assign the driver to the passenger without using any tool.
+Let's take a deep breath and think step by step.
+Once you made a final decision, output it in the following format: \n
+{output_format}
+"""
+
+output_format="""
+Once you made a final decision, output it in the following format: \n
 ```
 Final Answer: 
-"decision": {{list of request assignment tuple(int, int) that indicate the request(1st id) from a passenger is assigned to a taxi driver(2nd id)}},
-"explanation": {{your explanation about your decision, described your suggestions to the taxi drivers}}
-``` \n"""
+"decision": {{ list of request assignment tuple(int, int) that indicate the request (1st id) from a passenger is assigned to a taxi driver (2nd id) }},
+"explanation": {{ your explanation about your decision, described your suggestions to the taxi drivers }}
+```
+"""
 # AGENT_MESSAGE = """As the 'traffic signal light', you are tasked with controlling the traffic signal at an intersection. You've been in control for {sim_step} seconds. The last decision you made was {last_step_action}, with the explanation {last_step_explanation}. Now, you need to assess the current situation and make a decision for the next step.
 #
 # To do this, you must describe the Static State and Dynamic State of the traffic light, including the Intersection Layout, Signal Phase Structure, and Current Occupancy. Determine if you are facing a long-tail problem, such as the presence of an ambulance, impassable movements or the detectors are not work well.
