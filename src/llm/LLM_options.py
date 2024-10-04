@@ -14,10 +14,14 @@ class LLMOptions:
                 temperature=0.5)
             return client
 cfg = SimpleNamespace()
+cfg.dev = True
 cfg.langchain_key = "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"
 cfg.LANGCHAIN_TRACING_V2 = "true"
 cfg.project_name =  "graph_test"
 cfg.OutputDir = "agentLog"
+
+
+cfg.TAVILY_KEY = "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"
 
 cfg.STEP_STATE_DIR = "step_states"
 cfg.STEP_STATE_JSON_FILE = "step_states.json"
@@ -29,6 +33,7 @@ cfg.poi_cache_file = "poi_cache.json"
 cfg.origin_poi_file = "origin_poi.json"
 cfg.baidu_url = "https://api.map.baidu.com/reverse_geocoding/v3"
 cfg.baidu_ak = "tRwY30uG8lXYRkj7ObL3t67lMvRr7Qmq"
+
 # mssage="""\ Model vehicle_routing
 # \ LP format - for model browsing. Use MPS format to capture full model detail.
 # Minimize

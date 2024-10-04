@@ -30,7 +30,7 @@ from langchain.agents import AgentExecutor, create_react_agent
 from langchain_openai import ChatOpenAI
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langgraph.graph import END
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 class DecisionPair(BaseModel):
     u_id: int = Field(description="id of the passenger")
     v_id: int = Field(description="id of the taxi driver")

@@ -1,8 +1,7 @@
 import random
-
+from src.utils.data_process import dict_to_str
 import requests
 import json
-
 BASE_URL = "http://localhost:10086"
 
 def run_epoch(epoch_num=1):
@@ -38,6 +37,9 @@ def getUVinfo():
     return response.json()
 def getDemandNeed():
     response = requests.get(f"{BASE_URL}/getDemandNeed")
+    return response.json()
+def getDemandNeed_dis():
+    response = requests.get(f"{BASE_URL}/getDisDemandNeed")
     return response.json()
 def implement_action(decision):
     action = {"decisions": decision}
@@ -81,6 +83,21 @@ def test_random_multi():
             pairs.append(pair)
 
         implement_action(pairs)
+def test_dis_multi():
+    for i in range(300):
+        uv_json = getDemandNeed_dis()
+
+        Uinfo, Vinfo, U2MultiV, V2MultiU,DisHelp = uv_json["Passengers"], uv_json["Taxis"], uv_json["U2MultiV"],uv_json["V2MultiU"],uv_json["DisHelp"]
+        pairs = []
+        for  u_id, v_ids in U2MultiV.items():
+            pair = decide_multiV_singleU(u_id, v_ids)
+            pairs.append(pair)
+        print(dict_to_str(DisHelp))
+        break
+    implement_action(pairs)
+def test_finish():
+    response = requests.get(f"{BASE_URL}/save_res")
+    return response.json()
 def decide_multiV_singleU(u_id, v_ids):
     # 一个乘客匹配多个车辆
     v_id = random.choice(v_ids) # 随机选择一个车辆
@@ -91,7 +108,7 @@ def reset_env():
     return response.json()
 # 使用示例
 if __name__ == "__main__":
-    test_random_multi()
+    test_dis_multi()
     # # 获取当前请求
     # print(get_current_requests())
     #

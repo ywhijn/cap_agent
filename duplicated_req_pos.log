@@ -8047,3 +8047,47 @@
 2024-09-16 00:57:04 INFO:  * Debugger PIN: 127-749-938
 2024-09-16 00:57:04 INFO: 127.0.0.1 - - [16/Sep/2024 00:57:04] "POST /get_dt_w2_loc HTTP/1.1" 200 -
 2024-09-16 00:57:04 INFO: 127.0.0.1 - - [16/Sep/2024 00:57:04] "POST /get_dt_w2_loc HTTP/1.1" 200 -
+2024-09-21 18:53:13 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://localhost:10086
+2024-09-21 18:53:13 INFO: [33mPress CTRL+C to quit[0m
+2024-09-21 18:53:13 INFO:  * Restarting with stat
+2024-09-21 18:53:33 WARNING:  * Debugger is active!
+2024-09-21 18:53:33 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:40:44 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 20:40:45 INFO:  * Restarting with stat
+2024-09-21 20:41:02 WARNING:  * Debugger is active!
+2024-09-21 20:41:02 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:46:02 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/src/llm/agentSystem.py', reloading
+2024-09-21 20:46:04 INFO:  * Restarting with stat
+2024-09-21 20:46:20 WARNING:  * Debugger is active!
+2024-09-21 20:46:20 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:48:35 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 20:48:37 INFO:  * Restarting with stat
+2024-09-21 20:48:53 WARNING:  * Debugger is active!
+2024-09-21 20:48:53 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:49:29 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 20:49:31 INFO:  * Restarting with stat
+2024-09-21 20:49:48 WARNING:  * Debugger is active!
+2024-09-21 20:49:48 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:55:33 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/src/llm/LLM_options.py', reloading
+2024-09-21 20:55:34 INFO:  * Restarting with stat
+2024-09-21 20:55:52 WARNING:  * Debugger is active!
+2024-09-21 20:55:52 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 20:56:44 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 20:56:46 INFO:  * Restarting with stat
+2024-09-21 20:57:02 WARNING:  * Debugger is active!
+2024-09-21 20:57:02 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 21:00:03 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 21:00:04 INFO:  * Restarting with stat
+2024-09-21 21:00:21 WARNING:  * Debugger is active!
+2024-09-21 21:00:21 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 21:06:39 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 21:06:41 INFO:  * Restarting with stat
+2024-09-21 21:06:58 WARNING:  * Debugger is active!
+2024-09-21 21:06:58 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 21:07:48 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/tutor/collaboration.py', reloading
+2024-09-21 21:07:50 INFO:  * Restarting with stat
+2024-09-21 21:08:06 WARNING:  * Debugger is active!
+2024-09-21 21:08:06 INFO:  * Debugger PIN: 880-781-611
+2024-09-21 21:27:29 INFO:  * Detected change in '/Users/yangwenhan/Desktop/final/agent/Ride-sharing-Simulator-main/env_api.py', reloading
+2024-09-21 21:27:31 INFO:  * Restarting with stat

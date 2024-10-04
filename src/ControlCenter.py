@@ -186,7 +186,7 @@ class ControlCenter:
 
 
         assigned_trips={}
-        print("##Function：ChooseTripsbyPairs：\n\tall of possible UV pairs to the trip_id ", UV2trip_id)
+        # print("##Function：ChooseTripsbyPairs：\n\tall of possible UV pairs to the trip_id ", UV2trip_id)
         # Get vehicle specific trips from the decision pairs
         for uv_decision_pair in uv_decision_pairs:
             uid,vid = uv_decision_pair

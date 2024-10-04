@@ -51,10 +51,17 @@ class Simulation:
         self.args = parse_args()
         with open(self.args.cfg) as f:
             self.cfg = edict(yaml.load(f, Loader=yaml.FullLoader))
-        self.logger=self.initilize_logging(self.args, self.cfg)
+        self.logger= self.initilize_logging(self.args, self.cfg)
         self.control_center,self.environment =self.initialize_simulation(self.cfg)
         self.initialize_UV(self.cfg,self.control_center,self.environment)
         self.control_center.cur_step_states['requests_step_dict'] = defaultdict(list)
+
+        self.req_num = 0
+        self.req_num_avg =0
+
+        self.requests_results_all = []
+        self.vehicles_results_all = []
+
 
 
     def initialize_simulation(self,cfg):
@@ -155,7 +162,8 @@ class Simulation:
         #         req_num = RunEpisode(requests_tmp, vehicles_tmp, control_center, draw_veh_req=True, draw_fre=60,
         #                              img_path=img_path)
 
-    def LogResults(self,logger, requests_results, vehicles_results):
+    def LogResults(self, requests_results, vehicles_results):
+        logger = self.logger
         # Requests
         logger.info('Service rate (non-ride-pooling):  {}'.format(requests_results[0]))
         logger.info('Service rate (ride-pooling):      {}'.format(requests_results[1]))
@@ -267,6 +275,9 @@ class Simulation:
             for trip in trips:
                 if len(trip.requests)>0:
                     for req in trip.requests:
+                        if req.vehicle_id is not None:
+                            print(f"req {int(req.id)} has vehicle {int(req.vehicle_id)}  before decision")
+                            continue
                         v_id,u_id=int(idx),int(req.id)
                         V2MultiU[v_id].add(u_id)
                         U2MultiV[u_id].add(v_id)
@@ -312,8 +323,8 @@ class Simulation:
 
 
     def formatVinfo(self,v): # TODO add more info, e.g. idle time and total income
-        # v_info={"current position":data_process.map_npTuple(v.current_position),"available seats":v.max_capacity - v.current_capacity}
-        v_info = {"current position": data_process.map_npTuple(v.current_position)}
+        # v_info={"position":data_process.map_npTuple(v.current_position),"available seats":v.max_capacity - v.current_capacity}
+        v_info = {"position": data_process.map_npTuple(v.current_position)}
         if len(v.current_requests) > 0 :
             current_requests_info = {}
             for u in v.current_requests:
@@ -387,21 +398,52 @@ class Simulation:
         self.getScoredTrips()
         print("#\n\tBeforeDecision:")
         self.control_center.tracker_system.log_BeforeDemandNeedDecision(self.control_center, U2MultiV, V2MultiU)
+        self.control_center.tracker_system.log_steps_state(self.control_center.step, candidate_U, candidate_V, U2MultiV, V2MultiU)
 
-        return self.control_center.step,candidate_U, candidate_V, U2MultiV, V2MultiU
+        return self.control_center.step, candidate_U, candidate_V, U2MultiV, V2MultiU
+    def getDis_DN_BeforeDecision(self):
+        step, candidate_U, candidate_V, U2MultiV, V2MultiU = self.getDemandNeed_BeforeDecision()
+        help_D_info = self.format_help_DT(candidate_U, candidate_V, U2MultiV, V2MultiU)
+        return self.control_center.step, candidate_U, candidate_V, U2MultiV, V2MultiU, help_D_info
+
+    def format_help_DT(self,candidate_U, candidate_V, U2MultiV, V2MultiU):
+        help_info =None # {'distance_to_requests_pickup': {}, 'distance_to_requests_dropoff': {}}
+        for id, u in candidate_U.items():
+            u["expected_travel_distance"] = self.getDTw2Loc(u["origin"], u["destination"])["Distance"] # TODO real distance
+            u["expected_travel_time"] = self.getDTw2Loc(u["origin"], u["destination"])["Time"]
+            u["distance_to_taxis"] = {}
+            for v in U2MultiV[id]:
+                u["distance_to_taxis"][v] =  self.getDTw2Loc(u["origin"], candidate_V[v]["position"])["Distance"]
+        # help_info={'distance_to_requests_pickup':{},'distance_to_requests_dropoff':{}}
+        # # calculate the distance between the vehicle and its decision requests
+        # for vid, uids in V2MultiU.items():
+        #     help_info['distance_to_requests_pickup'][vid] = {}
+        #     help_info['distance_to_requests_dropoff'][vid] = {}
+        #     for uid in uids:
+        #         help_info['distance_to_requests_pickup'][vid][uid] = self.getDTw2Loc(candidate_V[vid]["position"], candidate_U[uid]["origin"])["Distance"]
+                # help_info['distance_to_requests_dropoff'][vid][uid] = self.getDTw2Loc(candidate_V[vid]["position"], candidate_U[uid]["destination"])["Distance"]
+
+                # what help information do you think is helpful during above thinking?
+        return help_info
+
 
     def implementDecision(self,decisions):
         print("#\n\timplementDecision: ",decisions)
         self.decision2Trips(decisions)
+        self.control_center.tracker_system.log_steps_decision(int(self.control_center.step), decisions)
         self.action_step()
         self.control_center.tracker_system.flow_track(self.control_center)
+
+
+        self.req_num += self.control_center.VehicleUtility()
+
 
     # function: Calculate the travel distance and time between origin and destination according to the type
     # params: The origin and destination position, type: 'Linear', 'Manhattan' or 'Itinerary'
     # return: the travel distance and time
     def getDTw2Loc(self,origin, destination):
         if not isinstance(origin, tuple) or not isinstance(destination, tuple):
-            raise ValueError('The origin and destination should be tuple')
+            origin,destination = tuple(origin), tuple(destination)
         dis, time=self.environment.GetDistanceandTime(origin, destination)
         round_digit = 2
         return {"Distance":round(dis, round_digit),"Time":round(time, round_digit) }
@@ -412,6 +454,20 @@ class Simulation:
         return self.control_center.agent_system.getUV_loc_prompt(requests,vehicles)
     def setConstraints4FeasibleTrips(self,constraints):
         self.control_center.setConstraints4FeasibleTrips(constraints)
+    def save_result(self): # for each epoch
+        logger = self.logger
+        self.req_num /= self.control_center.step
+        self.req_num_avg += self.req_num
+        # Record the results
+        requests_results, vehicles_results = self.control_center.CalculateResults()
+        self.requests_results_all.append(requests_results)
+        self.vehicles_results_all.append(vehicles_results)
+        logger.info('****************** Simulation Polling rate: {} *********************'.format(self.cfg.SIMULATION.POLLING_RATE))
+        self.LogResults(logger, requests_results, vehicles_results)
+        logger.info('The average number of requests in each vehicle: {}'.format(self.req_num))
+        logger.info('******************************')
+        self.control_center.UpdateParameters(timepoint=self.cfg.SIMULATION.START, step=0)
+
 
 from flask import Flask, request, jsonify
 
@@ -452,9 +508,13 @@ def getGetFlow_UVinfo():
     Uinfo, Vinfo, idleVs= simu.getUVInfo_BeforeDecision()
     return jsonify({"Passengers":Uinfo,"Taxis":Vinfo})
 @app.route('/getDemandNeed', methods=['GET'])
-def getgetDemandNeedInfo():
+def getDemandNeedInfo():
     step, candidate_U, candidate_V, U2MultiV, V2MultiU = simu.getDemandNeed_BeforeDecision()
     return jsonify({"step":step,"Passengers":candidate_U,"Taxis":candidate_V, "U2MultiV":U2MultiV, "V2MultiU":V2MultiU})
+@app.route('/getDisDemandNeed', methods=['GET'])
+def getDemandNeedInfo_dis():
+    step, candidate_U, candidate_V, U2MultiV, V2MultiU ,DisHelp= simu.getDis_DN_BeforeDecision()
+    return jsonify({"step":step,"Passengers":candidate_U,"Taxis":candidate_V, "U2MultiV":U2MultiV, "V2MultiU":V2MultiU, "DisHelp":DisHelp})
 @app.route('/implementDecision', methods=['POST'])
 def implementDecision():
     data = request.get_json()
@@ -478,6 +538,10 @@ def get_itinerary():
     itinerary,dis,time = simu.environment.GetItinerary(origin, destination)
     return jsonify(itinerary)
 
+@app.route('/save_res', methods=['GET'])
+def save():
+    simu.save_result()
+    return None
 
 
 if __name__ == '__main__':

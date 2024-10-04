@@ -1,0 +1,82 @@
+Now you get the basic information for passenger requests and taxi vehicles, respectively. Their positions are represented as [longitude, latitude].
+The passenger requests are as follows:
+{
+  "79770": {
+    "destination": [104.0202519, 30.6895784],
+    "distance_to_taxis": {
+      "0": 2210.49,
+      "1": 882.01,
+      "3": 1402.59,
+      "6": 107.35,
+      "8": 1114.88,
+      "14": 1843.93,
+      "18": 600.79,
+      "23": 1730.09,
+      "27": 1504.41,
+      "41": 2110.82,
+      "45": 778.0,
+      "53": 1887.16,
+      "57": 1783.91,
+      "60": 951.44,
+      "61": 1083.57,
+      "62": 812.35,
+      "72": 1773.86,
+      "74": 721.21,
+      "75": 260.28
+    },
+    "expected_travel_distance": 5993.65,
+    "expected_travel_time": 399.58,
+    "origin": [104.0705385, 30.6574171],
+    "state": "searching for available vehicles"
+  },
+  "80899": {
+    "destination": [104.0867935, 30.6884774],
+    "distance_to_taxis": {
+      "10": 1687.66
+    },
+    "expected_travel_distance": 9315.96,
+    "expected_travel_time": 621.06,
+    "origin": [104.060944, 30.6076951],
+    "state": "searching for available vehicles"
+  },
+  "81047": {
+    "destination": [104.0962794, 30.7083293],
+    "distance_to_taxis": {},
+    "expected_travel_distance": 1656.46,
+    "expected_travel_time": 110.43,
+    "origin": [104.1119439, 30.7146842],
+    "state": "searching for available vehicles"
+  }
+}	,where the key is the `request id`, and its value represents its ideal pickup position and drop-off position.
+The taxi vehicles are as follows:
+{
+  0: {
+    "position": [104.0929301, 30.652499]
+  },
+  1: {
+    "position": [104.0717077, 30.6652913]
+  },
+  3: {
+    "position": [104.0850985, 30.6558598]
+  },
+  6: {
+    "position": [104.069545, 30.6578636]
+  },
+  8: {
+    "position": [104.0808192, 30.6621508]
+  },
+  10: {
+    "current_requests": {
+      "81088": {
+        "destination": [104.0738543, 30.6970738],
+        "origin": [104.0562247, 30.6223237],
+        "state": "picked up, waiting for arrival at destination"
+      }
+    },
+    "position": [104.0562247, 30.6223237]
+  },
+  14: {
+    "position": [104.0595156, 30.6438068]
+  }
+}	,where the key is the `taxi id`, and its value represents the taxi's current position and any already assigned passenger on it.
+Please refer these information to make a accurate decision.

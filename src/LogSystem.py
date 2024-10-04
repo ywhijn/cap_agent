@@ -2,19 +2,51 @@
 select pooled vehicle to track
 each trip and path at least has an empty
 """
+import json
 from collections import defaultdict
+from datetime import datetime
 
+from src.llm.LLM_options import  cfg as log_cfg
 TESTING = False
 import logging
 import matplotlib.pyplot as plt
 import os
 import copy
-logging.basicConfig(filename='duplicated_req_pos.log',
-                    filemode='a',
-                    format='%(asctime)s %(levelname)s: %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    level=logging.INFO)
+import re
 from src.utils import data_process
+class SingleLineKeyJSONEncoder(json.JSONEncoder):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.indent = 2
+        self.current_indent = 0
+
+    def encode(self, obj):
+        if isinstance(obj, dict):
+            if not obj:
+                return '{}'
+            self.current_indent += self.indent
+            lines = []
+            for key, value in obj.items():
+                key_str = json.dumps(key, ensure_ascii=False)
+                value_str = self.encode(value)
+                lines.append(f"{self.current_indent * ' '}{key_str}: {value_str}")
+            result = '{\n' + ',\n'.join(lines) + '\n'
+            self.current_indent -= self.indent
+            result += self.current_indent * ' ' + '}'
+            return result
+        elif isinstance(obj, (list, tuple)):
+            if len(obj) == 0:
+                return '[]'
+            elif len(obj) == 1:
+                return '[' + self.encode(obj[0]) + ']'
+            else:
+                self.current_indent += self.indent
+                lines = [self.current_indent * ' ' + self.encode(item) for item in obj]
+                result = '[\n' + ',\n'.join(lines) + '\n'
+                self.current_indent -= self.indent
+                result += self.current_indent * ' ' + ']'
+                return result
+        return json.dumps(obj, ensure_ascii=False)
 class TrackerSystem:
     def __init__(self, cfg,environment,
                 current_timepoint,
@@ -31,10 +63,46 @@ class TrackerSystem:
         self.step_requests_id=[]
         self.req_id2state = {0: "waiting", 1: "assigned", 2: "picked up", 3: "dropped off"}
         self.req_state2id = {"waiting": 0, "assigned": 1, "picked up": 2, "dropped off": 3}
-
         self.V_pathed_after_assigned = defaultdict() # { vehicle_id: { req_id:[path position] } }
         self.U_state_tracker =  defaultdict() # { req_id: {state :[step] } }
         self.empty_decision = defaultdict() #
+
+        self.step_states = defaultdict(defaultdict)
+        self.step_u=defaultdict(defaultdict)
+        self.step_v=defaultdict(defaultdict)
+        folder_name_time = f"{datetime.now().strftime('%m-%d-%H-%M')}.log"
+
+        dirname, filename = os.path.split(os.path.abspath(__file__))
+        STEP_STATE_DIR = os.path.join(f'{dirname}/simulogs', folder_name_time)
+        os.makedirs(STEP_STATE_DIR, exist_ok=True)
+        self.STEP_STATE_JSON_FILE = os.path.join(STEP_STATE_DIR, "steps.json")
+        self.STEP_U_JSON_FILE = os.path.join(STEP_STATE_DIR, "user.json")
+        self.STEP_V_JSON_FILE = os.path.join(STEP_STATE_DIR, "vehicle.json")
+    def save_cache(self, cache,type):
+        if type=="u":
+            self.write_log(self.STEP_U_JSON_FILE, cache, cache["id"])
+        elif type=="v":
+            self.write_log(self.STEP_V_JSON_FILE, cache, cache["id"])
+        elif type=="step":
+            self.write_log(self.STEP_STATE_JSON_FILE, cache, cache["step"])
+    def write_log(self,file,new_cache,index):
+        if os.path.exists(file):
+            with open(file, 'r') as f:
+                all_steps_cache = json.load(f)
+        else:
+            all_steps_cache = {}
+        all_steps_cache[int(index)] = new_cache
+        with open(file, 'w') as f:
+            json.dump(all_steps_cache, f,ensure_ascii=False,cls=SingleLineKeyJSONEncoder)
+    def load_cache(self):
+        cache = {}
+        if os.path.exists(self.STEP_STATE_JSON_FILE):
+            with open(self.STEP_STATE_JSON_FILE, 'r') as f:
+                cache = json.load(f)
+        if not self.step_states:  # 检查是否为空
+            for key, value in cache.items():
+                self.step_states[int(key)] = value  # 将 cache 中的内容加载到 step_states 中
+        return cache
     def get_state_text(self,u):
         id2state = {
             0: "searching for available vehicles",
@@ -71,6 +139,19 @@ class TrackerSystem:
 
     def log_init_scan(self,control_center): # expand detail with before decision
         pass
+    def log_requests(self):
+        pass
+    def log_vehicles(self):
+        pass
+    def log_steps_state(self,step, Uinfo, Vinfo, U2MultiV, V2MultiU):
+        self.step_states[step]["step"] = step
+        self.step_states[step]["Uinfo"] = Uinfo
+        self.step_states[step]["Vinfo"] = Vinfo
+        self.step_states[step]["U2MultiV"] = U2MultiV
+        self.step_states[step]["V2MultiU"] = V2MultiU
+    def log_steps_decision(self,step, decision):
+        self.step_states[step]["decision"] = decision
+        self.save_cache(self.step_states[step],"step")
 
     def log_BeforeDemandNeedDecision(self,control_center,U2MultiV,V2MultiU):
         U2MultiV_to_decide = {}
@@ -146,15 +227,56 @@ class TrackerSystem:
         for u_id, u_i in control_center.cur_step_states["requests_step_dict"].items():
             state = self.get_state(u_i)
             print(f"_______________FOR U_ID {u_id} ____STATE : {state} ")
+            self.step_u[u_id]["id"] = u_id
+            if state == "waiting" :
+                if "waiting_step" not in self.step_u[u_id]:
+                    self.step_u[u_id]["waiting_step"] = control_center.step
+            if state == "assigned":
+                if "assigned_step" not in self.step_u[u_id]:
+                    self.step_u[u_id]["assigned_step"] = control_center.step
+            if state == "picked up":
+                if "picked_step" not in self.step_u[u_id]:
+                    self.step_u[u_id]["picked_step"] = control_center.step
+            if state == "dropped off":
+                if "dropped_step" not in self.step_u[u_id]:
+                    self.step_u[u_id]["dropped_step"] = control_center.step
+                    self.step_u[u_id] = data_process.merge_dicts( self.step_u[u_id],  self.u2dict(u_i))
+                    self.save_cache(self.step_u[u_id],"u")
+
             if state != "waiting" and state != "dropped off":
                 if u_i.vehicle_id is not None:
                     v = control_center.vehicles_all[u_i.vehicle_id] #
+                    v.id = int(v.id)
                     self.log_pathed(control_center, u_i, v)
                     print(f"Assigned Vehicle {int(v.id)} gone {len(self.V_pathed_after_assigned[v.id][u_i.id])} step",)
                     self.log_pooling(control_center, v, u_id)
                 else:
                     print("Not waiting but No vehicle assigned")
 
+    def u2dict(self,u):
+
+            return {
+                'pickup_position': u.pickup_position,
+                'dropoff_position': u.dropoff_position,
+                'send_request_timepoint': u.send_request_timepoint,
+                # 'assign_timepoint': u.assign_timepoint,
+                # 'pickup_timepoint': u.pickup_timepoint,
+                # 'dropoff_timepoint': u.dropoff_timepoint,
+                'vehicle_id': int(u.vehicle_id),
+                'pickup_grid_id': u.pickup_grid_id,
+                'dropoff_grid_id': u.dropoff_grid_id,
+            }
+    def v2dict(self,v):
+        return {
+            "id":int(v.id)
+        }
+
+    def format_json(self,obj):
+        json_str = json.dumps(obj, ensure_ascii=False, separators=(',', ':'))
+        json_str = json_str[1:-1]
+        pairs = json_str.split(',')
+        formatted_pairs = [f"{pair}\n" for pair in pairs]
+        return "{\n" + "".join(formatted_pairs) + "}"
     def track_assigned_request(self,requests_dict,vehicles):
         for request in requests_dict.values():
             if request.vehicle_id is not None:

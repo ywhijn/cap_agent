@@ -27,12 +27,21 @@ class Request:
         self.pickup_grid_id = pickup_grid_id
         self.dropoff_grid_id = dropoff_grid_id
         # original trajector, travel distance, and travel time without ride-pooling
-        self.iti_nodes = iti_nodes
-        self.iti_dis = iti_dis
-        self.iti_t = iti_t
+
         self.original_travel_distance = original_travel_distance
         self.original_travel_time = original_travel_time
-        
+        # Record the status of the request
+        self.finish_assign = False
+        self.finish_pickup = False
+        self.finish_dropoff = False
+        self.assign_timepoint = 0
+        self.pickup_timepoint = 0
+        self.dropoff_timepoint = 0
+        self.vehicle_id = None
+
+        # Record the time and distance of the request on the vehicle
+        self.time_on_vehicle = 0
+        self.distance_on_vehicle = 0
         # todo... (we assume that there is only one person in each request)
         self.num_person = num_person # There may be more than 1 person in some requests
         self.max_tol_num_person = 1  # maximal number of passengers that can be toleranted by the passenger
@@ -56,19 +65,10 @@ class Request:
 
         self.MAX_DROPOFF_DELAY = self.max_con_travel_time - self.original_travel_time
 
+        self.iti_nodes = iti_nodes
+        self.iti_dis = iti_dis
+        self.iti_t = iti_t
 
-        # Record the status of the request
-        self.finish_assign = False
-        self.finish_pickup = False
-        self.finish_dropoff = False
-        self.assign_timepoint = 0
-        self.pickup_timepoint = 0
-        self.dropoff_timepoint = 0
-        self.vehicle_id = None
-
-        # Record the time and distance of the request on the vehicle
-        self.time_on_vehicle = 0
-        self.distance_on_vehicle = 0
         
         # todo...
         self.max_tol_price = 0

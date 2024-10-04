@@ -17,6 +17,7 @@ class EnvCentor:
         self.steps_UV_info = defaultdict()
         self.logger = logger
         self.STEP_STATE_JSON_FILE = os.path.join(cfg.STEP_STATE_DIR, cfg.STEP_STATE_JSON_FILE)
+        self.dev = cfg.dev
         if not os.path.exists(self.cfg.STEP_STATE_DIR):
             os.makedirs(self.cfg.STEP_STATE_DIR)  # 创建数据目录
     def load_cache(self):
@@ -27,7 +28,6 @@ class EnvCentor:
         if not self.step_states:  # 检查是否为空
             for key, value in cache.items():
                 self.step_states[int(key)] = value  # 将 cache 中的内容加载到 step_states 中
-
         return cache
 
     def save_cache(self, cache):
@@ -60,11 +60,12 @@ Please refer these information to make a accurate decision.\n"""
         v_in_space = []
         # avaliable_vehicles = list(Vinfo.keys())
         U2MultiV = step_uv["U2MultiV"]
-        for u in U2MultiV:
-            max_len = len(U2MultiV[u])
-            keep_len = min(max_len,max_num_vehicles)
-            U2MultiV[u] = [int(v) for v in U2MultiV[u][:keep_len] ]
-            v_in_space.extend(U2MultiV[u])
+        if self.dev:
+            for u in U2MultiV:
+                max_len = len(U2MultiV[u])
+                keep_len = min(max_len,max_num_vehicles)
+                U2MultiV[u] = [int(v) for v in U2MultiV[u][:keep_len] ]
+                v_in_space.extend(U2MultiV[u])
         V2MultiU = step_uv["V2MultiU"]
         decision_space_prompt = \
 f"""Now you get the decision space for the current step. The decision space is represented as a dictionary, where the key is the `request id` and the value is a list of `taxi id` that can be assigned to the request.
@@ -84,14 +85,22 @@ Please use the appropriate tools to assign each passenger request to a single ta
                 requests_dict[int(requests[i].id)] = {"origin": requests[i].pickup_position,
                                                       "destination": requests[i].dropoff_position}
             vehicles_dict = {}
-            for i in range(len(vehicles[:num_vehicles])):
-                vehicles_dict[int(vehicles[i].id)] = vehicles[i].current_position
-                if i > num_vehicles:
-                    break
+            if self.dev:
+                for i in range(len(vehicles[:num_vehicles])):
+                    vehicles_dict[int(vehicles[i].id)] = vehicles[i].current_position
+                    if i > num_vehicles:
+                        break
             UV_loc_string = f"""Now you get the positions for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:
         {dict_to_str(requests_dict)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
         {dict_to_str(vehicles_dict)}\t,where `key` is the `taxi id`, and `value` represents the current position and assigned requests on this vehicles.
     Please use the appropriate tools to assign each request to a single taxi reasonably.\n"""
             return UV_loc_string
+
+    def present_helper_prompt(self,helper,help_note=None):
+        UV_loc_string = f"""To help you make a decision, the distance information for mentioned locations are as follows:
+            {dict_to_str(helper)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:"""
+        
+        
+
 
 
