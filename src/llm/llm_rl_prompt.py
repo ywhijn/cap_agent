@@ -4,20 +4,47 @@
 @Description: Agent Tools Prompts
 @LastEditTime: 2024-01-06 20:26:05
 '''
+AGENT_MESSAGE_TOOL = \
+"""{uv_pairs}
+{decision_space}
+To distribute the requests to taxi services, you must follow the given rules:
+{rules}
+Let's take a deep breath and think step by step.
+Once you have made all of final decision, you must output them in the following format: \n
+{output_format}
+"""
 AGENT_MESSAGE = \
 """{uv_pairs}
 {decision_space}
-To do this, you must follow the given rules:
-1. Don't finish the task until you have a final answer. You must output a list of decision when you finish this task.
-2. You can only use tools mentioned to help you make decision. Don't fabricate any other tool name not mentioned.
-3. Remember what tools you have used, you can use same tool to solve the problems of identical property.
-4. If all of the taxi drivers are not available or too far away from the certain passenger, you must assign the passenger to dirver id '-1', which means the order is not assigned to any taxi driver. 
-5. Output the list of passenger assignment decision in order of the given passenger request before. 
-6. If the assignment decision is too obvious, such as only one candidate taxi id is in a passengers' options, you can directly assign the driver to the passenger without using any tool.
-Let's take a deep breath and think step by step.
-Once you made a final decision, output it in the following format: \n
-{output_format}
+You must follow the rules:
+{rules}
+Please assign taxi drivers to passengers according to the given rules and information. 
+Provide your response only in the following format for each assignment without extra words:
+
+u_ID: Passenger ID
+v_ID: Driver ID
+reason: Brief explanation for this assignment
+
+
+Make sure to provide an assignment for each passenger if possible. Separate each assignment with a blank line.
 """
+
+BASIC_rules={
+"Constrain": "Each taxi driver can only take one passenger at a time, and each passenger can only be assigned to at most one taxi driver.",
+"CoT":"Let's take a deep breath and think step by step.",
+"complete_rule":
+"Don't finish the task until you have a final answer. Make sure you have considered all the given information.",
+"output_rule":
+"You must output a list of assignment decision and reasons in order of the given passenger requests.",
+"failed_request_handling":
+"If all of the taxi drivers are not available or too far away from certain passenger, you must assign the passenger to a special taxi id -1, which means the order is NOT assigned to any taxi driver. "
+}
+TOOL_rule={
+"fix_tools": "You can only use tools mentioned to help you make decision. Don't fabricate any other tool name not mentioned.",
+"remeber_tools": "Remember what tools you have used, you can use same tool to solve the problems of identical property.",
+"easy_tool" : "If the assignment decision is too obvious, such as only one candidate taxi id is in a passengers' options, you can directly assign the driver to the passenger without using any tool."
+}
+
 
 output_format="""
 Once you made a final decision, output it in the following format: \n
@@ -30,7 +57,10 @@ Final Answer:
 # AGENT_MESSAGE = """As the 'traffic signal light', you are tasked with controlling the traffic signal at an intersection. You've been in control for {sim_step} seconds. The last decision you made was {last_step_action}, with the explanation {last_step_explanation}. Now, you need to assess the current situation and make a decision for the next step.
 #
 # To do this, you must describe the Static State and Dynamic State of the traffic light, including the Intersection Layout, Signal Phase Structure, and Current Occupancy. Determine if you are facing a long-tail problem, such as the presence of an ambulance, impassable movements or the detectors are not work well.
-#
+## The decision space for passenger requests is as follows:
+# {dict_to_str(U2MultiV)}"""
+#         if len(V2MultiU)<2:
+#             decision_space_prompt += f"""
 # If it's a standard situation, refer to the Traditional Decision and justify your decision based on the observed scene. If it's a long-tail scenario, analyze the possible actions, make a judgment, and output your decision.
 #
 # Remember to prioritize public transportation and emergency vehicles, follow the signal phase durations, and do not give a green light to impassable movements.
@@ -78,13 +108,15 @@ Observation: the result of the action
 ... (this Thought/Action/Observation can repeat N times)
 """
 
-SYSTEM_MESSAGE_PREFIX = """You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
+SYSTEM_MESSAGE_PREFIX_TOOL = """You are a mature taxi manager for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios. 
 
 TOOLS:
 ------
 You have access to the following tools:
 """
-
+# SYSTEM_MESSAGE_PREFIX = """You are a super decision-maker for vehicle dispatch and passenger assignment, who can give reasonable and efficient advice to taxi drivers in complex traffic scenarios.
+# """
+SYSTEM_MESSAGE_PREFIX = "You are an AI assistant tasked with assigning taxi drivers to passengers, who can explore more information to do more clever decision. "
 SYSTEM_MESSAGE_SUFFIX = """
 The taxi assignment control task usually involves many steps. You can break this task down into subtasks and complete them one by one. 
 There is no rush to give a final answer unless you are confident that the answer is correct.

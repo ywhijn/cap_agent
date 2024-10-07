@@ -14,7 +14,8 @@
 '''
 import argparse
 import langchain
-
+from src.llm.llm_rl_prompt import (
+    SYSTEM_MESSAGE_PREFIX, AGENT_MESSAGE, BASIC_rules)
 import numpy as np
 from src.test_env_api import getDemandNeed,implement_action,reset_env,getDemandNeed_dis,decide_multiV_singleU,test_finish
 from langchain.chat_models import ChatOpenAI
@@ -26,8 +27,10 @@ from src.llm.output_parse import OutputParse
 from src.llm.LLM_options import LLMOptions, cfg
 from src.llm.custom_tools import dict_to_str
 from src.llm.env_centor import EnvCentor
-from src.llm.graph_construct import construct_simpleTool
-from langchain_core.messages import AIMessage,ToolMessage
+from src.llm.graph_construct import construct_simpleTool,construct_noTool
+from langchain_core.messages import AIMessage, ToolMessage, HumanMessage
+from langchain_core.prompts import ChatPromptTemplate,PromptTemplate,MessagesPlaceholder
+
 from src.llm.tools.cls_tools import POIbyLocation #, # GetDistanceTimeByID,GetDistanceTimeByPos,GetDistanceTimeByPos_Debug
 from src.llm.tools.tools import get_distance_time_between_positions
 from src import test_env_api
@@ -80,9 +83,13 @@ class AgentSystem:
     def initialize_agent(self,name="taxi"):
         if name=="taxi":
             self.agent = TaxiAgent(env=self.env, llm=self.chat, tools=self.complex_tools, cfg=self.cfg, verbose=True)
+            self.chain = self.agent.create_tool_agent(self.complex_tools)
         elif name=="compiler":
             self.agent = CompilerAgent(env=self.env, llm=self.chat, tools=self.tools, verbose=True)
-        return self.agent
+        elif name=="simple":
+            self.agent = TaxiAgent(env=self.env, llm=self.chat, tools=self.complex_tools, cfg=self.cfg, verbose=True)
+            self.chain = self.agent.create_noTool_chain()
+        return self.chain
     # req_dict={requests[i].id: {"origin":requests[i].pickup_position,"destination":requests[i].dropoff_position}}         previous_occupancy = self.env.getUV_loc()
     def getUV_loc_prompt(self,requests,vehicles,num_vehicles=20):
         requests_dict = {}
@@ -102,7 +109,7 @@ Please use the appropriate tools to assign each request to a single taxi reasona
         return self.o_parse.parser_output(output)
 
     def test_agent(self):
-        from langchain_core.messages import HumanMessage
+
         app = construct_simpleTool(self.env,self.chat)
         test_masg = "The location of passenger: id 1  [104.0412682, 30.6669185], id 3 [104.1438647, 30.6276377] . Given place 3 [104.0562247, 30.6223237] and place 4 [104.0566995, 30.6722262],  please select the closest place to the these passengers."
         inputs = {"messages": [HumanMessage(content=test_masg)]}
@@ -136,7 +143,7 @@ Please use the appropriate tools to assign each request to a single taxi reasona
         present_decision_space_prompt, V_space = self.env.present_decision_space_prompt(step, max_num_vehicles=3)
         basic_uv_prompt, Vinfo = self.env.present_UV_prompt(step, V_space, max_num_vehicles=1)
         # get_distance_time_tool = GetDistanceTimeByPos_Debug()
-        custom_message = agent.input_format(basic_uv_prompt, present_decision_space_prompt)
+        custom_message = self.agent.input_format(basic_uv_prompt, present_decision_space_prompt)
         # tools=[get_distance_time_tool]
         tools = [get_distance_time_between_positions]
         tool_node = ToolNode(tools)
@@ -197,7 +204,13 @@ Please use the appropriate tools to assign each request to a single taxi reasona
         print(toolargs)
         msg= tool_node.invoke({"messages": [model_with_tools.invoke("what's the weather in francisco?")]})
         print(msg)
-
+    def validate_output(self, pairs, expected_output=None):
+        u_ids = set()
+        for pair in pairs:
+            if pair[0] not in u_ids:
+                u_ids.add(pair[0])
+            else:
+                raise ValueError("Duplicate U id in pairs")
 
 # def test_random_multi():
 #     for i in range(300):
@@ -208,6 +221,7 @@ Please use the appropriate tools to assign each request to a single taxi reasona
 #             pair = decide_multiV_singleU(u_id, v_ids)
 #             pairs.append(pair)
 #         implement_action(pairs)
+
 def simple_demand():
     system = AgentSystem(cfg=cfg, env=None)
 
@@ -243,34 +257,71 @@ def simple_demand():
 def dis_demand():
     system = AgentSystem(cfg=cfg, env=None)
 
-    agent = system.initialize_agent(name="taxi")
+    chain = system.initialize_agent(name="simple")
     # system.test_agent()
     # a=agentsystem.initialize_agent(name="compiler")
     # a.test_multi_hop(a.graph)
-
-    for step in range(300):
+    sys_prompt=ChatPromptTemplate.from_messages(
+        [("system", SYSTEM_MESSAGE_PREFIX),
+         ("placeholder", "{chat_history}")])
+    prompt_template = PromptTemplate.from_template(AGENT_MESSAGE)
+    # app = construct_noTool(sys_prompt, env=system.env, chat=system.chat)
+    for step in range(3):
         uv_json = getDemandNeed_dis()
 
         Uinfo, Vinfo, U2MultiV, V2MultiU, DisHelp = uv_json["Passengers"], uv_json["Taxis"], uv_json["U2MultiV"], \
                                                     uv_json["V2MultiU"], uv_json["DisHelp"]
         system.env.store_UV(step, Uinfo, Vinfo, U2MultiV, V2MultiU)
-        present_decision_space_prompt, V_space = system.env.present_decision_space_prompt(step, max_num_vehicles=6)
+        decision_space_prompt, V_space = system.env.present_decision_space_prompt(step, max_num_vehicles=6)
         basic_uv_prompt, Vinfo = system.env.present_UV_prompt(step, V_space, max_num_vehicles=3)
-        pairs = []
-        if len(U2MultiV) ==0:
-            print("No demand")
-            implement_action(pairs)
-            continue
-        print(basic_uv_prompt)
+        action_pairs = []
+        reasons = []
 
+        # rules = [BASIC_rules["complete_rule"], BASIC_rules["failed_request_handling"],
+        #          BASIC_rules["output_rule"], ]  # TODO CoT
+        # rule_prompt = ""
+        # for i, rule in enumerate(rules):
+        #     rule_prompt += f"{i + 1}. {rule}\n"
+        #
+        # custom_message = prompt_template.format(
+        #     uv_pairs=basic_uv_prompt,
+        #     decision_space=decision_space_prompt,
+        #     rules=rule_prompt
+        # )
+        # inputs = {
+        #             "messages": [ HumanMessage(content=custom_message) ]
+        #           }
+
+        #
+        # if len(U2MultiV) ==0:
+        #     print("No demand")
+        #     implement_action(action_pairs)
+        #     continue
+        #
+        #
+        # for output in app.stream(inputs, stream_mode="values"):
+        #     last_msg = output["messages"][-1]
+        #     if last_msg is AIMessage and last_msg.tool_calls:
+        #         if last_msg.tool_calls[0]["name"] == "DecisionPair":
+        #             for call in last_msg.tool_calls:
+        #                 if call["name"] == "DecisionPair":
+        #                     args = call["args"]
+        #                     u, v,r = args["u_id"], args["v_id"],args["reason"]
+        #                     if v==-1 or u==-1:
+        #                         print("!!!!!!!!!! U V -1 !!!!!!!!")
+        #                         continue
+        #
+        #                     action_pairs.append((int(u), int(v)))
+        #                     reasons.append(r)
+        # final_state = app.invoke(inputs)
+
+
+        action_pairs, reasons = system.agent.run_noTool_agent(chain, basic_uv_prompt, decision_space_prompt)
         help_info = system.env.present_helper_prompt(DisHelp)
-        for u_id, v_ids in U2MultiV.items():
-            if len(v_ids) == 0:
-                continue # TODO what to do in the implementation?
-            pair = decide_multiV_singleU(u_id, v_ids)
-            pairs.append(pair)
         # res = agent.agent_run(basic_uv_prompt, present_decision_space_prompt)
-        implement_action(pairs)
+        # print("Reasons: ", reasons)
+        system.validate_output(action_pairs)
+        implement_action(action_pairs)
     print(test_finish())
 
 if __name__ == "__main__":

@@ -50,7 +50,8 @@ class SingleLineKeyJSONEncoder(json.JSONEncoder):
 class TrackerSystem:
     def __init__(self, cfg,environment,
                 current_timepoint,
-                step_time):
+                step_time,
+                 logger=None):
         self.track_vehicle_dict={}
         self.solo_id=[]
         self.pooled_id=None
@@ -78,6 +79,8 @@ class TrackerSystem:
         self.STEP_STATE_JSON_FILE = os.path.join(STEP_STATE_DIR, "steps.json")
         self.STEP_U_JSON_FILE = os.path.join(STEP_STATE_DIR, "user.json")
         self.STEP_V_JSON_FILE = os.path.join(STEP_STATE_DIR, "vehicle.json")
+        self.logger = logger
+        
     def save_cache(self, cache,type):
         if type=="u":
             self.write_log(self.STEP_U_JSON_FILE, cache, cache["id"])
@@ -105,7 +108,7 @@ class TrackerSystem:
         return cache
     def get_state_text(self,u):
         id2state = {
-            0: "searching for available vehicles",
+            0: "searching for an available vehicle",
             1: "assigned, waiting for pickup at origin",
             2: "picked up, waiting for arrival at destination",
             3: "dropped off and finished"
@@ -158,17 +161,17 @@ class TrackerSystem:
         V2MultiU_to_decide = {}
         for u in U2MultiV.keys():
             if len(U2MultiV[u]) > 0:
-                print("u: ",u, "is scanned by vehicles:",U2MultiV[u])
+                self.logger.info(f"u: {u} is scanned by vehicles: {U2MultiV[u]}")
                 U2MultiV_to_decide[u] = len(U2MultiV[u])
             else:
-                print("u: ",u, "is NOT scanned by any vehicle")
+                self.logger.info(f"u: {u} is NOT scanned by any vehicle")
         for v in V2MultiU.keys():
             if len(V2MultiU[v]) > 1:
-                print("v: ",v, "has scanned requests:",V2MultiU[v])
+                self.logger.info(f"v: {v} has scanned requests: {V2MultiU[v]}")
                 V2MultiU_to_decide[v] = len(V2MultiU[v])
 
         if len(U2MultiV_to_decide) < 1 :
-            print(f"!!!NO TRIP FEASIBLE!!! CUR REQUESTS: {len(control_center.requests_step)}")
+            self.logger.info(f"!!!NO TRIP FEASIBLE!!! CUR REQUESTS: {len(control_center.requests_step)}")
             self.empty_decision[control_center.step] = len(control_center.requests_step)
 
     def log_pooling(self,control_center, v, u_id):   # TODO POOLed log to generate complex decision situation
@@ -190,43 +193,43 @@ class TrackerSystem:
 
         count_num = assigned_req_num_by_car - excluded_req_num
         if  u_id_in_v and assigned_req_num_by_car==2:  # u_id assigened to v, and v has another request
-            print("***ALREADY POOLed***")
+            self.logger.info("***ALREADY POOLed***")
             if len(v_cur_reqs) > 0:
-                print(f"\tCurrent requests: {v_cur_reqs}")
+                self.logger.info(f"\tCurrent requests: {v_cur_reqs}")
             if len(v_next_reqs) > 0:
-                print(f"\tNext requests: {v_next_reqs}")
+                self.logger.info(f"\tNext requests: {v_next_reqs}")
             return True
         if assigned_req_num_by_car == 1 and u_id_in_v:  # u_id assigened to v, no other request
-            print("***FINDING POOL***")
+            self.logger.info("***FINDING POOL***")
             if len(v_cur_reqs) > 0:
-                print(f"\tCurrent requests: {v_cur_reqs}")
+                self.logger.info(f"\tCurrent requests: {v_cur_reqs}")
             if len(v_next_reqs) > 0:
-                print(f"\tNext requests: {v_next_reqs}")
+                self.logger.info(f"\tNext requests: {v_next_reqs}")
             return False
         if u_id_in_v == False:  # u_id not assigned to v
-            print("***SOLO***")
+            self.logger.info("***SOLO***")
             if len(v_cur_reqs) > 0:
-                print(f"\tCurrent requests: {v_cur_reqs}")
+                self.logger.info(f"\tCurrent requests: {v_cur_reqs}")
             if len(v_next_reqs) > 0:
-                print(f"\tNext requests: {v_next_reqs}")
-            print(f"\tAssigned requests num: {assigned_req_num_by_car}")
+                self.logger.info(f"\tNext requests: {v_next_reqs}")
+            self.logger.info(f"\tAssigned requests num: {assigned_req_num_by_car}")
             return False
     def log_multi_trips(self,control_center, uv_decision_pair, UV2trip_id,id_to_trip):
-        print(f"??????\tChooseTripsbyPairs\tuv pair {uv_decision_pair} has more trips: ")
+        self.logger.info(f"??????\tChooseTripsbyPairs\tuv pair {uv_decision_pair} has more trips: ")
         v = control_center.vehicles_all[uv_decision_pair[1]]
         self.log_pooling(control_center, v, -1)
         for trip_id in UV2trip_id[uv_decision_pair]:
             tem_req_ids = [int(req.id) for req in id_to_trip[trip_id].requests]
-            print(f"trip_id: {trip_id}, requests: {tem_req_ids}")
-        print("??????")
+            self.logger.info(f"trip_id: {trip_id}, requests: {tem_req_ids}")
+        self.logger.info("??????")
 
     def flow_track(self,control_center):
-        print("===============================================================")
-        print(f"STEP {control_center.step}, num cumulated requests: {len(control_center.cur_step_states['requests_step_dict'])}")
-        print("===============================================================")
+        self.logger.info("===============================================================")
+        self.logger.info(f"STEP {control_center.step}, num cumulated requests: {len(control_center.cur_step_states['requests_step_dict'])}")
+        self.logger.info("===============================================================")
         for u_id, u_i in control_center.cur_step_states["requests_step_dict"].items():
             state = self.get_state(u_i)
-            print(f"_______________FOR U_ID {u_id} ____STATE : {state} ")
+            self.logger.info(f"_______________FOR U_ID {u_id} ____STATE : {state} ")
             self.step_u[u_id]["id"] = u_id
             if state == "waiting" :
                 if "waiting_step" not in self.step_u[u_id]:
@@ -248,10 +251,10 @@ class TrackerSystem:
                     v = control_center.vehicles_all[u_i.vehicle_id] #
                     v.id = int(v.id)
                     self.log_pathed(control_center, u_i, v)
-                    print(f"Assigned Vehicle {int(v.id)} gone {len(self.V_pathed_after_assigned[v.id][u_i.id])} step",)
+                    self.logger.info(f"Assigned Vehicle {int(v.id)} gone {len(self.V_pathed_after_assigned[v.id][u_i.id])} step",)
                     self.log_pooling(control_center, v, u_id)
                 else:
-                    print("Not waiting but No vehicle assigned")
+                    self.logger.info("Not waiting but No vehicle assigned")
 
     def u2dict(self,u):
 
@@ -298,7 +301,7 @@ class TrackerSystem:
         req_id_set = set()
         for req in requests:
             if req.id in req_id_set:
-                print(f'the request {req.id} is repeated in the requests')
+                self.logger.info(f'the request {req.id} is repeated in the requests')
             else:
                 req_id_set.add(req.id)
     def fill_step_requests_id(self,requests_step,step=None):
@@ -308,7 +311,7 @@ class TrackerSystem:
         # for req in requests_step:
         #     if req.id in repeated_reqs:
         #         if req == repeated_reqs[req.id] or req.pickup_position == repeated_reqs[req.id].pickup_position:
-        #             print(f'the request {req.id} is repeated in the step requests')
+        #             self.logger.info(f'the request {req.id} is repeated in the step requests')
         #     else:
         #         repeated_reqs[req.id] = req
         # return
@@ -339,21 +342,21 @@ class TrackerSystem:
                 failed_num += 1
                 self.fail_feasible.append((v,scaned_reqs))
 
-                # print(f'the vehicle {v.id} has {len(scaned_reqs)} requests and has failed to match feasible trips')
+                # self.logger.info(f'the vehicle {v.id} has {len(scaned_reqs)} requests and has failed to match feasible trips')
             self.check_pooled_vehicle(v, trips)
-        # print(f' the number of vehicles that failed to match feasible trips is {failed_num}')
+        # self.logger.info(f' the number of vehicles that failed to match feasible trips is {failed_num}')
 
     def check_repeated_req(self,final_trips, final_paths):
         req_id_set= set()
         for trip, path in zip(final_trips, final_paths):
             for req in trip.requests:
                 if req.id in req_id_set:
-                    print(f'the request {req.id} is repeated in the final trips')
+                    self.logger.info(f'the request {req.id} is repeated in the final trips')
                     #save the repeated request into a text file
 
                 else:
                     req_id_set.add(req.id)
-        # print(f' the number of STEP requests is {len(self.step_requests_id)}')
+        # self.logger.info(f' the number of STEP requests is {len(self.step_requests_id)}')
     # visual vehicle has feasible trips but failed to match final trips, providing the failure and success position map
     def compare_feasible_final(self,final_trips,vehicles_all,scored_feasible_trips):
         if not TESTING:
@@ -361,11 +364,11 @@ class TrackerSystem:
         for trip, scored_trips, v in zip(final_trips, scored_feasible_trips,vehicles_all):
             reqs_assigned_vehicle = len(v.current_requests) + len(v.next_requests)
             if reqs_assigned_vehicle > 0 and len(scored_trips) < 1:
-                print(f' the vehicle {v.id} has assigned {len(trip.requests)} requests but failed a scanned request')
+                self.logger.info(f' the vehicle {v.id} has assigned {len(trip.requests)} requests but failed a scanned request')
 
             if len(scored_trips) > 1 and len(trip.requests) < 1:
 
-                print(f' the vehicle {v.id} has {len(scored_trips)} requests but failed to match a final trip')
+                self.logger.info(f' the vehicle {v.id} has {len(scored_trips)} requests but failed to match a final trip')
 
     # def check_stages_diff(self, vehicle):
 
@@ -379,7 +382,7 @@ class TrackerSystem:
         #     self.solo_id.append(list(self.track_vehicle_dict.keys())[0])
     def check_pooled_vehicle(self, chosen_v, trips):
         if (len(chosen_v.current_requests) + len(chosen_v.next_requests)) > 1 or len(trips) > 2:
-            print(f'the vehicle {chosen_v.id} has {len(trips)} requests ')
+            self.logger.info(f'the vehicle {chosen_v.id} has {len(trips)} requests ')
             self.set_track(chosen_v)
         elif (len(chosen_v.current_requests) + len(chosen_v.next_requests)) == 0:
             self.delete_track(chosen_v)
@@ -397,7 +400,7 @@ class TrackerSystem:
 
                 pooled_trips=trips[index]
 
-                print(f'the vehicle {chosen_v.id} has {len(pooled_trips)} requests ')
+                self.logger.info(f'the vehicle {chosen_v.id} has {len(pooled_trips)} requests ')
                 self.track_vehicle_dict[chosen_v.id] = chosen_v
         return pooled_vehicles
 
@@ -405,7 +408,7 @@ class TrackerSystem:
         if not TESTING:
             return
         if self.pooled_id is not None:
-            print(f'{step} DRAWING the pooled vehicle {self.pooled_id}')
+            self.logger.info(f'{step} DRAWING the pooled vehicle {self.pooled_id}')
             fig_aspect_ratio = control_center.FigAspectRatio()
             fig = plt.figure(figsize=(15/fig_aspect_ratio*1.2,15), dpi=100)
             ax = fig.add_subplot(111)

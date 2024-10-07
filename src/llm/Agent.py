@@ -15,35 +15,58 @@ from .get_abs_path import get_abs_path
 from .callback_handler import create_file_callback
 from .llm_rl_prompt import (
     SYSTEM_MESSAGE_PREFIX,
+SYSTEM_MESSAGE_PREFIX_TOOL,
     SYSTEM_MESSAGE_SUFFIX,
     HUMAN_MESSAGE,
-    AGENT_MESSAGE
+    AGENT_MESSAGE,
+AGENT_MESSAGE_TOOL,
+    BASIC_rules,
+TOOL_rule,
+
 )
+from langchain.memory import ConversationBufferMemory
 from langchain.chains.openai_functions import create_structured_output_runnable
 from langchain.output_parsers import PydanticOutputParser
 from langchain import hub
 from langchain_core.messages import (
-    HumanMessage,
+    HumanMessage, SystemMessage,
 )
-from langchain_core.prompts import ChatPromptTemplate
-from langchain.agents import AgentExecutor, create_react_agent
+from langchain_core.prompts import ChatPromptTemplate,PromptTemplate,MessagesPlaceholder,HumanMessagePromptTemplate
+from langchain.agents import AgentExecutor, create_react_agent,LLMSingleActionAgent
 from langchain_openai import ChatOpenAI
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langgraph.graph import END
 from pydantic import BaseModel, Field
 class DecisionPair(BaseModel):
-    u_id: int = Field(description="id of the passenger")
-    v_id: int = Field(description="id of the taxi driver")
+    """Final response to the user's question"""
+    u_ID: int = Field(description="Passenger ID")
+    v_ID: int = Field(description="Driver ID")
+    reason: str = Field(description="Brief explanation for this assignment")
 class ActionPairs(BaseModel):
     decisions: List[DecisionPair] = Field(
-        description= "list of assignment decision pairs, each of which indicates the request (u_id) from a passenger is assigned to a taxi driver (v_id)"
+        description= "list of assignment decision pairs," # each of which indicates the request (u_id) from a passenger is assigned to a taxi driver (v_id)"
     )
+import re
+from typing import List, Tuple
 
-# response_schemas = [
-#     ResponseSchema(name="answer", description="answer to the user's question"),
-#     ResponseSchema(name="source", description="source used to answer the user's question, should be a website.")
-# ]
-# output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+
+def parse_decisions(response: str) -> Tuple[List[Tuple[int, int]], List[str]]:
+    action_pairs = []
+    reasons = []
+
+    # 使用更灵活的正则表达式来匹配不同的格式
+    pattern = r'u_?[Ii][Dd]:\s*(\d+)\s*v_?[Ii][Dd]:\s*(\d+)\s*reason:\s*(.*?)(?=\nu_?[Ii][Dd]:|$)'
+    matches = re.findall(pattern, response, re.DOTALL | re.IGNORECASE)
+
+    for match in matches:
+        u_id, v_id, reason = match
+        pair = (int(u_id), int(v_id))
+        action_pairs.append(pair)
+        reasons.append(reason.strip())
+    print("action_pairs", action_pairs)
+    print("reasons", reasons)
+    return action_pairs, reasons
+
 
 
 class TaxiAgent:
@@ -71,7 +94,7 @@ class TaxiAgent:
         #     self.tools.append(
         #         Tool(name=func.name, description=func.description, func=func)
         #     )
-        prompt = ChatPromptTemplate.from_messages(
+        self.prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", SYSTEM_MESSAGE_PREFIX),
                 ("placeholder", "{chat_history}"),
@@ -83,10 +106,16 @@ class TaxiAgent:
             llm=self.llm,
         )
         self.action_output_parser = PydanticOutputParser(pydantic_object=ActionPairs)
+
+        response_schemas = [
+            ResponseSchema(name="answer", description="answer to the user's question"),
+            ResponseSchema(name="source", description="source used to answer the user's question, should be a website.")
+        ]
+        output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+
         self.output_format_prompt = self.action_output_parser.get_format_instructions()
         # self.agent = create_tool_calling_agent(llm, tools, prompt)
-        self.agent = create_tool_calling_agent(llm, tools, prompt=prompt)
-        self.agent_executor = AgentExecutor(agent=self.agent, tools=tools, verbose=True)
+
         # self.agent = initialize_agent(
         #     tools=self.tools,
         #     llm=self.llm,
@@ -103,7 +132,121 @@ class TaxiAgent:
         #     max_iterations=4,
         #     early_stopping_method="generate",
         # )
+    def create_tool_agent(self,tools):
+        "https://python.langchain.com/v0.1/docs/modules/agents/how_to/agent_structured/"
+        prompt =self.prompt
+        self.agent = create_tool_calling_agent(self.llm, tools, prompt=prompt)
+        self.agent_executor = AgentExecutor(agent=self.agent, tools=tools, verbose=True)
+    def create_noTool_chain(self):
 
+
+        prompt = ChatPromptTemplate(messages = [
+                ("system", SYSTEM_MESSAGE_PREFIX),
+                # ("placeholder", "{chat_history}"),
+                ("human", "{input}"),])
+                # ("placeholder", "{agent_scratchpad}"),
+            # ],partial_variables={"format_instructions": self.action_output_parser})
+        # MessagesPlaceholder(variable_name="agent_scratchpad")
+        # prompt = prompt.from_messages( )
+        # self.agent = create_react_agent(self.llm, prompt=prompt)
+        # self.agent = create_tool_calling_agent(self.llm
+        chain = prompt | self.llm  ## 无法解析列表
+        return chain
+    def create_noTool_agent(self):
+        prompt = ChatPromptTemplate(messages = [
+                ("system", SYSTEM_MESSAGE_PREFIX),
+                # ("placeholder", "{chat_history}"),
+                ("human", "{input}"),
+                # ("placeholder", "{agent_scratchpad}"),
+            ],partial_variables={"format_instructions": self.action_output_parser})
+
+        # # MessagesPlaceholder(variable_name="agent_scratchpad"),
+        # # prompt = prompt.from_messages( )
+        # # self.agent = create_react_agent(self.llm, prompt=prompt)
+        # chain = prompt | self.llm | self.action_output_parser  ## 无法解析列表
+        #
+        # return chain
+        sys_prompt = ChatPromptTemplate.from_messages([
+            SystemMessage(content=SYSTEM_MESSAGE_PREFIX),
+            HumanMessagePromptTemplate.from_template(AGENT_MESSAGE)
+        ])
+
+        agent = LLMSingleActionAgent(
+            llm_chain=self.llm,
+            prompt=sys_prompt,
+            output_parser=self.action_output_parser,
+            stop=["\nHuman:"],
+            allowed_tools=[],
+            verbose=True
+        )
+
+        agent_executor = AgentExecutor.from_agent_and_tools(
+            agent=agent,
+            tools=[],
+            verbose=True,
+            memory=ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        )
+        return agent_executor
+
+    def run_noTool_agent(self, agent,basic_uv_prompt,decision_space_prompt):
+        prompt_template = PromptTemplate.from_template(AGENT_MESSAGE)
+        rules=[BASIC_rules["complete_rule"],BASIC_rules["failed_request_handling"],BASIC_rules["output_rule"],] # TODO CoT
+        rule_prompt = ""
+        for i,rule in enumerate(rules):
+            rule_prompt += f"{i+1}. {rule}\n"
+
+        custom_message = prompt_template.format(
+            uv_pairs=basic_uv_prompt,
+            decision_space=decision_space_prompt,
+            rules=rule_prompt,
+            # output_format=self.output_format_prompt,
+        )
+        # input_variables = {
+        #     "uv_pairs": basic_uv_prompt,
+        #     "decision_space": decision_space_prompt,
+        #     "rules": rule_prompt
+        # }
+
+        # llm_response = agent.run(input_variables)
+        # print("AGENT prompt")
+        # for message in custom_message:
+        #     print(message.content)
+        # print("AGENT RUN")
+        llm_response = agent.invoke({
+            "input": custom_message
+        })
+        # decision_texts = llm_response.split("\n\n")
+        decisions = []
+        fres = llm_response.content
+        return parse_decisions  (fres)
+        #     try:
+        #         decision = self.action_output_parser.parse(decision_text)
+        #         decisions.append(decision)
+        #     except Exception as e:
+        #         print(f"Error parsing decision: {e}")
+        #         print("Raw decision text:", decision_text)
+        # action_pairs = []
+        # reasons = []
+        # for decision in decisions:
+        #     print(f"Passenger {decision.u_id} assigned to Driver {decision.v_id}")
+        #     print(f"Reason: {decision.reason}\n")
+        #     pair = (int(decision.u_id), int(decision.v_id))
+        #     reasons.append(decision.reason)
+        #     action_pairs.append(pair)
+        # return action_pairs,reasons
+        # print("parsing response")
+        # action_pairs = []
+        # reasons = []
+        # for message in llm_response:
+        #     print(message.content)
+        #     pair=(int(message.u_id),int(message.v_id))
+        #     reasons.append(message.reason)
+        #     action_pairs.append(pair)
+        # return action_pairs, reasons
+
+
+
+        # self.agent_executor = AgentExecutor(agent=self.agent, tools=[], verbose=True)
     def input_format(self, basic_uv_prompt,present_decision_space_prompt):
         """Agent Run
         """

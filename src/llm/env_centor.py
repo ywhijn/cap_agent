@@ -47,12 +47,12 @@ class EnvCentor:
         Uinfo = step_uv["Uinfo"]
         Vinfo = step_uv["Vinfo"]
         # shorten the length of the vehicle list
-        Vinfo = {k: Vinfo[str(k)] for k in V_space}
-        basic_uv_prompt = f"""Now you get the basic information for passenger requests and taxi vehicles, respectively. Their positions are represented as [longitude, latitude].\nThe passenger requests are as follows:
-{dict_to_str(Uinfo)}\t,where the key is the `request id`, and its value represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
-{dict_to_str(Vinfo)}\t,where the key is the `taxi id`, and its value represents the taxi's current position and any already assigned passenger on it.
-Please refer these information to make a accurate decision.\n"""
-
+        if self.dev:
+            Vinfo = {k: Vinfo[str(k)] for k in V_space}
+        basic_uv_prompt = f"""At step {step}, Now you get the basic information for passenger requests and taxi vehicles, respectively. Their positions are represented as [longitude, latitude].\nThe passenger requests are as follows:
+{dict_to_str(Uinfo)}\t, where `key` is the `passenger ID`, and `distance_to_taxis` field with 'taxi ID: distance' dict represents the estimated distance to the taxi vehicles in the decision space.\nThe taxi vehicles are as follows:
+{dict_to_str(Vinfo)}\t,where the key is the `taxi ID`, and its value represents the taxi's current position and any already assigned passenger on it."""
+# Please refer these information to make a accurate decision.\n"""
         # print(basic_uv_prompt)
         return basic_uv_prompt,Vinfo
     def present_decision_space_prompt(self,step,max_num_vehicles=6):
@@ -68,14 +68,9 @@ Please refer these information to make a accurate decision.\n"""
                 v_in_space.extend(U2MultiV[u])
         V2MultiU = step_uv["V2MultiU"]
         decision_space_prompt = \
-f"""Now you get the decision space for the current step. The decision space is represented as a dictionary, where the key is the `request id` and the value is a list of `taxi id` that can be assigned to the request.
-The decision space for passenger requests is as follows:
-{dict_to_str(U2MultiV)}"""
-        if len(V2MultiU)<2:
-            decision_space_prompt += f"""
-The decision space for taxi vehicles is as follows:
-{dict_to_str(V2MultiU)}
-Please use the appropriate tools to assign each passenger request to a single taxi reasonably.\n"""
+f"""For the current step, you get the decision space for taxis, where the key is the `taxi ID` and the value is possibly a list of `passenger ID` scanned by the taxi.
+{dict_to_str(V2MultiU)}"""
+# Please use the appropriate tools to assign each passenger passenger to a single taxi reasonably.\n"""
 
         # print(decision_space_prompt)
         return decision_space_prompt, list(set(v_in_space))
@@ -91,15 +86,18 @@ Please use the appropriate tools to assign each passenger request to a single ta
                     if i > num_vehicles:
                         break
             UV_loc_string = f"""Now you get the positions for passenger requests and taxi vehicles, respectively. Every position is represented as [longitude, latitude].\nThe passenger requests are as follows:
-        {dict_to_str(requests_dict)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
-        {dict_to_str(vehicles_dict)}\t,where `key` is the `taxi id`, and `value` represents the current position and assigned requests on this vehicles.
-    Please use the appropriate tools to assign each request to a single taxi reasonably.\n"""
+        {dict_to_str(requests_dict)}\t,where `key` is the `passenger ID`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
+        {dict_to_str(vehicles_dict)}\t,where `key` is the `taxi ID`, and `value` represents the current position and assigned requests on this vehicles.
+    Please use the appropriate tools to assign each passenger to a single taxi reasonably.\n"""
             return UV_loc_string
 
     def present_helper_prompt(self,helper,help_note=None):
         UV_loc_string = f"""To help you make a decision, the distance information for mentioned locations are as follows:
-            {dict_to_str(helper)}\t,where `key` is the `request id`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:"""
-        
+            {dict_to_str(helper)}\t,where `key` is the `Passenger ID`, and `value` represents its ideal pickup position and drop-off position.\nThe taxi vehicles are as follows:
+            {dict_to_str}\t,where `key` is the `taxi ID`, and `value` represents the current position and assigned requests on this vehicles.
+        Please use the appropriate tools to assign each passenger to a single taxi reasonably.\n"""
+        if help_note is None:
+            help_note = f"""The helper function is as follows:"""
         
 
 

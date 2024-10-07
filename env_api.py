@@ -84,7 +84,7 @@ class Simulation:
         #                                       vehicle_velocity=velocity,
         #                                       consider_congestion=False)
         # Initilize the control center
-        control_center = ControlCenter(cfg=cfg, environment=environment)
+        control_center = ControlCenter(cfg=cfg, environment=environment, logger=self.logger)
 
         # Record the number of requests and vehicles
         self.total_steps = int((end_timepoint - start_timepoint) / step_time - 1)
@@ -138,7 +138,7 @@ class Simulation:
         file_name_time = f"{datetime.now().strftime('%m-%d-%H-%M')}.log"
         filehandler = logging.FileHandler(os.path.join(args.OutputDir, cfg_file_name, file_name_time))
         streamhandler = logging.StreamHandler()
-        logger.setLevel(logging.WARNING)
+        logger.setLevel(logging.INFO)
         logger.addHandler(filehandler)
         logger.addHandler(streamhandler)
 
@@ -276,7 +276,7 @@ class Simulation:
                 if len(trip.requests)>0:
                     for req in trip.requests:
                         if req.vehicle_id is not None:
-                            print(f"req {int(req.id)} has vehicle {int(req.vehicle_id)}  before decision")
+                            self.logger.info(f"req {int(req.id)} has vehicle {int(req.vehicle_id)}  before decision")
                             continue
                         v_id,u_id=int(idx),int(req.id)
                         V2MultiU[v_id].add(u_id)
@@ -303,11 +303,11 @@ class Simulation:
             V2MultiU_lst[v] = list(V2MultiU[v])
         for u in U2MultiV.keys():
             U2MultiV_lst[u] = list(U2MultiV[u])
-        # print(candidate_U)
-        # print(candidate_V)
-        # print("idle vehicles ",idle_sampled_v)
+        # self.logger.info(candidate_U)
+        # self.logger.info(candidate_V)
+        # self.logger.info("idle vehicles ",idle_sampled_v)
         # for u in candidate_U.items():
-        #     print("u",u)
+        #     self.logger.info("u",u)
         return U2MultiV_lst, V2MultiU_lst, candidate_U, candidate_V, sampled_v
 
 
@@ -342,8 +342,24 @@ class Simulation:
 
 
     def formatUinfo(self,u):
-        u_info = {"origin":data_process.map_npTuple(u.pickup_position),"destination":data_process.map_npTuple(u.dropoff_position),
+        step_u = self.control_center.tracker_system.step_u[int(u.id)]
+        state=self.control_center.tracker_system.get_state(u)
+
+        if state is not "waiting":
+            u_info = {"destination": data_process.map_npTuple(u.dropoff_position),
+                      "state": self.control_center.tracker_system.get_state_text(u)}
+            time_on_vehicle = int(u.time_on_vehicle)
+            if time_on_vehicle > 0:
+                u_info["time_onboard"] = time_on_vehicle
+            if "assigned_step" in  step_u :
+                u_info["assigned_step"] = step_u["assigned_step"]
+            # u_info = {"expected":data_process.map_npTuple(u.pickup_position),"state": self.control_center.tracker_system.get_state_text(u),
+            #        "travel_phases":step_u} #
+        else:
+            u_info = {"origin":data_process.map_npTuple(u.pickup_position),"destination":data_process.map_npTuple(u.dropoff_position),
                   "state": self.control_center.tracker_system.get_state_text(u)}
+            if "waiting_step" in  step_u :
+                u_info["waiting_step"] = step_u["waiting_step"]
         return int(u.id), u_info
 
     # input the two id lists of vehicles and requests, output the pairs of vehicles and requests randomly
@@ -396,7 +412,7 @@ class Simulation:
         self.getFeasibleTrips()
         U2MultiV, V2MultiU, candidate_U, candidate_V, sampled_v = self.formateDemandNeed4Trips()
         self.getScoredTrips()
-        print("#\n\tBeforeDecision:")
+        self.logger.info("#\n\tBeforeDecision:")
         self.control_center.tracker_system.log_BeforeDemandNeedDecision(self.control_center, U2MultiV, V2MultiU)
         self.control_center.tracker_system.log_steps_state(self.control_center.step, candidate_U, candidate_V, U2MultiV, V2MultiU)
 
@@ -428,7 +444,7 @@ class Simulation:
 
 
     def implementDecision(self,decisions):
-        print("#\n\timplementDecision: ",decisions)
+        self.logger.info(f"#\n\timplementDecision: {decisions}")
         self.decision2Trips(decisions)
         self.control_center.tracker_system.log_steps_decision(int(self.control_center.step), decisions)
         self.action_step()
@@ -462,8 +478,8 @@ class Simulation:
         requests_results, vehicles_results = self.control_center.CalculateResults()
         self.requests_results_all.append(requests_results)
         self.vehicles_results_all.append(vehicles_results)
-        logger.info('****************** Simulation Polling rate: {} *********************'.format(self.cfg.SIMULATION.POLLING_RATE))
-        self.LogResults(logger, requests_results, vehicles_results)
+        logger.info('****************** Simulation Polling rate: {} *********************'.format(1))
+        self.LogResults(requests_results,vehicles_results)
         logger.info('The average number of requests in each vehicle: {}'.format(self.req_num))
         logger.info('******************************')
         self.control_center.UpdateParameters(timepoint=self.cfg.SIMULATION.START, step=0)
@@ -541,7 +557,7 @@ def get_itinerary():
 @app.route('/save_res', methods=['GET'])
 def save():
     simu.save_result()
-    return None
+    return jsonify({"status":"success"})
 
 
 if __name__ == '__main__':

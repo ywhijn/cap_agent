@@ -24,7 +24,8 @@ from typing import List, Dict, Tuple, Set, Any, Optional, Callable
 class ControlCenter:
     def __init__(self,
                 cfg,
-                environment
+                environment,
+                logger=None
                 ):
         self.cfg = cfg
         self.environment = environment
@@ -63,7 +64,8 @@ class ControlCenter:
                                                     )
         self.cur_step_states=defaultdict()
         self.empty_decision_steps = defaultdict()
-        self.tracker_system = TrackerSystem(cfg = self.cfg,environment = self.environment, current_timepoint = self.current_timepoint, step_time = self.step_time)
+        self.tracker_system = TrackerSystem(cfg = self.cfg,environment = self.environment, current_timepoint = self.current_timepoint, step_time = self.step_time,logger=logger)
+
         # self.agent_system = AgentSystem(cfg = self.cfg, env = self.environment)
 
     # Initialize the requests and vehicles

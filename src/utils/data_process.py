@@ -3,11 +3,56 @@
 import json
 
 import numpy as np
-
+# def dict_to_str(my_dict) -> str:
+#     """将字典转换为格式化的JSON字符串
+#     """
+#     def convert_to_serializable(obj):
+#         if isinstance(obj, np.ndarray):
+#             return obj.tolist()  # 将ndarray转换为列表
+#         raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+#
+#     json_str = json.dumps(my_dict, indent=2, default=convert_to_serializable)
+#     return json_str
 def merge_dicts(dict1, dict2):
     return {**dict1, **dict2}
 def exact_pos_resolution(requests_raw):
     pass
+# class CompactDictEncoder(json.JSONEncoder):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.indent = 2
+#         self.current_indent = 0
+#
+#     def encode(self, obj):
+#         if isinstance(obj, dict):
+#             if not obj:
+#                 return '{}'
+#             self.current_indent += self.indent
+#             lines = []
+#             for key, value in obj.items():
+#                 key_str = json.dumps(key)
+#                 value_str = self.encode(value)
+#                 lines.append(f"{self.current_indent * ' '}{key_str}: {value_str}")
+#             result = '{\n' + ',\n'.join(lines) + '\n'
+#             self.current_indent -= self.indent
+#             result += self.current_indent * ' ' + '}'
+#             return result
+#         elif isinstance(obj, (list, tuple)):
+#             if len(obj) == 0:
+#                 return '[]'
+#             elif  all(isinstance(x, (int, float)) for x in obj):
+#                 # 对于短的数值列表，保持在一行
+#                 return '[' + ', '.join(map(str, obj)) + ']'
+#             else:
+#                 self.current_indent += self.indent
+#                 lines = [self.current_indent * ' ' + self.encode(item) for item in obj]
+#                 result = '[\n' + ',\n'.join(lines) + '\n'
+#                 self.current_indent -= self.indent
+#                 result += self.current_indent * ' ' + ']'
+#                 return result
+#         elif isinstance(obj, np.ndarray):
+#             return self.encode(obj.tolist())
+#         return json.dumps(obj)
 class CompactDictEncoder(json.JSONEncoder):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,7 +65,12 @@ class CompactDictEncoder(json.JSONEncoder):
                 return '{}'
             self.current_indent += self.indent
             lines = []
-            for key, value in obj.items():
+            # 定义键的顺序
+            key_order = ['origin', 'destination', 'expected_travel_distance', 'expected_travel_time', 'state', 'distance_to_taxis']
+            # 对键进行排序，先排序指定的键，然后是其他键
+            sorted_keys = sorted(obj.keys(), key=lambda x: (key_order.index(x) if x in key_order else len(key_order), x))
+            for key in sorted_keys:
+                value = obj[key]
                 key_str = json.dumps(key)
                 value_str = self.encode(value)
                 lines.append(f"{self.current_indent * ' '}{key_str}: {value_str}")
@@ -31,7 +81,7 @@ class CompactDictEncoder(json.JSONEncoder):
         elif isinstance(obj, (list, tuple)):
             if len(obj) == 0:
                 return '[]'
-            elif  all(isinstance(x, (int, float)) for x in obj):
+            elif all(isinstance(x, (int, float)) for x in obj):
                 # 对于短的数值列表，保持在一行
                 return '[' + ', '.join(map(str, obj)) + ']'
             else:
@@ -43,17 +93,10 @@ class CompactDictEncoder(json.JSONEncoder):
                 return result
         elif isinstance(obj, np.ndarray):
             return self.encode(obj.tolist())
-        return json.dumps(obj)
-# def dict_to_str(my_dict) -> str:
-#     """将字典转换为格式化的JSON字符串
-#     """
-#     def convert_to_serializable(obj):
-#         if isinstance(obj, np.ndarray):
-#             return obj.tolist()  # 将ndarray转换为列表
-#         raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
-#
-#     json_str = json.dumps(my_dict, indent=2, default=convert_to_serializable)
-#     return json_str
+        elif isinstance(obj, str):
+            return json.dumps(obj)
+        else:
+            return str(obj)
 def dict_to_str(my_dict) -> str:
     """将字典转换为格式化的JSON字符串"""
     return json.dumps(my_dict, cls=CompactDictEncoder)

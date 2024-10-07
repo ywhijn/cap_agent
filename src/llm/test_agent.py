@@ -6,3 +6,10 @@
 # print(f'parsed response Output, {agent_action}')
 
 # print(f'scanned_UVpairs, {scanned_UVpairs}')
+template = "Tell me a {adjective} joke about {content}."
+from langchain import PromptTemplate
+prompt_template = PromptTemplate.from_template(template)
+prompt_template.input_variables
+# -> ['adjective', 'content']
+p=prompt_template.format(adjective="funny", content="chickens")
+print(p)

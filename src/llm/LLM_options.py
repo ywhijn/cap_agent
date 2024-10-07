@@ -14,7 +14,7 @@ class LLMOptions:
                 temperature=0.5)
             return client
 cfg = SimpleNamespace()
-cfg.dev = True
+cfg.dev = False
 cfg.langchain_key = "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"
 cfg.LANGCHAIN_TRACING_V2 = "true"
 cfg.project_name =  "graph_test"

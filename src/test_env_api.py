@@ -97,7 +97,7 @@ def test_dis_multi():
     implement_action(pairs)
 def test_finish():
     response = requests.get(f"{BASE_URL}/save_res")
-    return response.json()
+    print(response)
 def decide_multiV_singleU(u_id, v_ids):
     # 一个乘客匹配多个车辆
     v_id = random.choice(v_ids) # 随机选择一个车辆
