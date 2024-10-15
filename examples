@@ -391,3 +391,21 @@ Reason: Closest to taxi 72 and has been waiting since step 1849.
 Passenger 78812 assigned to Driver 72
 Reason: Second closest to taxi 72 and has been waiting since step 1849.
 Passenger 80517 assigned to Driver 72
+
+
+Reason: Closest passenger to the taxi with available seats.
+Passenger 78680 assigned to Driver 51
+Reason: Second closest passenger after seat is occupied by previous assignment.
+Passenger 79919 assigned to Driver 51
+Reason: Third closest passenger and the taxi has no more available seats after this assignment.
+Passenger 80352 assigned to Driver 51
+Reason: No available taxis with seats left for this passenger.
+Passenger 79415 assigned No Driver
+Reason: No available taxis with seats left for this passenger.
+Passenger 80202 assigned No Driver
+Reason: No available taxis with seats left for this passenger.
+Passenger 79326 assigned No Driver
+Reason: No available taxis with seats left for this passenger.
+Passenger 80542 assigned No Driver
+Reason: No available taxis with seats left for this passenger.
+Passenger 79372 assigned No Driver
