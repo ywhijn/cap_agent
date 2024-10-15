@@ -1,0 +1,119 @@
+  {"126": {
+    "Uinfo": {
+      "80484": {
+        "destination": [
+          104.0538091,
+          30.6626102
+        ],
+        "distance_to_taxis": {
+          "35": 1707.04
+        },
+        "expected_travel_distance": 3557.1,
+        "expected_travel_time": 237.14,
+        "origin": [
+          104.0287706,
+          30.6389487
+        ],
+        "state": "searching for an available vehicle",
+        "waiting_step": 109
+      }
+    },
+    "Vinfo": {
+      "35": {
+        "next_requests": {
+          "80867": {
+            "assigned_step": 37,
+            "destination": [
+              104.0815781,
+              30.674943
+            ],
+            "state": "assigned, waiting for pickup at origin"
+          }
+        },
+        "position": [
+          104.0347608,
+          30.6534113
+        ]
+      }
+    },
+    "U2MultiV": {
+      "80484": [
+        35
+      ]
+    },
+    "V2MultiU": {
+      "35": [
+        80484
+      ]
+    },
+    "decisions": [
+      [
+        80484,
+        -1
+      ]
+    ],
+    "reasons": [
+      "The only available taxi is too far away and has another assigned passenger, making it impractical to assign this passenger to the taxi."
+    ],
+     "comment":"don't know the pooling prompt"
+  },
+   "129": {
+    "Uinfo": {
+      "80484": {
+        "destination": [
+          104.0538091,
+          30.6626102
+        ],
+        "distance_to_taxis": {
+          "35": 1707.04
+        },
+        "expected_travel_distance": 3557.1,
+        "expected_travel_time": 237.14,
+        "origin": [
+          104.0287706,
+          30.6389487
+        ],
+        "state": "searching for an available vehicle",
+        "waiting_step": 109
+      }
+    },
+    "Vinfo": {
+      "35": {
+        "next_requests": {
+          "80867": {
+            "assigned_step": 37,
+            "destination": [
+              104.0815781,
+              30.674943
+            ],
+            "state": "assigned, waiting for pickup at origin"
+          }
+        },
+        "position": [
+          104.0347608,
+          30.6534113
+        ]
+      }
+    },
+    "U2MultiV": {
+      "80484": [
+        35
+      ]
+    },
+    "V2MultiU": {
+      "35": [
+        80484
+      ]
+    },
+    "decisions": [
+      [
+        80484,
+        -1
+      ]
+    ],
+    "reasons": [
+      "The only available taxi is too far away considering the waiting time and expected travel distance."
+    ],
+     "comment":"don't know the distance reference"
+  },
+}
