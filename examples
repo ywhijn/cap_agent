@@ -1,0 +1,363 @@
+At step 1207, you get the basic information for passenger requests and taxi vehicles, respectively. Their positions are represented as [longitude, latitude].
+The passenger requests are as follows:
+{
+  "79929": {
+    "origin": [104.0442485, 30.6541163],
+    "destination": [104.0943915, 30.6261715],
+    "expected_travel_distance": 5714.17,
+    "expected_travel_time": 380.94,
+    "state": "searching for an available vehicle",
+    "distance_to_taxis": {
+      "43": 1856.67
+    },
+    "waiting_step": 1129
+  },
+  "80419": {
+    "origin": [104.0574839, 30.6552292],
+    "destination": [104.0536866, 30.6700214],
+    "expected_travel_distance": 1682.62,
+    "expected_travel_time": 112.17,
+    "state": "searching for an available vehicle",
+    "distance_to_taxis": {
+      "43": 1285.72
+    },
+    "waiting_step": 1141
+  },
+  "80751": {
+    "origin": [104.053149, 30.6542649],
+    "destination": [104.0149634, 30.7055944],
+    "expected_travel_distance": 6776.01,
+    "expected_travel_time": 451.73,
+    "state": "searching for an available vehicle",
+    "distance_to_taxis": {
+      "43": 1312.8
+    },
+    "waiting_step": 1105
+  },
+  "80953": {
+    "origin": [104.0513409, 30.6303493],
+    "destination": [104.1485489, 30.6759049],
+    "expected_travel_distance": 10588.06,
+    "expected_travel_time": 705.87,
+    "state": "searching for an available vehicle",
+    "distance_to_taxis": {
+      "43": 1688.06
+    },
+    "waiting_step": 1189
+  }
+}       , where `key` is the `passenger ID`, and `distance_to_taxis` field with 'taxi ID: distance(meter)' dict represents the estimated distance to the taxi vehicles in the decision space.
+The taxi vehicles are as follows:
+{
+  "0": {
+    "available seats": 1,
+    "current_requests": {
+      "78952": {
+        "destination": [103.9711183, 30.6684935],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 829,
+        "time_onboard": 730
+      }
+    },
+    "position": [104.0159352, 30.6521332]
+  },
+  "1": {
+    "available seats": 1,
+    "current_requests": {
+      "60": {
+        "destination": [104.0238794, 30.6273549],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 847,
+        "time_onboard": 1370
+      }
+    },
+    "position": [104.0540681, 30.6506374]
+  },
+  "15": {
+    "available seats": 2,
+    "next_requests": {
+      "80095": {
+        "destination": [104.0764566, 30.6587257],
+        "state": "assigned, waiting for pickup at origin",
+        "assigned_step": 1004
+      }
+    },
+    "position": [104.0631559, 30.6648128]
+  },
+  "16": {
+    "available seats": 1,
+    "current_requests": {
+      "80679": {
+        "destination": [104.1143983, 30.7028838],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 853,
+        "time_onboard": 1015
+      }
+    },
+    "position": [104.1164236, 30.6943993]
+  },
+  "17": {
+    "available seats": 1,
+    "current_requests": {
+      "81209": {
+        "destination": [104.1438647, 30.6276377],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 769,
+        "time_onboard": 1395
+      }
+    },
+    "position": [104.0249002, 30.6353862]
+  },
+  "18": {
+    "available seats": 1,
+    "current_requests": {
+      "78852": {
+        "destination": [104.0635658, 30.6462189],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 899,
+        "time_onboard": 1405
+      }
+    },
+    "position": [104.0486799, 30.6623049]
+  },
+  "19": {
+    "available seats": 1,
+    "current_requests": {
+      "79833": {
+        "destination": [104.0149634, 30.7055944],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 637,
+        "time_onboard": 2620
+      }
+    },
+    "position": [104.0352823, 30.7147848]
+  },
+  "22": {
+    "available seats": 1,
+    "current_requests": {
+      "90": {
+        "destination": [104.0191967, 30.6727979],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 697,
+        "time_onboard": 2240
+      }
+    },
+    "position": [104.0997977, 30.662513]
+  },
+  "24": {
+    "available seats": 1,
+    "current_requests": {
+      "81196": {
+        "destination": [103.984198, 30.6072897],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 770,
+        "time_onboard": 1605
+      }
+    },
+    "position": [104.1215003, 30.6177852]
+  },
+  "25": {
+    "available seats": 1,
+    "current_requests": {
+      "80225": {
+        "destination": [104.09434, 30.6307457],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 829,
+        "time_onboard": 1860
+      }
+    },
+    "position": [104.0955529, 30.6369301]
+  },
+  "27": {
+    "available seats": 1,
+    "current_requests": {
+      "78929": {
+        "destination": [104.1033539, 30.7063154],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 978,
+        "time_onboard": 830
+      }
+    },
+    "position": [104.0878152, 30.6732245]
+  },
+  "28": {
+    "available seats": 1,
+    "current_requests": {
+      "78786": {
+        "destination": [103.9956322, 30.6495947],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 697,
+        "time_onboard": 1590
+      }
+    },
+    "position": [103.9970936, 30.6478147]
+  },
+  "30": {
+    "available seats": 1,
+    "current_requests": {
+      "80244": {
+        "destination": [104.0461122, 30.6985488],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 781,
+        "time_onboard": 1340
+      }
+    },
+    "position": [103.9914968, 30.6765276]
+  },
+  "32": {
+    "available seats": 1,
+    "current_requests": {
+      "80397": {
+        "destination": [104.0369647, 30.6311328],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 589,
+        "time_onboard": 2410
+      }
+    },
+    "position": [104.0192589, 30.662989]
+  },
+  "38": {
+    "available seats": 1,
+    "current_requests": {
+      "80152": {
+        "destination": [104.0686204, 30.6057423],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 661,
+        "time_onboard": 2400
+      }
+    },
+    "position": [104.0887933, 30.6260816]
+  },
+  "42": {
+    "available seats": 1,
+    "current_requests": {
+      "81147": {
+        "destination": [104.1417669, 30.6285694],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 841,
+        "time_onboard": 845
+      }
+    },
+    "position": [104.1082668, 30.6556556]
+  },
+  "43": {
+    "available seats": 2,
+    "next_requests": {
+      "79923": {
+        "destination": [104.0538091, 30.6626102],
+        "state": "assigned, waiting for pickup at origin",
+        "assigned_step": 1207
+      }
+    },
+    "position": [104.0595156, 30.6438068]
+  },
+  "44": {
+    "available seats": 1,
+    "current_requests": {
+      "78653": {
+        "destination": [104.1438647, 30.6276377],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 793,
+        "time_onboard": 1145
+      }
+    },
+    "position": [104.0833793, 30.6665533]
+  },
+  "47": {
+    "available seats": 1,
+    "current_requests": {
+      "81181": {
+        "destination": [104.121344, 30.6500574],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 457,
+        "time_onboard": 2930
+      }
+    },
+    "position": [104.0920269, 30.6580717]
+  },
+  "49": {
+    "available seats": 1,
+    "current_requests": {
+      "80143": {
+        "destination": [104.0581845, 30.652642],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 853,
+        "time_onboard": 990
+      }
+    },
+    "position": [104.0664746, 30.6570509]
+  },
+  "50": {
+    "available seats": 1,
+    "current_requests": {
+      "80678": {
+        "destination": [104.0803019, 30.6681304],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 774,
+        "time_onboard": 1345
+      }
+    },
+    "position": [104.0767, 30.6696598]
+  },
+  "51": {
+    "available seats": 1,
+    "current_requests": {
+      "80618": {
+        "destination": [104.128238, 30.6966276],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 925,
+        "time_onboard": 1215
+      }
+    },
+    "position": [104.1323804, 30.6818588]
+  },
+  "67": {
+    "available seats": 1,
+    "current_requests": {
+      "111": {
+        "destination": [104.0104793, 30.7109051],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 205,
+        "time_onboard": 4300
+      }
+    },
+    "position": [104.0201582, 30.7067199]
+  },
+  "78": {
+    "available seats": 1,
+    "current_requests": {
+      "81202": {
+        "destination": [104.0251047, 30.686333],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 541,
+        "time_onboard": 2685
+      }
+    },
+    "position": [104.0590152, 30.6971871]
+  },
+  "79": {
+    "available seats": 1,
+    "current_requests": {
+      "79108": {
+        "destination": [104.0641663, 30.6398776],
+        "state": "picked up, waiting for arrival at destination",
+        "assigned_step": 801,
+        "time_onboard": 890
+      }
+    },
+    "position": [104.0739529, 30.7020194]
+  }
+}       , where the key is the `taxi ID`, and its value represents the taxi's current position and any already assigned passenger on it.
+For the current step, you get the decision space for taxis, where the key is the `taxi ID` and the value is possibly a list of `passenger ID` within the suitable service area of the taxi.
+{
+  "43": [79929, 80953, 80419, 80751]
+}
+You must follow the rules:
+1. Don't finish the task until you have a final answer. Make sure you have considered all the given information.
+2. Assume passengers and drivers are willing to participate in ride-sharing for environmental and cost-saving reasons. But we cannot assign over 2 passengers to a single taxi
+3. If all taxi drivers are unavailable to a certain passenger, you must assign that passenger to a special taxi ID -1, which means the order is NOT assigned to any taxi driver. Provide a clear explanation for why the assignment couldn't be made.
+
+Please assign passengers to taxi drivers according to the given rules and information. 
+Provide your response only in the following json format without extra words:
+[
+  {"u_id": Passenger ID, "v_id": Driver ID, "reason": "Brief explanation for this assignment"}
+]
