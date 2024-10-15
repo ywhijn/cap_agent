@@ -361,3 +361,33 @@ Provide your response only in the following json format without extra words:
 [
   {"u_id": Passenger ID, "v_id": Driver ID, "reason": "Brief explanation for this assignment"}
 ]
+
+
+BASIC_rules={
+"allow_pooling": 
+  "Assume passengers and drivers are willing to participate in ride-sharing for environmental and cost-saving reasons if seats available. ",
+"Constrain": 
+  "Each taxi driver can be assigned at most one passenger at each step, and each passenger can only be assigned to at most one taxi driver.",
+"force_assignment": 
+  "Prioritize assigning all passengers to available drivers when possible",
+"CoT":"Let's take a deep breath and think step by step.",
+"complete_rule":
+"Don't finish the task until you have a final answer. Make sure you have considered all the given information.",
+"output_rule":
+"You should only output a list of json.",
+"failed_request_handling":
+ "If all taxi drivers are unavailable to a certain passenger, you must assign that passenger to a special taxi ID '-1', which means the passenger is NOT assigned to any taxi driver.",
+}
+
+
+Number U 48 Number V 2
+Reason: Closest to taxi 70 and has been waiting since step 1897.
+Passenger 78698 assigned to Driver 70
+Reason: Second closest to taxi 70 and has been waiting since step 1897.
+Passenger 79345 assigned to Driver 70
+Reason: Third closest to taxi 70 and has been waiting since step 1849.
+Passenger 79605 assigned to Driver 70
+Reason: Closest to taxi 72 and has been waiting since step 1849.
+Passenger 78812 assigned to Driver 72
+Reason: Second closest to taxi 72 and has been waiting since step 1849.
+Passenger 80517 assigned to Driver 72
