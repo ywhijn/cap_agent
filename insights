@@ -132,3 +132,30 @@ Corrected response:
   {"u_id": 79438, "v_id": 10, "reason": "Taxi 10 is the closest and available for passenger 79438."},
   {"u_id": 80333, "v_id": -1, "reason": "No suitable taxi found in decision space that can serve this passenger without violating the rule of not assigning over 2 passengers to a single taxi."}
 ]
+
+
+Passenger 79058 assigned No Driver
+Reason: Other passengers have shorter wait times or closer destinations, making them higher priority for the available taxis.
+
+Passenger 79399 assigned No Driver
+Reason: Closest taxi to passenger with available seats and reasonable waiting time
+
+Passenger 79735 assigned to Driver 57
+Reason: Closest taxi to passenger with available seats and shorter waiting time
+
+Passenger 79804 assigned to Driver 57
+Reason: Other passengers have shorter wait times or closer destinations, making them higher priority for the available taxis.
+
+Passenger 80137 assigned No Driver
+Reason: Other passengers have shorter wait times or closer destinations, making them higher priority for the available taxis.
+
+Passenger 80447 assigned No Driver
+Reason: Other passengers have shorter wait times or closer destinations, making them higher priority for the available taxis.
+
+Passenger 80720 assigned No Driver
+Reason: Other passengers have shorter wait times or closer destinations, making them higher priority for the available taxis.
+
+Passenger 80847 assigned No Driver
+Reason: Closest taxi to passenger with available seats and reasonable waiting time
+
+Passenger 80985 assigned to Driver 57
