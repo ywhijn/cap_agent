@@ -5,7 +5,19 @@ A high-capacity ride-sharing simulator calibrated by real request datasets and r
     <img src="intro-images/Simulator_Architecture.jpg", width="700" alt><br>
     Simulator Architecture
 </div>
-
+\begin{array}{|l|c|c|c|c|c|}
+\hline
+\text{Method} & \text{Service Rate} & \text{assigning} & \text{pick-up} & \text{detour} & \text{vehicles} \\
+& & \text{AVG time(min)} & \text{AVG time(min)} & \text{AVG time(min)} & \text{total income(USD)} \\
+\hline
+\text{Reinforcement Learning} & 0.4291 & \textcolor{blue}{2.29} & \textcolor{red}{3.27} & \textcolor{blue}{1.54} & \textcolor{blue}{28779.54} \\
+\text{Pre} & 0.41 & 2.95 & 2.99 & {5.08} & \textcolor{red}{25352.95} \\
+\text{Pre+Cot} & 0.44 & \textcolor{red}{3.17} & 2.62 & 4.76 & 26959.48 \\
+\text{Pre+Cot+income} & \textcolor{red}{0.373} & 3.08 & 2.81 & \textcolor{red}{5.54} & 27457.53 \\
+\text{Pre+Cot+service-rate} & 0.465 & 3.10 & 2.80 & 4.37 & 27004.67 \\
+\text{Pre+Cot+society} & \textcolor{blue}{0.469} & 3.12 & \textcolor{blue}{2.54} & 4.44 & 27445.41 \\
+\hline
+\end{array}
 ## Updating...
 - [x] Implement dispatching and repositioning algorithms of ride-sharing and ride-sourcing
 - [x] Add traffic flow models to measure traffic congestion, speed, and carbon emissions
