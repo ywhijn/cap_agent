@@ -1,0 +1,333 @@
+EXCLUSIVE_TEMP="""
+Current Step: {current_step}
+
+1. Passenger Requests:
+{requests_input}{requests_notation}
+2. Taxis:
+{taxi_information}{taxis_notation}
+3. Decision Space:
+{decision_space}{decision_space_notation}
+4. Rules you must follow:
+{rules}
+{output_format}
+""" 
+price="- price: Cost of request estimated by market currently service rate" 
+CoT_TEMP2="""Please analyze the given scenario and provide a considered assignment with maximum overall {target}, let's think it step by step!
+Remember rules you must follow:
+{rules}
+Current Step: {current_step} / {total_step}
+1. Passenger Requests:
+{requests_input}{requests_notation}
+2. Taxis:
+{taxi_information}{taxis_notation}
+3. Decision Space:
+{decision_space}{decision_space_notation}
+{output_format}"""
+
+CoT_TEMP="""Please analyze the given scenario and provide a considered assignment with balanced overall societal profit, let's think it step by step!
+Remember rules you must follow:
+{rules}
+Current Step: {current_step} / 8099.
+1. Passenger Requests:
+{requests_input}{requests_notation}
+2. Taxis:
+{taxi_information}{taxis_notation}
+3. Decision Space:
+{decision_space}{decision_space_notation}
+{output_format}
+"""
+Filter_TEMP="""
+
+1. Passenger Requests:
+{requests_input}{requests_notation}
+2. Taxis:
+{taxi_information}{taxis_notation}
+3. Decision Space:
+{decision_space}{decision_space_notation}
+4. Rules you must follow:
+{rules}
+{output_format}
+"""
+SYSTEM_INS="""
+You are an intelligent taxi dispatch system. Your task is to assign the suitable taxis to passengers based on the given passenger requests and available taxi information.
+Please consider overall system efficiency under complex traffic situation about demand and need. 
+"""
+
+RULES: dict[str, str]={
+    "no_sharing":
+        "Each taxi should be assigned to at most one passenger, ride-sharing is forbidden.",
+    "failed_request_handling":
+        "If no taxi is available for a passenger, assign that passenger to special taxi ID '-1', indicating no assignment.",
+    "closest_first":
+        "Prioritize taxis that are closest to passengers.",
+    "allow_sharing":
+        "Assume passengers and drivers are willing to participate in ride-sharing if seats available to save the cost.",
+    "overall_benefit":
+        "Consider requests' expected cost and taxis' current positions to maximize overall efficiency.",
+    "short_long":
+        "Balance immediate assignments with potential future rewards, process all information systematically",
+    "strict_json":"Please output only JSON. No additional words or text.",
+    "single_passenger": "Do not assign a passenger to more than one taxis.",
+    "filtering": "please select "
+
+    
+}
+DecisionSpaceNotesU=""",
+Where the key is the passenger ID and the value is a list of available taxi IDs for that passenger.
+"""
+DecisionSpaceNotesV=""",
+Where the key is the taxi ID and the value is a list of passenger IDs within the service area of that taxi.
+"""
+TAXI_DES_v3=""",
+Where the key is the taxi ID, and fields may include:
+- time_to_passengers: pickup time to each passenger in the decision space of that taxi, formatted as `{{passenger_id: time}}`
+- available_seats: number of passengers that can be accommodated in this taxi
+"""
+TAXI_DES_v2=""",
+Where the key is the taxi ID, and fields may include:
+- time_to_passengers: pickup time to each passenger in the decision space of that taxi, formatted as `{{passenger_id: time}}`
+"""
+TAXI_DES_noGeo=""",
+Where the key is the taxi ID, and fields may include:
+- distance_to_passengers: Distance to each passenger in the decision space of that taxi, formatted as `{{passenger_id: distance}}`
+- available_seats: number of passengers that can be accommodated in this taxi
+- (Optional) finished_requests: number of requested finished so far
+- (Optional) total_income: earning so far
+"""
+TAXI_DES=""",
+Where the key is the taxi ID, and fields may include:
+- position: Current position coordinates [longitude, latitude]
+- time_to_passengers: Distance to to each passenger in the decision space of that taxi, formatted as `{{passenger_id: distance}}`
+- available_seats: number of passengers that can be accommodated in this taxi
+"""
+REQUEST_DES_v3=""",
+Where the key is the passenger ID, and the fields may include:
+- expected_travel_distance: distance in meters
+- estimated_duration: Estimated journey duration in seconds
+- waiting: Accumulated waiting time
+- cost: Pay for the travel estimated by market in dollar
+Tolerance: Assume all passengers have 600 seconds for potential cancellation
+"""
+REQUEST_DES_v2=""",
+Where the key is the passenger ID, and the fields may include:
+- expected_travel_distance: distance in meters
+- estimated_duration: Estimated journey duration in seconds
+- waiting: Accumulated waiting time
+Tolerance: Assume all passengers have 600 seconds for potential cancellation
+"""
+REQUEST_DES_noGeo=""",
+Where the key is the passenger ID, and the fields may include:
+- expected_travel_distance: Expected cost for travel distance (meters)
+- expected_travel_steps: Expected cost for travel steps
+- state: Current progress
+- (Optional) steps_in_waiting: Number of waiting steps since this request is initiated
+"""
+REQUEST_DES=""",
+Where the key is the passenger ID, and the fields include:
+- origin: Starting coordinates [longitude, latitude]
+- destination: Ending coordinates [longitude, latitude]
+- expected_travel_distance: Expected cost for travel distance (meters)
+- expected_travel_steps: Expected cost for travel steps
+- state: Current progress
+- (Optional) steps_in_waiting: Number of waiting steps since this request is initiated
+"""
+REQUEST_DES_assigned="""
+Where the key is the passenger ID, and the fields include:
+- origin: Starting coordinates [longitude, latitude]
+- destination: Ending coordinates [longitude, latitude]
+- expected_travel_distance: Expected cost for travel distance (meters)
+- expected_travel_steps: Expected cost for travel steps
+- state: Current progress
+- (Optional) steps_in_waiting: Number of waiting steps since this request is initiated
+- (Optional) steps_on_onboard: Number of passed steps after is initiated
+- steps_after_assigned
+"""
+output_filter_format="""Based on the above information and rules, please assign the most suitable taxi for each passenger with maximum service rate, and use '-1' for unassigned passengers.
+Output your decisions strictly in this JSON format:
+[
+  {{"reason": "Brief explanation for this filter", "u_id": passenger_id, "v_id": taxi_id}},
+]
+"""
+output_json_format="""Based on the above information and rules, please assign the most suitable taxi for each passenger with maximum service rate, and use '-1' for unassigned passengers.
+Output your decisions strictly in this JSON format:
+[ 
+  {{"u_id": passenger_id, "v_id": taxi_id, "reason": "Brief explanation for this assignment"}},
+]
+"""
+output_readme_formats1="""
+Please provide your analysis and decisions in a clear README format with the following sections:
+
+# Situation Overview
+[Provide a brief overview of the current state]
+
+# Final Assignment
+## Passenger ID
+- **Decision Rationale:** 
+[analysis and explanation]
+- **Taxi Assignment:**
+[assigned taxi ID]
+
+# Failed Assignment
+## Passenger ID:
+- **Decision Rationale:** 
+[If any passengers remain unassigned, briefly explain why]
+
+Output Example:
+# Situation Overview
+...
+# Final Assignment
+## Passenger 12345:
+- **Decision Rationale:** XXX
+- **Taxi Assignment:** 82
+## Passenger 12:
+- **Decision Rationale:** ABCD
+- **Taxi Assignment:** 96
+
+"""
+output_free_format="""
+Please provide your analysis and decisions in a clear README format with the following sections:
+
+
+# Situation Overview
+[Provide a overview of the current state]
+
+# Final Assignment
+## Passenger ID
+### Rationale
+[analysis and explanation for this Passenger]
+### Taxi Assignment
+[Taxi ID or None if unassigned]
+
+
+Example Output:
+# Situation Overview
+Current time is peak hours (18:00), with high demand in downtown area...
+
+# Final Assignment
+## Passenger 6412
+### Rationale
+Passenger has been waiting for 15 minutes, high priority for assignment...
+### Taxi Assignment
+98
+
+## Passenger 12543
+### Rationale
+No available taxis after allocation...
+### Taxi Assignment
+None
+"""
+output_readme_formatsP="""
+Please provide your analysis and decisions in a clear README format with the following sections:
+
+# Final Assignment
+## Passenger ID
+- Decision Rationale: [analysis and explanation in only one paragraph]
+- Taxi Assignment: [assigned taxi ID]
+# Failed Assignment
+## Passenger ID:
+- Decision Rationale: [If any passengers remain unassigned, briefly explain why in only one sentence]
+
+
+Output Example:
+
+# Final Assignment
+## Passenger 12345:
+- Decision Rationale: ...
+...
+- Taxi Assignment: 82
+## Passenger 12:
+- Decision Rationale: ...
+ABCD
+- Taxi Assignment: 96
+
+"""
+output_readme_formatsV="""
+Please provide your analysis and decisions in a clear README format with the following sections:
+
+# Final Assignment
+## Taxi ID
+- Decision Rationale: [analysis and explanation in only one paragraph]
+- Passenger Assignment: [assigned Passenger ID]
+# Failed Assignment
+## Taxi ID:
+- Decision Rationale: [If any taxi remain unassigned, briefly explain why in only one sentence]
+
+
+Output Example:
+
+# Final Assignment
+## Taxi 25:
+- Decision Rationale: ...
+...
+- Passenger Assignment: 182
+## Taxi 94:
+- Decision Rationale: ...
+ABCD
+- Passenger Assignment: 9421
+
+"""
+future_readme_formats="""
+Please provide your analysis and decisions in a clear README format with the following sections:
+
+# Situation Overview
+[Provide a brief overview of the current state]
+# Key Decision Points
+[List critical factors affecting decisions]
+# Final Assignment
+## Passenger ID
+- Decision Rationale: [analysis and explanation]
+- Taxi Assignment: [assigned taxi ID]
+# Failed Assignment
+## Passenger ID:
+- Decision Rationale: [If any passengers remain unassigned, briefly explain why]
+# Evaluation and Improvement
+[suggestions about about making better overall decision]
+
+Output Example:
+# Situation Overview
+...
+# Key Decision Points
+..., ...
+# Final Assignment
+## Passenger 12345:
+- Decision Rationale: ...
+- Taxi Assignment: 82
+## Passenger 12:
+- Decision Rationale: ...
+- Taxi Assignment: 96
+# Evaluation and Improvement
+... we need ...
+"""
+EXTRA="""
+Important Notes:
+- Ensure you consider all given information before making final decisions.
+- Don't omit any passengers; each passenger must have an assignment (even if it's "-1").
+- Provide concise reasons explaining why each assignment is the best choice.
+- Make sure to evaluate the complete decision space before finalizing assignments.
+- Consider the impact of each assignment on the overall system efficiency.
+
+Additional Considerations:
+- The distance between taxi and passenger is a crucial factor but not the only one.
+- Consider the geographical distribution of both passengers and taxis.
+- Ensure fair distribution of services while maintaining efficiency.
+
+Remember:
+1. Process all information systematically before making decisions.
+2. Each taxi can serve only one passenger.
+3. Use "-1" for unassigned passengers.
+4. Provide clear, logical reasoning for each assignment.
+
+Output Example:
+# Situation Overview
+...
+# Key Decision Points
+..., ...
+# Final Assignment
+## Passenger 12345:
+- Decision Rationale: ...
+- Taxi Assignment: 82
+## Passenger 12:
+- Decision Rationale: ...
+- Taxi Assignment: 96
+
+"""
